@@ -9,7 +9,7 @@ class Alumno extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['matricula', 'nombre', 'apellido'];
+    protected $fillable = ['matricula', 'nombre', 'apellido', 'grado', 'grupo', 'nombre_padre'];
 
     public function expedienteMedico()
     {

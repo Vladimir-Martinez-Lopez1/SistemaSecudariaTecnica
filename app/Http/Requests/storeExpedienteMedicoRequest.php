@@ -25,6 +25,9 @@ class storeExpedienteMedicoRequest extends FormRequest
             'matricula'=>'required|max:11|unique:alumnos,matricula',
             'nombre'=>'required|max:50',
             'apellido'=>'required|max:50',
+            'grado'=>'required|max:20',
+            'grupo'=>'required|max:50',
+            'nombre_padre'=>'required|max:50',
         ];
     }
 }

@@ -19,7 +19,7 @@
     <div class="container w-100 border border-3 border-primary rounded p-4 mt-3">
         <form action="{{route('expedientes_medicos.store')}}" method="post">
             @csrf
-            <div class="row g-3">
+            <div class="row g-5">
                 <div class="col-md-6">
                     <label for="matricula" class="form-label">Matricula</label>
                     <input type="number" name="matricula" id="matricula" class="form-control" value="{{old('matricula')}}">
@@ -40,6 +40,30 @@
                     <label for="apellido" class="form-label">Apellido(s)</label>
                     <input type="text" name="apellido" id="apellido" class="form-control" value="{{old('apellido')}}">
                     @error('apellido')
+                       <small class="text-danger">{{'*'. $message}}</small> 
+                    @enderror
+                </div>
+
+                <div class="col-md-6">
+                    <label for="grado" class="form-label">grado</label>
+                    <input type="text" name="grado" id="grado" class="form-control" value="{{old('grado')}}">
+                    @error('grado')
+                       <small class="text-danger">{{'*'. $message}}</small> 
+                    @enderror
+                </div>
+
+                <div class="col-md-6">
+                    <label for="grupo" class="form-label">grupo</label>
+                    <input type="text" name="grupo" id="grupo" class="form-control" value="{{old('grupo')}}">
+                    @error('grupo')
+                       <small class="text-danger">{{'*'. $message}}</small> 
+                    @enderror
+                </div>
+
+                <div class="col-md-6">
+                    <label for="nombre_padre" class="form-label">Nombre(s) del padre</label>
+                    <input type="text" name="nombre_padre" id="nombre_padre" class="form-control" value="{{old('nombre_padre')}}">
+                    @error('nombre_padre')
                        <small class="text-danger">{{'*'. $message}}</small> 
                     @enderror
                 </div>

@@ -54,6 +54,9 @@
                             <th>Matricula</th>
                             <th>Nombre</th>
                             <th>Apellidos</th>
+                            <th>Grado</th>
+                            <th>Grupo</th>
+                            <th>Nombre del Padre</th>
                             <th>Acciones</th>
                         </tr>
                     </thead>
@@ -69,6 +72,15 @@
                                 </td>
                                 <td>
                                     {{ $expediente->alumno->apellido }}
+                                </td>
+                                <td>
+                                    {{ $expediente->alumno->grado }}
+                                </td>
+                                <td>
+                                    {{ $expediente->alumno->grupo }}
+                                </td>
+                                <td>
+                                    {{ $expediente->alumno->nombre_padre }}
                                 </td>
                                 <td>
                                     

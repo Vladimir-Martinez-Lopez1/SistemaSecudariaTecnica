@@ -18,6 +18,9 @@ return new class extends Migration
             $table->integer('matricula')->unique();
             $table->string('nombre', 50);
             $table->string('apellido', 50);
+            $table->string('grado', 20);
+            $table->string('grupo', 50);
+            $table->string('nombre_padre', 50);
             $table->timestamps();
             
         

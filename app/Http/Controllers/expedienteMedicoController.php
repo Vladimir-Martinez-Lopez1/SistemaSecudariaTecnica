@@ -36,7 +36,7 @@ class expedienteMedicoController extends Controller
      */
     public function store(storeExpedienteMedicoRequest $request)
     {
-        dd($request);
+        //dd($request);
         try{
             DB::beginTransaction();
             // Alumno
@@ -92,6 +92,9 @@ class expedienteMedicoController extends Controller
                 'matricula' => $request->matricula,
                 'nombre' => $request->nombre,
                 'apellido' => $request->apellido,
+                'grado' => $request->grado,
+                'grupo' => $request->grupo,
+                'nombre_padre' => $request->nombre_padre,
             ]);
 
             DB::commit();
