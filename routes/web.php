@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\expedienteMedicoController;
 use App\Http\Controllers\controlDeCitaController;
+use App\Http\Controllers\justificanteMedicoController;
+use App\Http\Controllers\informeSaludController;
 
 
 Route::get('/', function () {
@@ -11,15 +13,12 @@ Route::get('/', function () {
 
 Route::view('/panel', 'panel.index')->name('panel');
 
-//route::view('/expedientes_medicos', 'expediente_medico.index');
-Route::resource('expedientes_medicos', expedienteMedicoController::class);
 
+Route::resource('expedientes_medicos', expedienteMedicoController::class);
 Route::resource('control_de_citas', controlDeCitaController::class);
-/*
-Route::get('/panel', function () {
-    return view('panel.index');
-});
-*/
+Route::resource('justificante_inasistencia_medico', justificanteMedicoController::class);
+Route::resource('informe_salud', informeSaludController::class);
+
 Route::get('/login', function () {
     return view('auth.login');
 });

@@ -86,6 +86,7 @@ class controlDeCitaController extends Controller
      */
     public function edit(ControlCita $control_de_cita)
     {
+        dd($control_de_cita);
         // Relación expedienteMedico y alumno
         $control_de_cita->load('expedienteMedico.alumno');
         return view('control_de_citas.edit', ['control_de_cita' => $control_de_cita]);

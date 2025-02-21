@@ -36,7 +36,7 @@ class expedienteMedicoController extends Controller
      */
     public function store(storeExpedienteMedicoRequest $request)
     {
-        dd($request);
+        //dd($request);
         try{
             DB::beginTransaction();
             // Alumno

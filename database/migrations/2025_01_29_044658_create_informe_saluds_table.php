@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('informe_saluds', function (Blueprint $table) {
             $table->id();
+            $table->string('grado', 50);
+            $table->string('grupo', 50);
             $table->date('fecha');
             $table->string('diagnostico', 150);
             $table->string('motivo', 150);

@@ -55,12 +55,24 @@
             <div class="sb-sidenav-menu-heading">Modulos</div>
 
             <a class="nav-link" href="{{route('expedientes_medicos.index')}}">
-                <div class="sb-nav-link-icon"><i class="fa-regular fa-registered"></i></div>
-                Agregar Expediente
+                <div class="sb-nav-link-icon"><i class="fa-solid fa-suitcase-medical"></i></div>
+                Expedientes Medicos
+                <!-- Agregar Expediente-->
             </a>
             <a class="nav-link" href="{{route('control_de_citas.index')}}">
                 <div class="sb-nav-link-icon"><i class="fa-solid fa-notes-medical"></i></div>
-                Agregar cita medica
+                Citas Medicas
+                <!-- Agregar cita medica-->
+            </a>
+            <a class="nav-link" href="{{route('justificante_inasistencia_medico.index')}}">
+                <div class="sb-nav-link-icon"><i class="fa-regular fa-calendar-days"></i></div>
+                Justificantes de Inasistencias Medica
+                <!-- Justificante de inasistencia medica-->
+            </a>
+            <a class="nav-link" href="{{route('informe_salud.index')}}">
+                <div class="sb-nav-link-icon"><i class="fa-regular fa-registered"></i></div>
+                Informes de salud
+                <!-- Informe de salud-->
             </a>
             <a class="nav-link" href="">
                 <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
