@@ -13,8 +13,9 @@ return new class extends Migration
     {
         Schema::create('permiso_trab_sociales', function (Blueprint $table) {
             $table->id();
-            $table->integer('numero_lista');
-            $table->string('motivo', 250);
+            $table->string('grado', 50);
+            $table->string('grupo', 50);
+            $table->text('motivo');
             $table->date('fecha_salida');
             $table->foreignId('expediente_disciplinario_id')->constrained('expediente_disciplinarios')->onDelete('cascade');          
             $table->timestamps();

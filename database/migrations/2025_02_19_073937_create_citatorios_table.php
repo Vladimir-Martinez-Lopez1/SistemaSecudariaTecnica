@@ -13,8 +13,10 @@ return new class extends Migration
     {
         Schema::create('citatorios', function (Blueprint $table) {
             $table->id();
-            $table->integer('numero_lista');
-            $table->time('hora_cita', precision: 0);
+            $table->string('nombre_padre', 50);
+            $table->string('grado', 50);
+            $table->string('grupo', 50);
+            $table->time('hora_cita');
             $table->date('fecha_cita');
             $table->foreignId('expediente_disciplinario_id')->constrained('expediente_disciplinarios')->onDelete('cascade');
             $table->timestamps();

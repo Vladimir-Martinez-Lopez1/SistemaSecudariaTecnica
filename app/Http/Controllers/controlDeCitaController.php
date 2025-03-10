@@ -19,8 +19,16 @@ class controlDeCitaController extends Controller
     public function index()
     {
         //Datos Citas médicas y alumno
-        $control_de_citas = ControlCita::with('expedienteMedico.alumno')->get();
-        return view('control_de_citas.index', compact('control_de_citas'));
+        $citas_activas = ControlCita::with('expedienteMedico.alumno')
+        ->where('estado', 1)
+        ->get();
+
+        // Citas médicas inactivas (estado = 0)
+        $citas_inactivas = ControlCita::with('expedienteMedico.alumno')
+        ->where('estado', 0)
+        ->get();
+
+        return view('control_de_citas.index', compact('citas_activas', 'citas_inactivas'));
     }
 
     /**
