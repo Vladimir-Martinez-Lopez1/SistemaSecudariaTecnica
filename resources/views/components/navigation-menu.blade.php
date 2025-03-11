@@ -52,7 +52,7 @@
             </div>
         -->
            
-            <div class="sb-sidenav-menu-heading">Medicos</div>
+            <div class="sb-sidenav-menu-heading">Modulos</div>
 
             <a class="nav-link" href="{{route('expedientes_medicos.index')}}">
                 <div class="sb-nav-link-icon"><i class="fa-solid fa-suitcase-medical"></i></div>
@@ -78,51 +78,6 @@
                 <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                 Tables
             </a> 
-            <div class="sb-sidenav-menu-heading">Disciplinarios</div>
-
-            <a class="nav-link" href="{{route('citatorio.index')}}">
-                <div class="sb-nav-link-icon"><i class="fa-solid fa-calendar-check"></i></div>
-                Citatorio Individual
-                <!-- Citarorio individual-->
-            </a>
-            <a class="nav-link" href="{{route('citatorio_general.index')}}">
-                <div class="sb-nav-link-icon"><i class="fa-solid fa-calendar-week"></i> </div>
-                Citatorio General
-                <!-- Citarorio individual-->
-            </a>
-            <a class="nav-link" href="{{route('pase_salida.index')}}">
-                <div class="sb-nav-link-icon"><i class="fa-solid fa-person-walking-arrow-right"></i></div>
-                Pase de Salida
-                <!-- Pase de salida general-->
-            </a>
-            <a class="nav-link" href="{{route('reporte_incidencia.index')}}">
-                <div class="sb-nav-link-icon"><i class="fa-solid fa-flag"></i></div>
-                Reporte de Incidencia
-                <!-- Reporte de Incidencia-->
-            </a>
-            <a class="nav-link" href="{{route('suspencion_clase.index')}}">
-                <div class="sb-nav-link-icon"><i class="fa-solid fa-circle-exclamation"></i></div>
-                Suspenci&oacuten de clases
-                <!-- Suspencion de clases disciplinaria-->
-            </a>
-
-            <div class="sb-sidenav-menu-heading">Trabajo Social</div>
-
-            <a class="nav-link" href="{{route('pase_salida_trab_sociale.index')}}">
-                <div class="sb-nav-link-icon"><i class="fa-solid fa-person-walking-dashed-line-arrow-right"></i></div>
-                Pase de Salida Trabajo Social
-                <!-- Pase de salida del trabajo social -->
-            </a>
-            <a class="nav-link" href="{{route('permiso_trab_sociale.index')}}">
-                <div class="sb-nav-link-icon"><i class="fa-solid fa-file-invoice"></i></div>
-                Permiso de Ausencia
-                <!-- Permiso de Ausencia-->
-            </a>
-            <a class="nav-link" href="{{route('justi_retardo_sociale.index')}}">
-                <div class="sb-nav-link-icon"><i class="fa-solid fa-check-to-slot"></i></div>
-                Justificante de Retardo
-                <!-- Justificante de retardo por trabajo social-->
-            </a>
         </div>
     </div>
     <div class="sb-sidenav-footer">

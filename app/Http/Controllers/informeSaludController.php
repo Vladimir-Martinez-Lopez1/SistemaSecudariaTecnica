@@ -80,9 +80,27 @@ class informeSaludController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    /*public function show(string $id)
     {
-        //
+        //dd($id);
+        // Obtener el informe de salud con sus relaciones
+        $informe_salud = InformeSalud::with('expedienteMedico.alumno')->findOrFail($id);
+
+        // Pasar los datos a la vista
+        return view('informe_salud.show', compact('informe_salud'));
+
+
+    }*/
+    public function show(string $id, Request $request)
+    {
+        // Obtener el informe de salud con sus relaciones
+        $informe_salud = InformeSalud::with('expedienteMedico.alumno')->findOrFail($id);
+
+        // Determinar si la solicitud proviene de expediente_medico
+        $fromExpedienteMedico = $request->query('from_expediente_medico', false);
+
+        // Pasar los datos a la vista
+        return view('informe_salud.show', compact('informe_salud', 'fromExpedienteMedico'));
     }
 
     /**
@@ -95,38 +113,7 @@ class informeSaludController extends Controller
         return view('informe_salud.edit', ['informe_salud' => $informe_salud]);
     }
 
-    /*
-      Update the specified resource in storage.*/
-     
-    //public function update(InformeSalud $informe_salud)
-    /*public function update(UpdateInformeSaludRequest $request, InformeSalud $informe_salud)
-    {
-        try {
-            DB::beginTransaction();
-
-            $informe_salud->update([
-                'grado' => $request->grado,
-                'grupo' => $request->grupo,
-                'fecha' => $request->fecha,
-                'diagnostico' => $request->diagnostico,
-                'motivo' => $request->motivo,
-                'fecha_inicio' => $request->fecha_inicio,
-                'fecha_final' => $request->fecha_final,
-                'recomendaciones' => $request->recomendaciones,
-                'nombre_medico' => $request->nombre_medico,
-            ]);
-            DB::commit();
-
-            $updated = InformeSalud::find($informe_salud->id);
-            dd($updated->toArray());
-            
-            return redirect()->route('informe_salud.index')->with('success', 'Informe de salud actualizado exitosamente.');
-        } catch (Exception $e) {
-            DB::rollBack();
-            
-            return redirect()->back()->withErrors(['error' => 'Error al actualizar: ' . $e->getMessage()]);
-        }
-    }*/
+    
     public function update(UpdateInformeSaludRequest $request, InformeSalud $informe_salud)
 {
     try {
@@ -160,6 +147,6 @@ class informeSaludController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        
     }
 }

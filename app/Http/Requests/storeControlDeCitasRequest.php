@@ -29,6 +29,7 @@ class storeControlDeCitasRequest extends FormRequest
             'sexo' => 'required|in:Masculino,Femenino',
             'diagnostico' => 'required|string|max:100',
             'observaciones' => 'nullable|string|max:100',
+            'estado' => 'nullable|integer',
         ];
     }
 }

@@ -36,10 +36,12 @@
             <li class="breadcrumb-item active">Expedientes Medicos</li>          
         </ol>
 
+        <div class="mb-4">
+            <a href="{{route('expedientes_medicos.create')}}"> 
+                <button type="button" class=" btn btn-primary"> Crear Expediente Medico </button>
+            </a>
+        </div>
         
-        <a href="{{route('expedientes_medicos.create')}}"> 
-            <button type="button" class=" btn btn-primary"> Crear Expediente Medico </button>
-        </a>
         <div class="mb-4">
             <!--Tabla expedientes -->
             <div class="card mb-4">
@@ -79,7 +81,11 @@
                                             </a>
         
                                             <!--Falta desarrollar la vista de los expedientes -->
-                                            <button type="button" class="btn btn-outline-dark">Ver expediente</button>
+                                            <a href="{{ route('expedientes_medicos.show', $expediente->id) }}">
+                                                <button type="button" class="btn btn-outline-info">Ver expediente</button>
+                                            </a>
+
+                                            
                                         </div>
                                     </td>
                                 </tr>

@@ -10,7 +10,7 @@ class JustificanteInasistenciaMedica extends Model
     use HasFactory;
 
     protected $fillable = ['fecha', 'grado','grupo', 'modulos', 'nombre_medico', 'expediente_medico_id'];
-    
+
     public function expedienteMedico(){
         return $this->belongsTo(ExpedienteMedico::class);
     }

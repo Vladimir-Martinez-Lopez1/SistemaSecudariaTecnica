@@ -63,9 +63,17 @@ class expedienteMedicoController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    /*public function show(string $id)
     {
         //
+    }*/
+    public function show(string $id)
+    {
+        // Obtener el expediente médico con sus relaciones
+        $expediente = ExpedienteMedico::with(['alumno', 'informesSalud', 'justificantesInasistencia'])->findOrFail($id);
+
+        // Pasar los datos a la vista
+        return view('expediente_medico.show', compact('expediente'));
     }
 
     /**

@@ -18,7 +18,7 @@ class controlDeCitaController extends Controller
      */
     public function index()
     {
-        //Datos Citas médicas y alumno
+        // Citas médicas activas (estado = 1)
         $citas_activas = ControlCita::with('expedienteMedico.alumno')
         ->where('estado', 1)
         ->get();
@@ -69,6 +69,7 @@ class controlDeCitaController extends Controller
                 'sexo' => $request->sexo,
                 'diagnostico' => $request->diagnostico,
                 'observaciones' => $request->observaciones,
+                'estado' => 1,
             ]);
 
             DB::commit();
@@ -131,6 +132,24 @@ class controlDeCitaController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        try {
+            DB::beginTransaction();
+    
+            // Buscar la cita médica por su ID
+            $cita = ControlCita::findOrFail($id);
+    
+            // Cambiar el estado: si está activo (1), desactivarlo (0), y viceversa
+            $cita->estado = $cita->estado == 1 ? 0 : 1;
+            $cita->save();
+    
+            DB::commit();
+    
+            // Redirigir al índice con un mensaje de éxito
+            return redirect()->route('control_de_citas.index')->with('success', 'Estado de la cita actualizado correctamente.');
+    
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return redirect()->route('control_de_citas.index')->with('error', 'Ocurrió un error al cambiar el estado de la cita.');
+        }
     }
 }

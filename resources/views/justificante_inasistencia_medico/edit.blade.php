@@ -33,6 +33,38 @@
 
                     <input type="hidden" name="expediente_medico_id" id="expediente_medico_id" value="{{ old('expediente_medico_id', $justificante->expediente_medico_id) }}">
 
+                    <!-- Grado -->
+                <div class="col-md-6">
+                    <label for="grado" class="form-label">Grado</label>
+                    <select name="grado" id="grado" class="form-control">
+                        <option value="">Seleccione...</option>
+                        @foreach(['1', '2', '3', '4', '5', '6'] as $grado)
+                            <option value="{{ $grado }}" {{ old('grado', $informe_salud->grado) == $grado ? 'selected' : '' }}>
+                                {{ $grado }}
+                            </option>
+                        @endforeach
+                    </select>
+                    @error('grado')
+                        <small class="text-danger">{{ '*' . $message }}</small>
+                    @enderror
+                </div>
+
+                <!-- Grupo -->
+                <div class="col-md-6">
+                    <label for="grupo" class="form-label">Grupo</label>
+                    <select name="grupo" id="grupo" class="form-control">
+                        <option value="">Seleccione...</option>
+                        @foreach(['A', 'B', 'C', 'D'] as $grupo)
+                            <option value="{{ $grupo }}" {{ old('grupo', $informe_salud->grupo) == $grupo ? 'selected' : '' }}>
+                                {{ $grupo }}
+                            </option>
+                        @endforeach
+                    </select>
+                    @error('grupo')
+                        <small class="text-danger">{{ '*' . $message }}</small>
+                    @enderror
+                </div>
+                
                     <div class="col-md-6">
                         <label for="fecha" class="form-label">Fecha</label>
                         <input type="date" name="fecha" id="fecha" class="form-control" value="{{ old('fecha', $justificante->fecha) }}">
