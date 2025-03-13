@@ -37,56 +37,63 @@
         <h1 class="mt-4">Pase de salida Trabajo Social</h1>
         <ol class="breadcrumb mb-4">
             <li class="breadcrumb-item"><a href="{{route('panel')}}">Inicio</a></li>
-            <li class="breadcrumb-item active">Pase de Salida</li>    
+            <li class="breadcrumb-item active">Pase de Salida</li>
         </ol>
 
         <div class="mb-4">
-        <a href="{{route('pase_salida_trab_sociale.create')}}"> 
-            <button type="button" class=" btn btn-primary"> Crear Nuevo Pase de Salida</button>
-        </a>
+            <a href="{{route('pase_salida_trab_sociale.create')}}">
+                <button type="button" class=" btn btn-primary"> Crear Nuevo Pase de Salida</button>
+            </a>
         </div>
 
-        <!--Tabla de citatorios-->
-        <div class="card mb-4">
-            <div class="card-header">
-                <i class="fas fa-table me-1"></i>
-                Tabla Citatorios
-            </div>
-            <div class="card-body">
-                <table id="datatablesSimple" class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Position</th>
-                            <th>Office</th>
-                            <th>Age</th>
-                            <th>Start date</th>
-                            <th>Salary</th>
-                        </tr>
-                    </thead>
+        < <!--Tabla de citatorios-->
+            <div class="card mb-4">
+                <div class="card-header">
+                    <i class="fas fa-table me-1"></i>
+                    Tabla Citatorios
+                </div>
+                <div class="card-body">
+                    <table id="datatablesSimple" class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Matricula</th>
+                                <th>Nombre del alumno(a)</th>
+                                <th>Grado|Grupo</th>
+                                <th>No. Lista</th>
+                                <th>Motivo</th>
+                                <th>Hora de salida | Hora de regreso</th>
+                                <th>Nombre del profesor</th>
+                                <th>Fecha</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
 
-                    <tbody>
-                        <tr>
-                            <td>Tiger Nixon</td>
-                            <td>System Architect</td>
-                            <td>Edinburgh</td>
-                            <td>61</td>
-                            <td>2011/04/25</td>
-                            <td>$320,800</td>
-                        </tr>
-                        <tr>
-                            <td>Garrett Winters</td>
-                            <td>Accountant</td>
-                            <td>Tokyo</td>
-                            <td>63</td>
-                            <td>2011/07/25</td>
-                            <td>$170,750</td>
-                        </tr>
-
-                    </tbody>
-                </table>
+                        <tbody>
+                            @foreach ($paseTra as $pase)
+                                <tr>
+                                    <td>{{$pase->expedienteDisciplinario->alumno->matricula}}</td>
+                                    <td>{{$pase->expedienteDisciplinario->alumno->nombre }}
+                                        {{ $pase->expedienteDisciplinario->alumno->apellido }}</td>
+                                    <td>{{$pase->grado }} / {{ $pase->grupo }}</td>
+                                    <td>{{$pase->numero_lista}}</td>
+                                    <td>{{$pase->motivo}}</td>
+                                    <td>{{$pase->hora_salida}} / {{$pase->hora_regreso}} </td>
+                                    <td>{{$pase->solicito}}</td>
+                                    <td>{{$pase->fecha_salida}}</td>
+                                    <td>
+                                        <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+                                            <button type="button" class="btn btn-success">Ver</button>
+                                            <button type="button" class="btn btn-warning">Editar</button>
+                                            <button type="button" class="btn btn-danger">Borrar</button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
             </div>
-        </div>
+
 
 
 

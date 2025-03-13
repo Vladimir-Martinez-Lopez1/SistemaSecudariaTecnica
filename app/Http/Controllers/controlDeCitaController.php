@@ -18,17 +18,9 @@ class controlDeCitaController extends Controller
      */
     public function index()
     {
-        // Citas médicas activas (estado = 1)
-        $citas_activas = ControlCita::with('expedienteMedico.alumno')
-        ->where('estado', 1)
-        ->get();
-
-        // Citas médicas inactivas (estado = 0)
-        $citas_inactivas = ControlCita::with('expedienteMedico.alumno')
-        ->where('estado', 0)
-        ->get();
-
-        return view('control_de_citas.index', compact('citas_activas', 'citas_inactivas'));
+        //Datos Citas médicas y alumno
+        $control_de_citas = ControlCita::with('expedienteMedico.alumno')->get();
+        return view('control_de_citas.index', compact('control_de_citas'));
     }
 
     /**
@@ -69,7 +61,6 @@ class controlDeCitaController extends Controller
                 'sexo' => $request->sexo,
                 'diagnostico' => $request->diagnostico,
                 'observaciones' => $request->observaciones,
-                'estado' => 1,
             ]);
 
             DB::commit();
@@ -95,7 +86,7 @@ class controlDeCitaController extends Controller
      */
     public function edit(ControlCita $control_de_cita)
     {
-        dd($control_de_cita);
+        //dd($control_de_cita);
         // Relación expedienteMedico y alumno
         $control_de_cita->load('expedienteMedico.alumno');
         return view('control_de_citas.edit', ['control_de_cita' => $control_de_cita]);
@@ -132,24 +123,6 @@ class controlDeCitaController extends Controller
      */
     public function destroy(string $id)
     {
-        try {
-            DB::beginTransaction();
-    
-            // Buscar la cita médica por su ID
-            $cita = ControlCita::findOrFail($id);
-    
-            // Cambiar el estado: si está activo (1), desactivarlo (0), y viceversa
-            $cita->estado = $cita->estado == 1 ? 0 : 1;
-            $cita->save();
-    
-            DB::commit();
-    
-            // Redirigir al índice con un mensaje de éxito
-            return redirect()->route('control_de_citas.index')->with('success', 'Estado de la cita actualizado correctamente.');
-    
-        } catch (\Exception $e) {
-            DB::rollBack();
-            return redirect()->route('control_de_citas.index')->with('error', 'Ocurrió un error al cambiar el estado de la cita.');
-        }
+        //
     }
 }

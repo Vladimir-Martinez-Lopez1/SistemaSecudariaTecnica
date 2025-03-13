@@ -10,64 +10,93 @@
 
 @section('content')
 
-<div class="container-fluid px-4">
+    @if (session('success'))
+        <script>
+            let message = "{{ session('success')}}";
+            const Toast = Swal.mixin({
+                toast: true,
+                position: "top-end",
+                showConfirmButton: false,
+                timer: 1500,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                    toast.addEventListener = ('mouseenter', Swal.stopTimer);
+                    toast.addEventListener = ('mouseleave', Swal.resumeTimer);
+                }
+            });
+            Toast.fire({
+                icon: "success",
+                title: message
+            });
+        </script>
+    @endif
+    <div class="container-fluid px-4">
 
-    <h1 class="mt-4">Suspenci&oacuten de Clases</h1>
-    <ol class="breadcrumb mb-4">
-        <li class="breadcrumb-item"><a href="{{route('panel')}}">Inicio</a></li>
-        <li class="breadcrumb-item active">Suspenci&oacuten de Clases</li>    
-    </ol>
+        <h1 class="mt-4">Suspenci&oacuten de Clases</h1>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item"><a href="{{route('panel')}}">Inicio</a></li>
+            <li class="breadcrumb-item active">Suspenci&oacuten de Clases</li>
+        </ol>
 
-    <div class="mb-4">
-    <a href="{{route('suspencion_clase.create')}}"> 
-        <button type="button" class=" btn btn-primary"> Crear Nuevo Documento</button>
-    </a>
-    </div>
-
-    <!--Tabla de citatorios-->
-    <div class="card mb-4">
-        <div class="card-header">
-            <i class="fas fa-table me-1"></i>
-            Tabla Citatorios
+        <div class="mb-4">
+            <a href="{{route('suspencion_clase.create')}}">
+                <button type="button" class=" btn btn-primary"> Crear Nuevo Documento</button>
+            </a>
         </div>
-        <div class="card-body">
-            <table id="datatablesSimple" class="table table-striped">
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Position</th>
-                        <th>Office</th>
-                        <th>Age</th>
-                        <th>Start date</th>
-                        <th>Salary</th>
-                    </tr>
-                </thead>
-             
-                <tbody>
-                    <tr>
-                        <td>Tiger Nixon</td>
-                        <td>System Architect</td>
-                        <td>Edinburgh</td>
-                        <td>61</td>
-                        <td>2011/04/25</td>
-                        <td>$320,800</td>
-                    </tr>
-                    <tr>
-                        <td>Garrett Winters</td>
-                        <td>Accountant</td>
-                        <td>Tokyo</td>
-                        <td>63</td>
-                        <td>2011/07/25</td>
-                        <td>$170,750</td>
-                    </tr>
-                   
-                </tbody>
-            </table>
-        </div>
-    </div>
 
-    
-</div>
+        <!--Tabla de citatorios-->
+        <div class="card mb-4">
+            <div class="card-header">
+                <i class="fas fa-table me-1"></i>
+                Tabla Suspenciones
+            </div>
+            <div class="card-body">
+                <table id="datatablesSimple" class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Matricula</th>
+                            <th>Nombre del alumno(a)</th>
+                            <th>Grado|Grupo</th>
+                            <th>Motivo</th>
+                            <th>No. días de suspencion</th>
+                            <th>Inicio de la suspención</th>
+                            <th>Termino de la suspención</th>
+                            <th>Nombre del Profesor</th>
+                            <th>Fecha del acta</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @foreach ($suspenciones as $suspencion)
+                            <tr>
+                                <td>{{$suspencion->expedienteDisciplinario->alumno->matricula}}</td>
+                                <td>{{$suspencion->expedienteDisciplinario->alumno->nombre }}
+                                    {{ $suspencion->expedienteDisciplinario->alumno->apellido }}
+                                </td>
+                                <td>{{$suspencion->grado }} / {{ $suspencion->grupo }}</td>
+                                <td>{{$suspencion->motivo}}</td>
+                                <td>{{$suspencion->numero_dias}}</td>
+                                <td>{{$suspencion->fecha_inicio}}</td>
+                                <td>{{$suspencion->fecha_termino}}</td>
+                                <td>{{$suspencion->nombre_profesor}}</td>
+                                <td>{{$suspencion->fecha_suspencion}}</td>
+                                <td>
+                                    <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+                                        <button type="button" class="btn btn-success">Ver</button>
+                                        <button type="button" class="btn btn-warning">Editar</button>
+                                        <button type="button" class="btn btn-danger">Borrar</button>
+                                    </div>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+
+    </div>
 
 @endsection
 

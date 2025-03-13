@@ -24,17 +24,17 @@
         <!--Formulario para el Documento de suspencion-->
         <div class="container w-100 border border-3 border-secundary rounded p-4 mt-3">
             @if ($errors->any())
-                <div class="alert alert-danger">
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-            @endif
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+            @endif 
 
             <div class="container w-100 border border-3 border-secundary rounded p-4 mt-3">
-                <form action="{{route('reporte_incidencia.store')}}" method="post">
+                <form action="{{route('suspencion_clase.store')}}" method="post">
                     @csrf
                     <div class="row g-3">
                         <!--Nombre de la escueal-->
@@ -49,35 +49,47 @@
                         <div class="col-md-6">
                             <div class="row align-items-center">
                                 <div class="col-auto">
-                                    <label for="fecha_reporte" class="form-label">CUILAPAN DE GUERRERO, OAXACA, OAX.
+                                    <label for="fecha_suspencion" class="form-label">CUILAPAN DE GUERRERO, OAXACA, OAX.
                                         A:</label>
                                 </div>
                                 <div class="col">
-                                    <input type="date" name="fecha_reporte" id="fecha_reporte" class="form-control"
-                                        value="{{ old('fecha_reporte') }}">
+                                    <input type="date" name="fecha_suspencion" id="fecha_suspencion" class="form-control"
+                                        value="{{ old('fecha_suspencion') }}">
                                 </div>
                                 <div class="col-auto">
-                                    @error('fecha_reporte')
+                                    @error('fecha_suspencion')
                                         <small class="text-danger">{{ '*' . $message }}</small>
                                     @enderror
                                 </div>
                             </div>
                         </div>
 
-                        
-                        <!--Matricula del alumno-->
-                        <div class="col-md-9">
+                        <div class="col-md-12">
+                            C.
+                            <input type="text" name="nombre_padre" id="nombre_padre" placeholder="Nombre del Padre"
+                                class="form-control" value="{{ old('nombre_padre') }}">
+                            <label for="nombre_padre" class="form-label">NOMBRE DEL (A) PADRE, MADRE O TUTOR (A): </label>
+                            @error('nombre_padre')
+                                <small class="text-danger">{{ '*' . $message }}</small>
+                            @enderror
+                        </div>
 
-                            <label for="matricula" class="form-label">COMUNICO A USTED QUE EL ALUMNO (A):</label>
+
+                        <!--Matricula del alumno-->
+                        <div class="col-md-12">
+
+                            <label for="matricula" class="form-label">La Coordinación de Servicios Educativos
+                                Complementarios, en coordinación con la Dirección de la Escuela Secundaria Técnica No. 66
+                                con clave 20DST00621, por medio del presente comunica a usted que el alumno (a):</label>
                             {{-- <input type="number" name="matricula" id="matricula" class="form-control"
                                 value="{{ old('matricula') }}"> --}}
                             <select title="Seleccione un alumno..." data-live-search="true" name="matricula" id="matricula"
                                 class="form-control selectpicker show-tick">
                                 @foreach ($matricula as $item)
                                     <option value="{{ $item->matricula }}">{{ $item->matricula }} - {{ $item->nombre }}
-                                        {{ $item->apellido }}</option>
+                                        {{ $item->apellido }}
+                                    </option>
                                 @endforeach
-                                <P>P R E S E N T E</P>
                             </select>
                             @error('matricula')
                                 <small class="text-danger">{{ '*' . $message }}</small>
@@ -114,99 +126,114 @@
                             @enderror
                         </div>
 
-                        {{-- tipo de falta --}}
-                        <div class="form-group">
-                            <label for="motivo">INCURRIO EN LA(S) SIGUIENTE(S) FALTA(S):</label>
-                            <select title="Seleccione la(s) falta(s)..." name="motivo[]" id="motivo"
-                                class="form-control selectpicker" multiple>
-                                <option value="No se presentó a clases">No se presentó a clases</option>
-                                <option value="Falta de respeto al personal">Falta de respeto al personal</option>
-                                <option value="Por indisciplina en el salón">Por indisciplina en el salón</option>
-                                <option value="No portar adecuadamente el uniforme">No portar adecuadamente el uniforme
-                                </option>
-                                <option value="Agredir verbalmente a sus compañeros">Agredir verbalmente a sus compañeros
-                                </option>
-                                <option value="Destruir el material de sus compañeros">Destruir el material de sus
-                                    compañeros</option>
-                                <option value="Presentar trabajos de mala calidad">Presentar trabajos de mala calidad
-                                </option>
-                                <option value="No cumple con sus tareas">No cumple con sus tareas</option>
-                                <option value="Se retira de la escuela">Se retira de la escuela</option>
-                                <option value="Pintar en el inmueble">Pintar en el inmueble</option>
-                                <option value="Portar, usar el celular">Portar, usar el celular</option>
-                                <option value="Traer revistas inadecuadas">Traer revistas inadecuadas</option>
-                                <option value="Indisciplina en actos cívicos">Indisciplina en actos cívicos</option>
-                                <option value="Traer aliento alcohólico o fumar">Traer aliento alcohólico o fumar</option>
-                                <option value="No trae material de trabajo">No trae material de trabajo</option>
-                                <option value="Golpear a su compañero">Golpear a su compañero</option>
-                                <option value="Impuntualidad constante">Impuntualidad constante</option>
-                                <option value="No asistir al homenaje">No asistir al homenaje</option>
-                                <option value="Otro">Otro</option>
-                            </select>
-                        </div>
 
-                        <!-- Campo de texto para "Otro" -->
-                        <div class="form-group" id="otro-motivo" style="display: none;">
-                            <label for="motivo_otro">Especificar otra falta:</label>
-                            <input type="text" name="motivo_otro" id="motivo_otro" class="form-control"
-                                style="width: 300px;">
-                        </div>
-
-                        <!--Modulo en que ocurrio-->
-                        <div class="col-md-6">
-                            <label for="modulo" class="form-label">EN EL MODULO DE:</label>
-                            <input type="text" name="modulo" id="modulo" class="form-control" value="{{ old('modulo') }}">
-                            @error('modulo')
+                        {{-- Motivo de la suspencion --}}
+                        <div class="col-md-12">
+                            <label for="motivo" class="form-label">Violó el Reglamento Interno fundamentado en el
+                                acuerdo
+                                97, donde se establece la organización y funcionamiento de la escuela, al que se sujetará el
+                                alumnado, por el motivo:</label>
+                            <textarea name="motivo" id="motivo" class="form-control"
+                                value="{{ old('motivo') }}"></textarea>
+                            @error('motivo')
                                 <small class="text-danger">{{ '*' . $message }}</small>
                             @enderror
                         </div>
 
-                        <!--Hora de la incidencia-->
+                        {{-- CAPITULO, ARTICULO, FRACCION E INCISO --}}
                         <div class="col-md-6">
-                            <label for="hora_clase" class="form-label">A LA HORA</label>
-                            <input type="time" name="hora_clase" id="hora_clase" class="form-control"
-                                value="{{ old('hora_clase') }}" required>
-                            @error('hora_clase')
+                            <label for="capitulo" class="form-label">Que lo establece el Capítulo: </label>
+                            <input type="text" name="capitulo" id="capitulo" class="form-control"
+                                value="{{ old('capitulo') }}" required>
+                            @error('capitulo')
                                 <small class="text-danger">{{ '*' . $message }}</small>
+                            @enderror
+
+                        </div>
+                        <div class="col-md-6">
+                            <label for="articulo" class="form-label">Artículo: </label>
+
+                            <input type="text" name="articulo" id="articulo" class="form-control"
+                                value="{{ old('articulo') }}" required>
+                            @error('articulo')
+                                <small class="text-danger">{{ '*' . $message }}</small>
+                            @enderror
+
+                        </div>
+                        <div class="col-md-6">
+
+                            <label for="fraccion" class="form-label">Fracción: </label>
+
+                            <input type="text" name="fraccion" id="fraccion" class="form-control"
+                                value="{{ old('fraccion') }}" required>
+                            @error('fraccion')
+                                <small class="text-danger">{{ '*' . $message }}</small>
+                            @enderror
+
+                        </div>
+                        <div class="col-md-6">
+
+                            <label for="inciso" class="form-label">Inciso: </label>
+
+                            <input type="text" name="inciso" id="inciso" class="form-control" value="{{ old('inciso') }}"
+                                required>
+                            @error('inciso')
+                                <small class="text-danger">{{ '*' . $message }}</small>
+                            @enderror
+
+                        </div>
+
+                        {{-- numero de dias de suspencion --}}
+                        <div class="col-md-6">
+                            <label for="numero_dias" class="form-label">Se hace acreedor a una sanción disciplinaria
+                                correspondiente a</label>
+                            <input type="number" name="numero_dias" id="numero_dias" class="form-numero_dias"
+                                value="{{old('numero_dias')}}"> día(s) hábil(es) de SUSPENSIÓN DE CLASES
+                            @error('numero_dias')
+                                <small class="text-danger">{{'*' . $message}}</small>
+                            @enderror
+                        </div>
+                        
+                        {{-- fecha de incio de la suspencion --}}
+                        <div class="col-md-6">
+                            <label for="fecha_inicio" class="form-label">iniciando el:</label>
+                            <input type="date" name="fecha_inicio" id="fecha_inicio" class="form-control"
+                                value="{{ old('fecha_inicio') }}">
+                            @error('fecha_inicio')
+                                <small class="text-danger">{{'*' . $message}}</small>
                             @enderror
                         </div>
 
-
-                        <!--Asignatura-->
-                        <div class="col-md-6">
-                            <label for="asignatura" class="form-label">EN LA ASIGNATURA:</label>
-                            <input type="text" name="asignatura" id="modulo" class="form-control"
-                                value="{{ old('modulo') }}">
-                            @error('asignatura')
-                                <small class="text-danger">{{ '*' . $message }}</small>
-                            @enderror
+                        <div class="col-md-12">
+                            <p>
+                                Por lo que se le comunica, para su conocimiento e intervención en el mejoramiento conductual
+                                de su hijo (a).
+                            </p>
                         </div>
 
 
-
-                        <!--Nombre de quien lo solicita-->
                         <div class="col-md-6">
-                            <label for="nombre_profesor" class="form-label">REPORTÓ:</label>
-                            <input placeholder="nombre_profesor" type="text" name="nombre_profesor" id="nombre_profesor"
-                                class="form-control" value="{{ old('nombre_profesor') }}">
-                            @error('nombre_profesor')
-                                <small class="text-danger">{{ '*' . $message }}</small>
-                            @enderror
-                        </div>
-
-                        {{-- campo para observaciones --}}
-                        <div class="col-md-6">
-                            <label for="observaciones" class="form-label">OBSERVACIONES:</label>
-                            <textarea name="observaciones" id="observaciones" class="form-control"
-                                value=value="{{ old('nombre_profesor') }}"></textarea>
-                            @error('observaciones')
-                                <small class="text-danger">{{ '*' . $message }}</small>
-                            @enderror
+                            EL ASESOR DEL GRUPO:
+                            <div class="row align-items-center">
+                                <div class="col-auto">
+                                    <label for="nombre_profesor" class="form-label">PROFR (A)
+                                        A:</label>
+                                </div>
+                                <div class="col">
+                                    <input type="text" name="nombre_profesor" id="nombre_profesor" class="form-control"
+                                        value="{{ old('nombre_padre') }}">
+                                </div>
+                                <div class="col-auto">
+                                    @error('nombre_profesor')
+                                        <small class="text-danger">{{ '*' . $message }}</small>
+                                    @enderror
+                                </div>
+                            </div>
                         </div>
 
 
                         <div class="col-12 text-center">
-                            <button type="submit" class="btn btn-primary"> Guardar</button>
+                            <button type="submit" class="btn btn-secondary"> Guardar</button>
 
                         </div>
 
@@ -221,6 +248,7 @@
 @endsection
 
 @push('js')
+
 
 
     {{--
@@ -246,18 +274,4 @@
     </script> --}}
     <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.14.0-beta3/dist/js/bootstrap-select.min.js"></script>
 
-    <script>
-        $(document).ready(function () {
-            // Escuchar cambios en el select
-            $('#motivo').on('change', function () {
-                // Verificar si la opción "Otro" está seleccionada
-                if ($(this).val() && $(this).val().includes('Otro')) {
-                    $('#otro-motivo').show(); // Mostrar el campo de texto
-                } else {
-                    $('#otro-motivo').hide(); // Ocultar el campo de texto
-                    $('#motivos_otro').val(''); // Limpiar el valor del campo
-                }
-            });
-        });
-    </script>
 @endpush

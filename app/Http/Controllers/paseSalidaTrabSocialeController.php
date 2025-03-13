@@ -17,8 +17,8 @@ class paseSalidaTrabSocialeController extends Controller
     public function index()
     {
         //
-        $pase = Pase_salida_trab_sociale::with('expedienteDisciplinario')->get();
-        return view('pase_salida_trab_sociale.index',compact('pase'));
+        $paseTra = Pase_salida_trab_sociale::with('expedienteDisciplinario')->get();
+        return view('pase_salida_trab_sociale.index',compact('paseTra'));
 
     }
 

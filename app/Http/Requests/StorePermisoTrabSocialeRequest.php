@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreSuspencionClaseRequest extends FormRequest
+class StorePermisoTrabSocialeRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,21 +22,14 @@ class StoreSuspencionClaseRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
-            
-            'fecha_suspencion' => 'required|date',
-            'nombre_padre' => 'required|string|max:255',
-            'matricula' => 'required|exists:alumnos,matricula|integer',
+            'fecha_reporte' => 'required|date',
+            'matricula' => 'required|exists:alumnos,matricula', // Asegura que la matrícula exista en la tabla `alumnos`
             'grado' => 'required|in:1,2,3', // Solo permite los grados 1, 2 o 3
             'grupo' => 'required|in:A,B,C,D,E,F', // Solo permite los grupos A, B, C, D, E, F
             'motivo' => 'required|string|max:1000',
-            'capitulo' => 'required|string|max:255',
-            'articulo' => 'required|string|max:255',
-            'fraccion' => 'required|string|max:255',
-            'inciso' => 'required|string|max:255',
             'numero_dias' => 'required|integer|min:1', // Número de días debe ser un entero positivo
             'fecha_inicio' => 'required|date|after_or_equal:today', // Fecha de inicio debe ser hoy o después
-            'nombre_profesor' => 'required|string|max:255', // Nombre del profesor que reporta
+            'nombre_padre' => 'required|string|max:255', // Nombre del padre o tutor
         ];
     }
 }
