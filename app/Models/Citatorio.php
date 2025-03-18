@@ -10,7 +10,7 @@ class Citatorio extends Model
     //
 
 
-    protected $fillable = ['nombre_padre', 'grado','grupo', 'hora_cita', 'fecha_cita', 'expediente_disciplinario_id'];
+    protected $fillable = ['nombre_padre', 'grado','grupo', 'hora_cita', 'fecha_cita','nombre_profesor', 'expediente_disciplinario_id'];
 
     public function expedienteDisciplinario(){
         return $this->belongsTo(ExpedienteDisciplinario::class);

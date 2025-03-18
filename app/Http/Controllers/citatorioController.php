@@ -63,6 +63,7 @@ class citatorioController extends Controller
                 'grupo' => $request->grupo,
                 'hora_cita' => $request->hora_cita,
                 'fecha_cita' => $request->fecha_cita,
+                'nombre_profesor' => $request->nombre_profesor,
                 'expediente_disciplinario_id' => $expediente->id,
             ]);
 
@@ -78,9 +79,23 @@ class citatorioController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(string $id, Request $request)
     {
-        //
+
+        // Obtener el registro por su ID
+        $citatorio = Citatorio::with('expedienteDisciplinario.alumno')->find($id);
+
+        // Verificar si el registro existe
+        if (!$citatorio) {
+            return redirect()->route('citatorio.index')->with('error', 'El citatorio no existe.');
+        }
+        // $matricula = $citatorio->expedienteDisciplinario->alumno->matricula;
+        $nombre = $citatorio->expedienteDisciplinario->alumno->nombre;
+        $apellido = $citatorio->expedienteDisciplinario->alumno->apellido;
+        // Determinar si la solicitud proviene de citatorio_general
+        $fromCitatorio = $request->query('from_citatorio', false);
+        // Pasar los datos a la vista
+        return view('citatorio.show', compact('citatorio', 'fromCitatorio', 'nombre', 'apellido'));
     }
 
     /**

@@ -34,33 +34,38 @@
             <table id="datatablesSimple" class="table table-striped">
                 <thead>
                     <tr>
-                        <th>Name</th>
-                        <th>Position</th>
-                        <th>Office</th>
-                        <th>Age</th>
-                        <th>Start date</th>
-                        <th>Salary</th>
+                        <th>Fecha de creacion</th>
+                        <th>Nombre del profesor</th>
+                        <th>Asignatura</th>
+                        <th>Grado</th>
+                        <th>Grupo</th>
+                        <th>Hora de la cita</th>
+                        <th>Fecha de la cita</th>
+                        <th>Acciones</th>
                     </tr>
                 </thead>
-             
                 <tbody>
-                    <tr>
-                        <td>Tiger Nixon</td>
-                        <td>System Architect</td>
-                        <td>Edinburgh</td>
-                        <td>61</td>
-                        <td>2011/04/25</td>
-                        <td>$320,800</td>
-                    </tr>
-                    <tr>
-                        <td>Garrett Winters</td>
-                        <td>Accountant</td>
-                        <td>Tokyo</td>
-                        <td>63</td>
-                        <td>2011/07/25</td>
-                        <td>$170,750</td>
-                    </tr>
-                   
+                    @foreach ($citatorios as $citatorio)
+                        <tr>
+                            <td>{{ $citatorio->fecha_creacion}}</td>
+                            <td>{{ $citatorio->nombre_profesor}}</td>
+                            <td>{{ $citatorio->asignatura}}</td>
+                            <td>{{ $citatorio->grado}}</td>
+                            <td>{{ $citatorio->grupo}}</td>
+                            <td>{{ $citatorio->hora_cita}}</td>
+                            <td>{{ $citatorio->fecha_cita }}</td>
+                            <td>
+                                <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+                                    <a href="{{ route('citatorio_general.show', ['citatorio_general' => $citatorio->id, 'from_citatorio_general' => true]) }}">
+                                        <button type="button" class="btn btn-success">Ver</button>
+                                    </a>
+                                    {{-- <button type="button" class="btn btn-success">Ver</button> --}}
+                                    <button type="button" class="btn btn-warning">Editar</button>
+                                    <button type="button" class="btn btn-danger">Borrar</button>
+                                </div>
+                            </td>
+                        </tr>
+                    @endforeach
                 </tbody>
             </table>
         </div>

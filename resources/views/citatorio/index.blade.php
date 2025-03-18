@@ -76,7 +76,10 @@
                             <td>{{$citatorio->fecha_cita}}</td>
                             <td>
                                 <div class="btn-group" role="group" aria-label="Basic mixed styles example">
-                                    <button type="button" class="btn btn-success">Ver</button>
+                                    <a href="{{ route('citatorio.show', ['citatorio' => $citatorio->id, 'from_citatorio' => true]) }}">
+                                        <button type="button" class="btn btn-success">Ver</button>
+                                    </a>
+                                    {{-- <button type="button" class="btn btn-success">Ver</button> --}}
                                     <button type="button" class="btn btn-warning">Editar</button>
                                     <button type="button" class="btn btn-danger">Borrar</button>
                                 </div>

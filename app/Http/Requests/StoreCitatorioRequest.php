@@ -27,19 +27,21 @@ class StoreCitatorioRequest extends FormRequest
             'matricula' => 'required|exists:alumnos,matricula|integer',
             'grado' => 'required|in:1,2,3',
             'grupo' => 'required|in:A,B,C,D,E,F',
-            'hora_cita' => [
-                'required',
-                'date_format:H:i:s', // Valida que el formato sea HH:MM:SS
-                function ($attribute, $value, $fail) {
-                    // Extraer la hora (HH) del valor
-                    $hora = explode(':', $value)[0];
-                    // Validar que la hora esté en el rango permitido
-                    if (!in_array((int) $hora, [8, 9, 10, 11, 12, 13, 14, 15, 16])) {
-                        $fail('La hora seleccionada no es válida.');
-                    }
-                },
-            ],
+            // 'hora_cita' => [
+            //     'required',
+            //     'date_format:H:i:s', // Valida que el formato sea HH:MM:SS
+            //     function ($attribute, $value, $fail) {
+            //         // Extraer la hora (HH) del valor
+            //         $hora = explode(':', $value)[0];
+            //         // Validar que la hora esté en el rango permitido
+            //         if (!in_array((int) $hora, [8, 9, 10, 11, 12, 13, 14, 15, 16])) {
+            //             $fail('La hora seleccionada no es válida.');
+            //         }
+            //     },
+            // ],
+            'hora_cita' => 'required|date_format:H:i', // Hora en formato HH:MM
             'fecha_cita' => 'required|date',
+            'nombre_profesor' => 'required|string|max:255', // Nombre del profesor es obligatorio
         ];
     }
 }
