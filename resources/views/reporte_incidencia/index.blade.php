@@ -44,7 +44,7 @@
             </a>
             </div>
 
-
+            {{-- Tabla reporte de Incidencia --}}
             <div class="card mb-4">
                 <div class="card-header">
                     <i class="fas fa-table me-1"></i>
@@ -86,7 +86,6 @@
                                             <a href="{{ route('reporte_incidencia.edit', ['reporte_incidencium' => $reporte->id]) }}">
                                                 <button type="button" class="btn btn-warning">Editar</button>
                                             </a>
-                                            <button type="button" class="btn btn-danger">Borrar</button>
                                         </div>
                                     </td>
                                 </tr>

@@ -30,14 +30,14 @@
 @endif
 
     <div class="container-fluid px-4">
-        <h1 class="mt-4">Expedientes Disciplinario</h1>
+        <h1 class="mt-4">Expedientes Disciplinarios</h1>
         <ol class="breadcrumb mb-4">
             <li class="breadcrumb-item"><a href="{{route('panel')}}">Inicio</a></li>
             <li class="breadcrumb-item active">Expedientes Disciplinarios</li>
         </ol>
 
         <div class="mb-4">
-            <a href="{{route('expedientes_medicos.create')}}">
+            <a href="{{route('expediente_disciplinario.create')}}">
                 <button type="button" class=" btn btn-primary"> Crear Expediente </button>
             </a>
         </div>
@@ -47,7 +47,7 @@
             <div class="card mb-4">
                 <div class="card-header">
                     <i class="fas fa-table me-1"></i>
-                    Expedientes Medicos
+                    Expedientes Disciplinarios
                 </div>
                 <div class="card-body">
                     <table id="datatablesSimple">
@@ -76,12 +76,12 @@
 
                                         <div class="btn-group btn-group-sm" role="group" aria-label="Small button group">
 
-                                            <a href="{{ route('expedientes_medicos.edit', ['expedientes_medico' => $expediente->id]) }}">
+                                            <a href="{{ route('expediente_disciplinario.edit', ['expediente_disciplinario' => $expediente->id]) }}">
                                                 <button type="button" class="btn btn-outline-dark">Editar información</button>
                                             </a>
 
                                             <!--Falta desarrollar la vista de los expedientes -->
-                                            <a href="{{ route('expedientes_medicos.show', $expediente->id) }}">
+                                            <a href="{{ route('expediente_disciplinario.show', $expediente->id) }}">
                                                 <button type="button" class="btn btn-outline-info">Ver expediente</button>
                                             </a>
 

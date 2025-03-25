@@ -44,7 +44,7 @@
             </a>
         </div>
 
-
+        {{-- Tabla Persmiso Trabajo social --}}
         <div class="card mb-4">
             <div class="card-header">
                 <i class="fas fa-table me-1"></i>
@@ -81,13 +81,14 @@
                                 <td>{{$permiso->nombre_padre}}</td>
                                 <td>
                                     <div class="btn-group" role="group" aria-label="Basic mixed styles example">
-                                        <a href="{{ route('permiso_trab_sociale.show', ['permiso_trab_sociale' => $permiso->id, 'from_permiso_trab_sociale' => true]) }}">
+                                        <a
+                                            href="{{ route('permiso_trab_sociale.show', ['permiso_trab_sociale' => $permiso->id, 'from_permiso_trab_sociale' => true]) }}">
                                             <button type="button" class="btn btn-success">Ver</button>
                                         </a>
-                                        <a href="{{ route('permiso_trab_sociale.edit', ['permiso_trab_sociale' => $permiso->id]) }}">
+                                        <a
+                                            href="{{ route('permiso_trab_sociale.edit', ['permiso_trab_sociale' => $permiso->id]) }}">
                                             <button type="button" class="btn btn-warning">Editar</button>
                                         </a>
-                                        <button type="button" class="btn btn-danger">Borrar</button>
                                     </div>
                                 </td>
                             </tr>

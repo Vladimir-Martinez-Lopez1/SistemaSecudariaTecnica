@@ -82,7 +82,6 @@
                                         <a href="{{ route('citatorio_general.edit', ['citatorio_general' => $citatorio->id]) }}">
                                             <button type="button" class="btn btn-warning">Editar</button>
                                         </a>
-                                        <button type="button" class="btn btn-danger">Borrar</button>
                                     </div>
                                 </td>
                             </tr>

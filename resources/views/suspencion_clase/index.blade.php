@@ -44,7 +44,7 @@
             </a>
         </div>
 
-        <!--Tabla de citatorios-->
+        <!--Tabla de Suspencion de clases-->
         <div class="card mb-4">
             <div class="card-header">
                 <i class="fas fa-table me-1"></i>
@@ -91,7 +91,6 @@
                                         <a href="{{ route('suspencion_clase.edit', ['suspencion_clase' => $suspencion->id]) }}">
                                             <button type="button" class="btn btn-warning">Editar</button>
                                         </a>
-                                        <button type="button" class="btn btn-danger">Borrar</button>
                                     </div>
                                 </td>
                             </tr>

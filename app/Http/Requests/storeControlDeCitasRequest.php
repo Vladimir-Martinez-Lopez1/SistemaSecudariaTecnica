@@ -24,7 +24,7 @@ class storeControlDeCitasRequest extends FormRequest
         return [
             'matricula' => 'required|exists:alumnos,matricula|integer',
             'fecha' => 'required|date',
-            'grado' => 'required|in:1,2,3,4,5,6',
+            'grado' => 'required|in:1,2,3',
             'grupo' => 'required|in:A,B,C,D,E,F',
             'sexo' => 'required|in:Masculino,Femenino',
             'diagnostico' => 'required|string|max:100',

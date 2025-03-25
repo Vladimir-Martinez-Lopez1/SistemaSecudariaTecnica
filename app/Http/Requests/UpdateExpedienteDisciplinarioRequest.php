@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class storeJustificanteInasistenciaMedicoRequest extends FormRequest
+class UpdateExpedienteDisciplinarioRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,12 +22,9 @@ class storeJustificanteInasistenciaMedicoRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'matricula' => 'required|exists:alumnos,matricula|integer',
-            'fecha' => 'required|date',
-            'grado' => 'required|in:1,2,3',
-            'grupo' => 'required|in:A,B,C,D,E,F',
-            'modulos' => 'required|string|max:255',
-            'nombre_medico' => 'required|string|max:255',
+            'matricula'=>'required|max:11|unique:alumnos,matricula',
+            'nombre'=>'required|max:50',
+            'apellido'=>'required|max:50',
         ];
     }
 }

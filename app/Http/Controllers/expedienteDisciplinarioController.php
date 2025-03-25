@@ -2,8 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreExpedienteDisciplinarioRequest;
+use App\Http\Requests\UpdateExpedienteDisciplinarioRequest;
+use App\Models\Alumno;
 use App\Models\ExpedienteDisciplinario;
+use App\Models\ExpedienteMedico;
+use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class expedienteDisciplinarioController extends Controller
 {
@@ -21,15 +27,37 @@ class expedienteDisciplinarioController extends Controller
      */
     public function create()
     {
-        //
+        $matricula = Alumno::all();
+        return view('expediente_disciplinario.create', compact('matricula'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreExpedienteDisciplinarioRequest $request)
     {
-        //
+        //dd($request);
+        try{
+            DB::beginTransaction();
+            // Alumno
+            $alumno = Alumno::create($request->validated());
+
+            // Expediente Médico asociado al alumno
+            ExpedienteMedico::create([
+                'alumno_id' => $alumno->id
+            ]);
+
+            // Expediente Disciplinario asociado al alumno
+            ExpedienteDisciplinario::create([
+                'alumno_id' => $alumno->id
+            ]);
+
+            DB::commit();
+        }catch(Exception $e){
+            DB::rollBack();
+        }
+
+       return redirect()->route('expediente_disciplinario.index')->with('success','Registro exitoso');
     }
 
     /**
@@ -37,23 +65,46 @@ class expedienteDisciplinarioController extends Controller
      */
     public function show(string $id)
     {
-        //
+        // Obtener el expediente disciplinario con sus relaciones
+        $expediente = ExpedienteDisciplinario::with(['alumno', 'Citatorio', 'Justi_retardo_sociale', 'Pase_salida', 'Pase_salida_trab_sociale', 'Permiso_trab_sociale', 'Suspencion_clase', 'Reporte_incidencia'])->findOrFail($id);
+
+        // Pasar los datos a la vista
+        return view('expediente_disciplinario.show', compact('expediente'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(ExpedienteDisciplinario $expedienteDisciplinario)
     {
-        //
+        $expedienteDisciplinario->load('alumno');
+        // dd($expedientes_medico);
+        return view('expediente_disciplinario.edit', ['expediente' => $expedienteDisciplinario]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateExpedienteDisciplinarioRequest $request, ExpedienteDisciplinario $expedienteDisciplinario)
     {
-        //
+        try {
+            DB::beginTransaction();
+
+            $alumno = $expedienteDisciplinario->alumno;
+
+            $alumno->update([
+                'matricula' => $request->matricula,
+                'nombre' => $request->nombre,
+                'apellido' => $request->apellido,
+            ]);
+
+            DB::commit();
+
+            return redirect()->route('expediente_disciplinario.index')->with('success', 'Actualización exitosa');
+        } catch (Exception $e) {
+            DB::rollBack();
+            return redirect()->route('expediente_disciplinario.index')->with('error', 'Error al actualizar');
+        }
     }
 
     /**

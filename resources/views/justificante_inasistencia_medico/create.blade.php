@@ -1,9 +1,9 @@
 @extends('template')
 
 @section('title','Crear justificante medico')
-    
+
 @push('css')
-    
+
 @endpush
 
 @section('content')
@@ -11,7 +11,7 @@
     <h1 class="mt-4">Crear justificante de inasistencia medica</h1>
         <ol class="breadcrumb mb-4">
             <li class="breadcrumb-item"><a href="{{route('panel')}}">Inicio</a></li>
-            <li class="breadcrumb-item"><a href="{{route('justificante_inasistencia_medico.index')}}">Justificantes de inasistencia medica</a></li>          
+            <li class="breadcrumb-item"><a href="{{route('justificante_inasistencia_medico.index')}}">Justificantes de inasistencia medica</a></li>
             <li class="breadcrumb-item active">Crear justificante Medico</li>
         </ol>
 
@@ -36,7 +36,7 @@
                     <label for="grado" class="form-label">Grado</label>
                     <select name="grado" id="grado" class="form-control">
                         <option value="">Seleccione...</option>
-                        @foreach([1,2,3,4,5,6] as $grado)
+                        @foreach([1,2,3] as $grado)
                             <option value="{{ $grado }}" {{ old('grado') == $grado ? 'selected' : '' }}>{{ $grado }}</option>
                         @endforeach
                     </select>
@@ -57,7 +57,7 @@
                     <small class="text-danger">{{ '*'.$message }}</small>
                     @enderror
                 </div>
-                
+
                 <div class="col-md-6">
                     <label for="fecha" class="form-label">Fecha</label>
                     <input type="date" name="fecha" id="fecha" class="form-control" value="{{ old('fecha') }}">
@@ -90,14 +90,14 @@
                 <div class="col-12 text-center">
                     <button type="submit" class="btn btn-primary">Guardar</button>
                 </div>
-                
-            </div> 
-        </form>
-    </div> 
 
-</div>    
+            </div>
+        </form>
+    </div>
+
+</div>
 @endsection
 
 @push('js')
-    
+
 @endpush

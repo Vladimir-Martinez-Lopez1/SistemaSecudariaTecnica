@@ -80,7 +80,7 @@
 
             <a class="nav-link" href="{{route('expediente_disciplinario.index')}}">
                 <div class="sb-nav-link-icon"><i class="fa-solid fa-folder-plus"></i></div>
-                Expedientes Disciplinario
+                Expedientes Disciplinarios
                 <!-- Agregar Expediente-->
             </a>
             <a class="nav-link" href="{{route('citatorio.index')}}">

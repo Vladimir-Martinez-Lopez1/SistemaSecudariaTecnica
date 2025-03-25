@@ -44,7 +44,7 @@
             </a>
         </div>
 
-        <!--Tabla de citatorios-->
+        <!--Tabla de Justificante de retardo trabajo social-->
         <div class="card mb-4">
             <div class="card-header">
                 <i class="fas fa-table me-1"></i>
@@ -79,7 +79,6 @@
                                         <a href="{{ route('justi_retardo_sociale.edit', ['justi_retardo_sociale' => $justificado->id]) }}">
                                             <button type="button" class="btn btn-warning">Editar</button>
                                         </a>
-                                        <button type="button" class="btn btn-danger">Borrar</button>
                                     </div>
                                 </td>
                             </tr>
