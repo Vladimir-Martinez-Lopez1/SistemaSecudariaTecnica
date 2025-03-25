@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StorePaseSalidaTrabSocialeRequest extends FormRequest
+class UpdatePaseSalidaTrabSocialeRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -71,8 +71,6 @@ class StorePaseSalidaTrabSocialeRequest extends FormRequest
             ],
             'fecha_salida' => 'required|date',
             'solicito' => 'required|max:50',
-            'matricula' => 'required|exists:alumnos,matricula|integer',
-
         ];
     }
 }

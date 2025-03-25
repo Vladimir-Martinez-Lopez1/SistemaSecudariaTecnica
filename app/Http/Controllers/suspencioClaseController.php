@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreSuspencionClaseRequest;
+use App\Http\Requests\UpdateSuspencioClaseRequest;
 use App\Models\Alumno;
 use App\Models\ExpedienteDisciplinario;
 use App\Models\Suspencion_clase;
@@ -99,25 +100,88 @@ class suspencioClaseController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(string $id, Request $request)
     {
-        //
+
+        // Obtener el registro por su ID
+        $suspencion_clase = Suspencion_clase::with('expedienteDisciplinario.alumno')->find($id);
+
+        // Verificar si el registro existe
+        if (!$suspencion_clase) {
+            return redirect()->route('suspencion_clase.index')->with('error', 'El documento de suspencion no existe.');
+        }
+        // $matricula = $citatorio->expedienteDisciplinario->alumno->matricula;
+        $nombre = $suspencion_clase->expedienteDisciplinario->alumno->nombre;
+        $apellido = $suspencion_clase->expedienteDisciplinario->alumno->apellido;
+        // Determinar si la solicitud proviene de citatorio_general
+        $from_suspencion_clase = $request->query('from_suspencion_clase', false);
+        // Pasar los datos a la vista
+        return view('suspencion_clase.show', compact('suspencion_clase', 'from_suspencion_clase', 'nombre', 'apellido'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Suspencion_clase $suspencion_clase)
     {
-        //
+        // Cargar la relación expedienteDisciplinario.alumno
+        $suspencion_clase->load('expedienteDisciplinario.alumno');
+
+        // Obtener todos los alumnos para el select
+        $matricula = Alumno::all();
+
+        // Pasar el suspencion_clase y la lista de alumnos a la vista
+        return view('suspencion_clase.edit', [
+            'suspencion_clase' => $suspencion_clase,
+            'matricula' => $matricula,
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateSuspencioClaseRequest $request, Suspencion_clase $suspencion_clase)
     {
-        //
+        try {
+            // Calcular la fecha de término
+            $fechaInicio = Carbon::parse($request->fecha_inicio);
+            $fechaTermino = $fechaInicio->copy()->addDays($request->numero_dias - 1); // Restar 1 porque el primer día cuenta
+
+            // Ajustar la fecha de término si cae en sábado o domingo
+            if ($fechaTermino->isWeekend()) {
+                $fechaTermino->next(Carbon::MONDAY); // Redondear al siguiente lunes
+            }
+
+            DB::beginTransaction();
+
+            // Actualizar el registro
+            $suspencion_clase->update([
+                'fecha_suspencion' => $request->fecha_suspencion,
+                'nombre_padre' => $request->nombre_padre,
+                'grado' => $request->grado,
+                'grupo' => $request->grupo,
+                'motivo' => $request->motivo,
+                'capitulo' => $request->capitulo,
+                'articulo' => $request->articulo,
+                'fraccion' => $request->fraccion,
+                'inciso' => $request->inciso,
+                'numero_dias' => $request->numero_dias,
+                'fecha_inicio' => $request->fecha_inicio,
+                'fecha_termino' => $fechaTermino->toDateString(), // Usar la fecha calculada
+                'nombre_profesor' => $request->nombre_profesor,
+            ]);
+
+            DB::commit();
+
+            return redirect()->route('suspencion_clase.index')->with('success', 'Documento de suspención actualizado con éxito.');
+        } catch (\Exception $e) {
+            DB::rollBack();
+
+            // Redirigir al usuario con un mensaje de error que incluya el motivo de la excepción
+            return redirect()->back()
+                ->withErrors(['error' => 'Ocurrió un error al actualizar el documento: ' . $e->getMessage()])
+                ->withInput(); // Mantener los datos del formulario
+        }
     }
 
     /**

@@ -59,7 +59,6 @@
                                 <th>Matricula</th>
                                 <th>Nombre del alumno(a)</th>
                                 <th>Grado|Grupo</th>
-                                <th>No. Lista</th>
                                 <th>Motivo</th>
                                 <th>Hora de salida | Hora de regreso</th>
                                 <th>Nombre del profesor</th>
@@ -73,17 +72,22 @@
                                 <tr>
                                     <td>{{$pase->expedienteDisciplinario->alumno->matricula}}</td>
                                     <td>{{$pase->expedienteDisciplinario->alumno->nombre }}
-                                        {{ $pase->expedienteDisciplinario->alumno->apellido }}</td>
+                                        {{ $pase->expedienteDisciplinario->alumno->apellido }}
+                                    </td>
                                     <td>{{$pase->grado }} / {{ $pase->grupo }}</td>
-                                    <td>{{$pase->numero_lista}}</td>
                                     <td>{{$pase->motivo}}</td>
                                     <td>{{$pase->hora_salida}} / {{$pase->hora_regreso}} </td>
                                     <td>{{$pase->solicito}}</td>
                                     <td>{{$pase->fecha_salida}}</td>
                                     <td>
                                         <div class="btn-group" role="group" aria-label="Basic mixed styles example">
-                                            <button type="button" class="btn btn-success">Ver</button>
-                                            <button type="button" class="btn btn-warning">Editar</button>
+                                            <a
+                                                href="{{ route('pase_salida_trab_sociale.show', ['pase_salida_trab_sociale' => $pase->id, 'from_pase_salida_trab_sociale' => true]) }}">
+                                                <button type="button" class="btn btn-success">Ver</button>
+                                            </a>
+                                            <a href="{{ route('pase_salida_trab_sociale.edit', ['pase_salida_trab_sociale' => $pase->id]) }}">
+                                                <button type="button" class="btn btn-warning">Editar</button>
+                                            </a>
                                             <button type="button" class="btn btn-danger">Borrar</button>
                                         </div>
                                     </td>

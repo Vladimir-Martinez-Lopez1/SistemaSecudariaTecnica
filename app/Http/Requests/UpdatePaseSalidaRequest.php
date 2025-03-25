@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StorePaseSalidaTrabSocialeRequest extends FormRequest
+class UpdatePaseSalidaRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,7 +22,7 @@ class StorePaseSalidaTrabSocialeRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //Request para comprobar los datos del formulario
+            'numero_lista' => 'required|integer|min:1',
             'grado' => 'required|in:1,2,3',
             'grupo' => 'required|in:A,B,C,D,E,F',
             'motivo' => 'required',
@@ -71,8 +71,6 @@ class StorePaseSalidaTrabSocialeRequest extends FormRequest
             ],
             'fecha_salida' => 'required|date',
             'solicito' => 'required|max:50',
-            'matricula' => 'required|exists:alumnos,matricula|integer',
-
         ];
     }
 }

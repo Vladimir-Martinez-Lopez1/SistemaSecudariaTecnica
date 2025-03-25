@@ -1,6 +1,6 @@
 @extends('template')
 
-@section('title','Expedientes Medicos')
+@section('title','Expedientes Disciplinario')
 
 @push('css')
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> <!--alerta -->
@@ -30,10 +30,10 @@
 @endif
 
     <div class="container-fluid px-4">
-        <h1 class="mt-4">Expedientes Medicos</h1>
+        <h1 class="mt-4">Expedientes Disciplinario</h1>
         <ol class="breadcrumb mb-4">
             <li class="breadcrumb-item"><a href="{{route('panel')}}">Inicio</a></li>
-            <li class="breadcrumb-item active">Expedientes Medicos</li>
+            <li class="breadcrumb-item active">Expedientes Disciplinarios</li>
         </ol>
 
         <div class="mb-4">

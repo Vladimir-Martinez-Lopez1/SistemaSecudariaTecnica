@@ -81,8 +81,12 @@
                                 <td>{{$pase->fecha_salida}}</td>
                                 <td>
                                     <div class="btn-group" role="group" aria-label="Basic mixed styles example">
-                                        <button type="button" class="btn btn-success">Ver</button>
-                                        <button type="button" class="btn btn-warning">Editar</button>
+                                        <a href="{{ route('pase_salida.show', ['pase_salida' => $pase->id, 'from_pase_salida' => true]) }}">
+                                            <button type="button" class="btn btn-success">Ver</button>
+                                        </a>
+                                        <a href="{{ route('pase_salida.edit', ['pase_salida' => $pase->id]) }}">
+                                            <button type="button" class="btn btn-warning">Editar</button>
+                                        </a>
                                         <button type="button" class="btn btn-danger">Borrar</button>
                                     </div>
                                 </td>

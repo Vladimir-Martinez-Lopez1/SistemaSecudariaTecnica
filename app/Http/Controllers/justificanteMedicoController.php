@@ -112,6 +112,7 @@ class justificanteMedicoController extends Controller
      */
     public function update(UpdateJustificanteInasistenciaMedicoRequest $request, JustificanteInasistenciaMedica $justificante)
     {
+        //dd($request);
         try {
             DB::beginTransaction();
 

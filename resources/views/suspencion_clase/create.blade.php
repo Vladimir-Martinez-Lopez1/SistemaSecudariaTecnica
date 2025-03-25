@@ -24,14 +24,14 @@
         <!--Formulario para el Documento de suspencion-->
         <div class="container w-100 border border-3 border-secundary rounded p-4 mt-3">
             @if ($errors->any())
-            <div class="alert alert-danger">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-            @endif 
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
 
             <div class="container w-100 border border-3 border-secundary rounded p-4 mt-3">
                 <form action="{{route('suspencion_clase.store')}}" method="post">
@@ -133,8 +133,7 @@
                                 acuerdo
                                 97, donde se establece la organización y funcionamiento de la escuela, al que se sujetará el
                                 alumnado, por el motivo:</label>
-                            <textarea name="motivo" id="motivo" class="form-control"
-                                value="{{ old('motivo') }}"></textarea>
+                            <textarea name="motivo" id="motivo" class="form-control" value="{{ old('motivo') }}"></textarea>
                             @error('motivo')
                                 <small class="text-danger">{{ '*' . $message }}</small>
                             @enderror
@@ -193,7 +192,7 @@
                                 <small class="text-danger">{{'*' . $message}}</small>
                             @enderror
                         </div>
-                        
+
                         {{-- fecha de incio de la suspencion --}}
                         <div class="col-md-6">
                             <label for="fecha_inicio" class="form-label">iniciando el:</label>
@@ -221,7 +220,7 @@
                                 </div>
                                 <div class="col">
                                     <input type="text" name="nombre_profesor" id="nombre_profesor" class="form-control"
-                                        value="{{ old('nombre_padre') }}">
+                                        value="{{ old('nombre_profesor') }}">
                                 </div>
                                 <div class="col-auto">
                                     @error('nombre_profesor')

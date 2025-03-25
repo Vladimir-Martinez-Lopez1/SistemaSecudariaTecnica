@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreCitatorioGeneraleRequest;
+use App\Http\Requests\UpdateCitatorioGeneralRequest;
 use App\Models\Citatorio_generale;
 use Illuminate\Http\Request;
+use Exception;
 use Illuminate\Support\Facades\DB;
 
 class citatorioGeneralClaseController extends Controller
@@ -82,17 +84,41 @@ class citatorioGeneralClaseController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Citatorio_generale $citatorio_general)
     {
-        //
+        //dd($citatorio_general);
+        // Pasar el citatorio y la lista de alumnos a la vista
+        return view('citatorio_general.edit', [
+            'citatorio_general' => $citatorio_general,
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateCitatorioGeneralRequest $request, Citatorio_generale $citatorio_general)
     {
-        //
+
+        try {
+            DB::beginTransaction();
+
+            $citatorio_general->update([
+                'fecha_creacion' => $request->fecha_creacion,
+                'asignatura' => $request->asignatura,
+                'grado' => $request->grado,
+                'grupo' => $request->grupo,
+                'hora_cita' => $request->hora_cita,
+                'fecha_cita' => $request->fecha_cita,
+                'nombre_profesor' => $request->nombre_profesor,
+            ]);
+
+            DB::commit();
+
+            return redirect()->route('citatorio_general.index')->with('success', 'Citatorio actualizado con éxito.');
+        } catch (Exception $e) {
+            DB::rollBack();
+            return redirect()->route('citatorio_general.index')->with('error', 'Error al actualizar el citatorio.');
+        }
     }
 
     /**

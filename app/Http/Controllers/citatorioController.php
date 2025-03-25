@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreCitatorioRequest;
+use App\Http\Requests\UpdateCitaMedicaRequest;
+use App\Http\Requests\UpdateCitatorioRequest;
 use App\Models\Citatorio;
 use App\Models\ExpedienteDisciplinario;
 use App\Models\Alumno;
@@ -101,17 +103,52 @@ class citatorioController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
-    {
-        //
-    }
+    // public function edit(Citatorio $citatorio)
+    // {
 
+    //     // Relación expedienteMedico y alumno
+    //     $citatorio->load('expedienteDisiplinario.alumno');
+    //     return view('citatorio.edit', ['citatorio' => $citatorio]);
+    // }
+
+    public function edit(Citatorio $citatorio)
+    {
+        // Cargar la relación expedienteDisciplinario.alumno
+        $citatorio->load('expedienteDisciplinario.alumno');
+
+        // Obtener todos los alumnos para el select
+        $matricula = Alumno::all();
+
+        // Pasar el citatorio y la lista de alumnos a la vista
+        return view('citatorio.edit', [
+            'citatorio' => $citatorio,
+            'matricula' => $matricula,
+        ]);
+    }
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateCitatorioRequest $request, Citatorio $citatorio)
     {
-        //
+        try {
+            DB::beginTransaction();
+
+            $citatorio->update([
+                'nombre_padre' => $request->nombre_padre,
+                'grado' => $request->grado,
+                'grupo' => $request->grupo,
+                'hora_cita' => $request->hora_cita,
+                'fecha_cita' => $request->fecha_cita,
+                'nombre_profesor' => $request->nombre_profesor,
+            ]);
+
+            DB::commit();
+
+            return redirect()->route('citatorio.index')->with('success', 'Citatorio actualizado con éxito.');
+        } catch (Exception $e) {
+            DB::rollBack();
+            return redirect()->route('citatorio.index')->with('error', 'Error al actualizar el citatorio.');
+        }
     }
 
     /**

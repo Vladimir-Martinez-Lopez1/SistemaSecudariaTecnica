@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\citatorioController;
 use App\Http\Controllers\citatorioGeneralClaseController;
+use App\Http\Controllers\expedienteDisciplinarioController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\expedienteMedicoController;
 use App\Http\Controllers\controlDeCitaController;
@@ -27,6 +28,7 @@ Route::resource('justificante_inasistencia_medico', justificanteMedicoController
 Route::resource('informe_salud', informeSaludController::class);
 
 //Rutas disciplinarias
+Route::resource('expediente_disciplinario', expedienteDisciplinarioController::class);
 Route::resource('citatorio', citatorioController::class);
 Route::resource('citatorio_general', citatorioGeneralClaseController::class);
 Route::resource('pase_salida', paseSalidaController::class);

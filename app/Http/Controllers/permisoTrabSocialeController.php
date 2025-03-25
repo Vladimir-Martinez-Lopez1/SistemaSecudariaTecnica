@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StorePermisoTrabSocialeRequest;
+use App\Http\Requests\UpdatePermisoTrabSocialeRequest;
 use App\Models\Alumno;
 use App\Models\ExpedienteDisciplinario;
 use App\Models\Permiso_trab_sociale;
@@ -95,25 +96,86 @@ class permisoTrabSocialeController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(string $id, Request $request)
     {
-        //
+
+        // Obtener el registro por su ID
+        $permiso_trab_sociale = Permiso_trab_sociale::with('expedienteDisciplinario.alumno')->find($id);
+
+        // Verificar si el registro existe
+        if (!$permiso_trab_sociale) {
+            return redirect()->route('permiso_trab_sociale.index')->with('error', 'El documento de suspencion no existe.');
+        }
+        // $matricula = $citatorio->expedienteDisciplinario->alumno->matricula;
+        $nombre = $permiso_trab_sociale->expedienteDisciplinario->alumno->nombre;
+        $apellido = $permiso_trab_sociale->expedienteDisciplinario->alumno->apellido;
+        // Determinar si la solicitud proviene de citatorio_general
+        $from_permiso_trab_sociale = $request->query('from_permiso_trab_sociale', false);
+        // Pasar los datos a la vista
+        return view('permiso_trab_sociale.show', compact('permiso_trab_sociale', 'from_permiso_trab_sociale', 'nombre', 'apellido'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Permiso_trab_sociale $permiso_trab_sociale)
     {
-        //
+        //dd($pase_salida);
+        // Cargar la relación expedienteDisciplinario.alumno
+        $permiso_trab_sociale->load('expedienteDisciplinario.alumno');
+
+        // Obtener todos los alumnos para el select
+        $matricula = Alumno::all();
+
+        // Pasar el suspencion_clase y la lista de alumnos a la vista
+        return view('permiso_trab_sociale.edit', [
+            'permiso_trab_sociale' => $permiso_trab_sociale,
+            'matricula' => $matricula,
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdatePermisoTrabSocialeRequest $request, Permiso_trab_sociale $permiso_trab_sociale)
     {
-        //
+        try {
+            DB::beginTransaction();
+
+            // Calcular fecha_termino sumando numero_dias a fecha_inicio
+            $fechaTermino = \Carbon\Carbon::parse($request->fecha_inicio);
+            for ($i = 1; $i < $request->numero_dias; $i++) {
+                $fechaTermino->addDay();
+                // Si es sábado o domingo, sumar otro día
+                while ($fechaTermino->isWeekend()) {
+                    $fechaTermino->addDay();
+                }
+            }
+            $fechaTermino = $fechaTermino->format('Y-m-d');
+
+            // Actualizar el registro
+            $permiso_trab_sociale->update([
+                'fecha_reporte' => $request->fecha_reporte, // Cambié esto de fecha_salida a fecha_reporte
+                'grado' => $request->grado,
+                'grupo' => $request->grupo,
+                'motivo' => $request->motivo,
+                'numero_dias' => $request->numero_dias,
+                'fecha_inicio' => $request->fecha_inicio,
+                'fecha_termino' => $fechaTermino, // Usamos la fecha calculada
+                'nombre_padre' => $request->nombre_padre,
+                'solicito' => $request->solicito,
+            ]);
+
+            DB::commit();
+
+            return redirect()->route('permiso_trab_sociale.index')->with('success', 'Permiso actualizado con éxito.');
+        } catch (\Exception $e) {
+            DB::rollBack();
+
+            return redirect()->back()
+                ->withErrors(['error' => 'Ocurrió un error al actualizar el documento: ' . $e->getMessage()])
+                ->withInput();
+        }
     }
 
     /**

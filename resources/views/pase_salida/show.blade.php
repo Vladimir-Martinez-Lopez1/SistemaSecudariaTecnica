@@ -1,6 +1,6 @@
 @extends('template')
 
-@section('title', 'Ver citatorio')
+@section('title', 'Ver pase de salida')
 
 @push('css')
     <style>
@@ -20,45 +20,45 @@
 
         @media print {
 
-                /* Mantener alineación y espaciado */
-                .text-center {
-                    text-align: center !important;
-                }
+            /* Mantener alineación y espaciado */
+            .text-center {
+                text-align: center !important;
+            }
 
-                .fw-bold {
-                    font-weight: bold !important;
-                }
+            .fw-bold {
+                font-weight: bold !important;
+            }
 
-                .line-height-small {
-                    line-height: 0.5 !important;
-                }
+            .line-height-small {
+                line-height: 0.5 !important;
+            }
 
-                .ms-4 {
-                    margin-left: 1.5rem !important;
-                }
+            .ms-4 {
+                margin-left: 1.5rem !important;
+            }
 
-                .mt-4 {
-                    margin-top: 1.5rem !important;
-                }
+            .mt-4 {
+                margin-top: 1.5rem !important;
+            }
 
-                .my-4 {
-                    margin-top: 1.5rem !important;
-                    margin-bottom: 1.5rem !important;
-                }
+            .my-4 {
+                margin-top: 1.5rem !important;
+                margin-bottom: 1.5rem !important;
+            }
 
-                .border {
-                    border: 1px solid #000 !important;
-                }
+            .border {
+                border: 1px solid #000 !important;
+            }
 
-                .p-4 {
-                    padding: 1.5rem !important;
-                }
+            .p-4 {
+                padding: 1.5rem !important;
+            }
 
-                /* Asegurar que los elementos mantengan su formato */
-                h3,
-                p {
-                    font-size: 1rem !important;
-                }
+            /* Asegurar que los elementos mantengan su formato */
+            h3,
+            p {
+                font-size: 1rem !important;
+            }
 
         }
     </style>
@@ -66,15 +66,15 @@
 
 @section('content')
     <div class="container-fluid px-4">
-        @if ($fromCitatorio) <!-- Mostrar solo si no viene del expediente -->
-            <h1 class="mt-4">Citatorio</h1>
+        @if ($from_pase_salida) <!-- Mostrar solo si no viene del expediente -->
+            <h1 class="mt-4">Pase de salida</h1>
             <ol class="breadcrumb mb-4">
                 <li class="breadcrumb-item"><a href="{{ route('panel') }}">Inicio</a></li>
-                <li class="breadcrumb-item"><a href="{{ route('citatorio.index') }}">Citatorio general</a></li>
-                <li class="breadcrumb-item active">Ver citatorio</li>
+                <li class="breadcrumb-item"><a href="{{ route('pase_salida.index') }}">Pase de salida</a></li>
+                <li class="breadcrumb-item active">Ver pase</li>
             </ol>
         @endif
-        <div class="print">
+        <div class="imprimir">
             <!-- Contenido original -->
             <div class="contenido-original">
                 <!-- Vista del justificante -->
@@ -90,31 +90,28 @@
                     <hr class="my-4">
 
                     <!-- Texto con sangría -->
-                    <div class="ms-4">
+                    <div class="text-center  ms-4">
                         <div class="row mt-4">
                             <div class="col text-end">
-                                <p>ASUNTO: CITATORIO</p>
-                                <p>Cuilapam de Guerrero, Oax., a <strong>{{$citatorio->fecha_creacion}}</strong></p>
+                                <p>ASUNTO: PASE DE SALIDA</p>
                             </div>
-                            <p>C._<strong>{{$citatorio->nombre_padre}}</strong>_</p>
-                            <p>Padre de familiar o tutor</p>
+
                         </div>
 
                         <p>
-                            Por medio del presente, la titular de la Coordinación de Servicios Educativos Complementarios, en
-                            coordinación con la Dirección de la Escuela, de la manera más atenta, le citan con el objetivo de tratar
-                            asuntos relacionados con el aprovechamiento académico y conductual de su hijo(a):
-                            <strong>{{ $citatorio->asignatura }}</strong>,de la manera más atenta, Citan a usted con el
-                            objetivo
-                            de
-                            tratar asuntos relacionados con el aprovechamiento académico y conductual de su hijo
-                            (a): <strong>{{$nombre}} {{$apellido }}</strong> del
-                            <strong>{{ $citatorio->grado }}</strong> grado, grupo <strong>{{ $citatorio->grupo}}</strong>.
+                            NOMBRE DEL ALUMNO (A): <strong>{{$nombre}} {{$apellido }}</strong> No. DE LISTA
+                            <strong>{{$pase_salida->numero_lista}}</strong>
                         </p>
-
                         <p>
-                            Agradecemos su puntual asistencia a las <strong>{{$citatorio->hora_cita}}</strong> hrs., del día
-                            <strong>{{$citatorio->fecha_cita }}</strong>.
+                            GRADO: <strong>{{ $pase_salida->grado }}</strong> GRUPO:
+                            <strong>{{ $pase_salida->grupo}}</strong> MOTIVO: <strong>{{ $pase_salida->motivo }}</strong>
+                        </p>
+                        <P>
+                            HORA DE SALIDA: <strong>{{$pase_salida->hora_salida}}</strong> HORA DE REGRESO:
+                            <strong>{{$pase_salida->hora_regreso}}</strong>
+                        </P>
+                        <p>
+                            CUILAPAM DE GUERRERO, OAXACA, OAX. A <strong>{{$pase_salida->fecha_salida}}</strong>
                         </p>
                     </div>
 
@@ -124,12 +121,18 @@
                     </div>
                     <div class="row mt-4">
                         <div class="col text-center">
-                            <p>PROFRA. <strong>{{ $citatorio->nombre_profesor }}</strong></p>
-                            <P>OORD. DE SERVS. EDUCS. COMPLS.</P>
+                            <p>SOLICITO</p> 
+                            <p><strong>{{ $pase_salida->solicito }}</strong></p>
                         </div>
                         <div class="col text-center">
-                            <P>PROFE. ULTIMINIO G. GONZALEZ</P>
+                            <p>Vo.Bo.</p>
                             <P>DIRECTOR DE LA ESCUELA</P>
+                            <P>MTRO. ULTIMINIO GALLO GONZÁLEZ</P>                          
+                        </div>
+                        <div class="col text-center">
+                            <p>AUTORIZÓ</p>
+                            <P>DEPTO. DE SERVS. EDUCS. COMPLS.</P>
+                            <P>MTRO. BERTOLDO AQUINO BOLAÑOS</P>
                         </div>
                     </div>
                 </div>
@@ -137,8 +140,8 @@
         </div>
         <div class="container-fluid px-4 d-flex justify-content-center gap-3">
             <!-- Botón para regresar a la lista de citatorios -->
-            <a href="{{ route('citatorio.index') }}" class="btn btn-primary mt-3">
-                Volver a la lista de citatorios
+            <a href="{{ route('pase_salida.index') }}" class="btn btn-primary mt-3">
+                Volver a la lista de pase de salida
             </a>
             <!-- Botón para imprimir -->
             <button onclick="imprimir()" class="btn btn-success mt-3">

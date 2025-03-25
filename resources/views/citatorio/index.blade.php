@@ -80,7 +80,10 @@
                                         <button type="button" class="btn btn-success">Ver</button>
                                     </a>
                                     {{-- <button type="button" class="btn btn-success">Ver</button> --}}
-                                    <button type="button" class="btn btn-warning">Editar</button>
+                                    <a href="{{ route('citatorio.edit', ['citatorio' => $citatorio->id]) }}">
+                                        <button type="button" class="btn btn-warning">Editar</button>
+                                    </a>
+                                    
                                     <button type="button" class="btn btn-danger">Borrar</button>
                                 </div>
                             </td>
