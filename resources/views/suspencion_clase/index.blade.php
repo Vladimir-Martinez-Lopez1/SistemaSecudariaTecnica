@@ -85,7 +85,7 @@
                                 <td>{{$suspencion->fecha_suspencion}}</td>
                                 <td>
                                     <div class="btn-group" role="group" aria-label="Basic mixed styles example">
-                                        <a href="{{ route('suspencion_clase.show', ['suspencion_clase' => $suspencion->id, 'from_suspencion_clase' => true]) }}">
+                                        <a href="{{ route('suspencion_clase.show', ['suspencion_clase' => $suspencion->id, 'from_suspencion_clase' => false]) }}">
                                             <button type="button" class="btn btn-success">Ver</button>
                                         </a>
                                         <a href="{{ route('suspencion_clase.edit', ['suspencion_clase' => $suspencion->id]) }}">

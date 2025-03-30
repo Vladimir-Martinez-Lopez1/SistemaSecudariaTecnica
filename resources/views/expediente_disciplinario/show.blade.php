@@ -33,7 +33,7 @@
         <!-- Tabla de citatorios -->
         <div class="card mb-4">
             <div class="card-header">
-                <i class="fas fa-table me-1"></i>
+                <i class="fa-solid fa-calendar-check"></i></i>
                 Tabla Citatorios
             </div>
             <div class="card-body">
@@ -81,7 +81,7 @@
         <!-- Tabla de Pase de salida -->
         <div class="card mb-4">
             <div class="card-header">
-                <i class="fas fa-table me-1"></i>
+                <i class="fa-solid fa-person-walking-arrow-right"></i>
                 Tabla Pases de salida Generales
             </div>
             <div class="card-body">
@@ -131,7 +131,7 @@
         <!-- Tabla reporte de Incidencia -->
         <div class="card mb-4">
             <div class="card-header">
-                <i class="fas fa-table me-1"></i>
+                <i class="fa-solid fa-flag"></i>
                 Tabla Reportes de Incidencias
             </div>
             <div class="card-body">
@@ -181,7 +181,7 @@
         <!-- Tabla de Suspencion de clases -->
         <div class="card mb-4">
             <div class="card-header">
-                <i class="fas fa-table me-1"></i>
+                <i class="fa-solid fa-circle-exclamation"></i>
                 Tabla Suspenciones
             </div>
             <div class="card-body">
@@ -235,7 +235,7 @@
         <!-- Tabla de pase de salida trabajo Social -->
         <div class="card mb-4">
             <div class="card-header">
-                <i class="fas fa-table me-1"></i>
+                <i class="fa-solid fa-person-walking-dashed-line-arrow-right"></i>
                 Tabla Pases de Salida por Trabajo Social
             </div>
             <div class="card-body">
@@ -284,7 +284,7 @@
         <!-- Tabla Permiso Trabajo social -->
         <div class="card mb-4">
             <div class="card-header">
-                <i class="fas fa-table me-1"></i>
+                <i class="fa-solid fa-file-invoice"></i>
                 Tabla Permisos por Trabajo Social
             </div>
             <div class="card-body">
@@ -335,7 +335,7 @@
         <!-- Tabla de Justificante de retardo trabajo social -->
         <div class="card mb-4">
             <div class="card-header">
-                <i class="fas fa-table me-1"></i>
+                <i class="fa-solid fa-check-to-slot"></i>
                 Tabla Justificantes de Retardo por Trabajo Social
             </div>
             <div class="card-body">

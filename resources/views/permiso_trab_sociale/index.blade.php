@@ -82,7 +82,7 @@
                                 <td>
                                     <div class="btn-group" role="group" aria-label="Basic mixed styles example">
                                         <a
-                                            href="{{ route('permiso_trab_sociale.show', ['permiso_trab_sociale' => $permiso->id, 'from_permiso_trab_sociale' => true]) }}">
+                                            href="{{ route('permiso_trab_sociale.show', ['permiso_trab_sociale' => $permiso->id, 'from_permiso_trab_sociale' => false]) }}">
                                             <button type="button" class="btn btn-success">Ver</button>
                                         </a>
                                         <a

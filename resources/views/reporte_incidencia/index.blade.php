@@ -80,7 +80,7 @@
                                     <td>{{$reporte->fecha_reporte}} / {{$reporte->hora_clase}} </td>
                                     <td>
                                         <div class="btn-group" role="group" aria-label="Basic mixed styles example">
-                                            <a href="{{ route('reporte_incidencia.show', ['reporte_incidencium' => $reporte->id, 'from_reporte_incidencium' => true]) }}">
+                                            <a href="{{ route('reporte_incidencia.show', ['reporte_incidencium' => $reporte->id, 'from_reporte_incidencium' => false]) }}">
                                                 <button type="button" class="btn btn-success">Ver</button>
                                             </a>
                                             <a href="{{ route('reporte_incidencia.edit', ['reporte_incidencium' => $reporte->id]) }}">

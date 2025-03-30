@@ -66,7 +66,7 @@
 
 @section('content')
     <div class="container-fluid px-4">
-        @if ($from_pase_salida) <!-- Mostrar solo si no viene del expediente -->
+        @if (!$from_pase_salida) <!-- Mostrar solo si no viene del expediente -->
             <h1 class="mt-4">Pase de salida</h1>
             <ol class="breadcrumb mb-4">
                 <li class="breadcrumb-item"><a href="{{ route('panel') }}">Inicio</a></li>
@@ -121,13 +121,13 @@
                     </div>
                     <div class="row mt-4">
                         <div class="col text-center">
-                            <p>SOLICITO</p> 
+                            <p>SOLICITO</p>
                             <p><strong>{{ $pase_salida->solicito }}</strong></p>
                         </div>
                         <div class="col text-center">
                             <p>Vo.Bo.</p>
                             <P>DIRECTOR DE LA ESCUELA</P>
-                            <P>MTRO. ULTIMINIO GALLO GONZÁLEZ</P>                          
+                            <P>MTRO. ULTIMINIO GALLO GONZÁLEZ</P>
                         </div>
                         <div class="col text-center">
                             <p>AUTORIZÓ</p>
@@ -140,9 +140,16 @@
         </div>
         <div class="container-fluid px-4 d-flex justify-content-center gap-3">
             <!-- Botón para regresar a la lista de citatorios -->
-            <a href="{{ route('pase_salida.index') }}" class="btn btn-primary mt-3">
-                Volver a la lista de pase de salida
-            </a>
+            @if ($from_pase_salida)
+                <a href="{{ route('expediente_disciplinario.show', $pase_salida->expedienteDisciplinario->id) }}"
+                    class="btn btn-primary mt-3">
+                    Volver al expediente
+                </a>
+            @else
+                <a href="{{ route('pase_salida.index') }}" class="btn btn-primary mt-3">
+                    Volver a la lista de pase de salida
+                </a>
+            @endif
             <!-- Botón para imprimir -->
             <button onclick="imprimir()" class="btn btn-success mt-3">
                 Imprimir

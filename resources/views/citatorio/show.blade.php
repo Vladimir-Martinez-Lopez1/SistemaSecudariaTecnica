@@ -66,7 +66,7 @@
 
 @section('content')
     <div class="container-fluid px-4">
-        @if ($fromCitatorio) <!-- Mostrar solo si no viene del expediente -->
+        @if (!$fromCitatorio) <!-- Mostrar solo si no viene del expediente -->
             <h1 class="mt-4">Citatorio</h1>
             <ol class="breadcrumb mb-4">
                 <li class="breadcrumb-item"><a href="{{ route('panel') }}">Inicio</a></li>
@@ -137,9 +137,16 @@
         </div>
         <div class="container-fluid px-4 d-flex justify-content-center gap-3">
             <!-- Botón para regresar a la lista de citatorios -->
-            <a href="{{ route('citatorio.index') }}" class="btn btn-primary mt-3">
-                Volver a la lista de citatorios
-            </a>
+            @if ($fromCitatorio)
+                <a href="{{ route('expediente_disciplinario.show', $citatorio->expedienteDisciplinario->id) }}"
+                    class="btn btn-primary mt-3">
+                    Volver al expediente
+                </a>
+            @else
+                <a href="{{ route('citatorio.index') }}" class="btn btn-primary mt-3">
+                    Volver a la lista de citatorios
+                </a>
+            @endif
             <!-- Botón para imprimir -->
             <button onclick="imprimir()" class="btn btn-success mt-3">
                 Imprimir

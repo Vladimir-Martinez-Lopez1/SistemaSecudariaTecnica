@@ -47,7 +47,7 @@
 
                 <div class="col-12 text-center">
                     <button type="submit" class="btn btn-primary">Actualizar</button>
-                    <button type="reset" class="btn btn-secondary">Cancelar</button>
+                    <a href="{{ route('expediente_disciplinario.index') }}" class="btn btn-secondary">Cancelar</a>
                 </div>
             </div>
         </form>

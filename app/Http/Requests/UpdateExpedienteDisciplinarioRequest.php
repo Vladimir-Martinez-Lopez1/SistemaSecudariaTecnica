@@ -22,7 +22,7 @@ class UpdateExpedienteDisciplinarioRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'matricula'=>'required|max:11|unique:alumnos,matricula',
+            'matricula'=>'required',
             'nombre'=>'required|max:50',
             'apellido'=>'required|max:50',
         ];

@@ -16,7 +16,7 @@
         <h1 class="mt-4 text-center">Crear reporte</h1>
         <ol class="breadcrumb mb-4">
             <li class="breadcrumb-item"><a href="{{route('panel')}}">Inicio</a></li>
-            <li class="breadcrumb-item"><a href="{{route('reporte_incidencia.index')}}">reporte de incidencias</a></li> 
+            <li class="breadcrumb-item"><a href="{{route('reporte_incidencia.index')}}">reporte de incidencias</a></li>
             <li class="breadcrumb-item active">Crear reporte</li>
         </ol>
         @if ($errors->any())
@@ -69,7 +69,8 @@
                         {{-- <input type="number" name="matricula" id="matricula" class="form-control" value="{{ old('matricula') }}"> --}}
                         <select title="Seleccione un alumno..." data-live-search="true" name="matricula" id="matricula" class="form-control selectpicker show-tick">
                             @foreach ($matricula as $item)
-                                <option value="{{ $item->matricula }}">{{ $item->matricula }} - {{ $item->nombre }} {{ $item->apellido }}</option>
+                                <option value="{{ $item->matricula }}"{{old('matricula')==$item->matricula ? 'selected': ''}}>{{ $item->matricula }} - {{ $item->nombre }}
+                                    {{ $item->apellido }}</option>
                             @endforeach
                         </select>
                         @error('matricula')
@@ -199,7 +200,7 @@
 
 @push('js')
 
-        
+
         {{-- <script>
             $(document).ready(function () {
                 $('form').on('submit', function (event) {

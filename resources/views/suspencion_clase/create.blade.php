@@ -81,12 +81,12 @@
                             <label for="matricula" class="form-label">La Coordinación de Servicios Educativos
                                 Complementarios, en coordinación con la Dirección de la Escuela Secundaria Técnica No. 66
                                 con clave 20DST00621, por medio del presente comunica a usted que el alumno (a):</label>
-                            {{-- <input type="number" name="matricula" id="matricula" class="form-control"
-                                value="{{ old('matricula') }}"> --}}
+                            {{-- <input type="number" name="matricula" id="matricula" class="form-control" value="{{ old('matricula') }}"> --}}
                             <select title="Seleccione un alumno..." data-live-search="true" name="matricula" id="matricula"
                                 class="form-control selectpicker show-tick">
                                 @foreach ($matricula as $item)
-                                    <option value="{{ $item->matricula }}">{{ $item->matricula }} - {{ $item->nombre }}
+                                    <option value="{{ $item->matricula }}" {{old('matricula') == $item->matricula ? 'selected' : ''}}>
+                                        {{ $item->matricula }} - {{ $item->nombre }}
                                         {{ $item->apellido }}
                                     </option>
                                 @endforeach
@@ -133,7 +133,7 @@
                                 acuerdo
                                 97, donde se establece la organización y funcionamiento de la escuela, al que se sujetará el
                                 alumnado, por el motivo:</label>
-                            <textarea name="motivo" id="motivo" class="form-control" value="{{ old('motivo') }}"></textarea>
+                            <textarea name="motivo" id="motivo" class="form-control">{{ old('motivo') }}</textarea>
                             @error('motivo')
                                 <small class="text-danger">{{ '*' . $message }}</small>
                             @enderror
@@ -266,7 +266,7 @@
                     console.log(item.name + ": " + item.value);
                 });
 
-                // Opcional: Enviar el formulario manualmente después de verificar los datos 
+                // Opcional: Enviar el formulario manualmente después de verificar los datos
                 // $(this).unbind('submit').submit();
             });
         });

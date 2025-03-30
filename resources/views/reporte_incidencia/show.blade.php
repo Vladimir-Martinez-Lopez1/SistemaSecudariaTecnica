@@ -66,7 +66,7 @@
 
 @section('content')
     <div class="container-fluid px-4">
-        @if ($from_reporte_incidencium) <!-- Mostrar solo si no viene del expediente -->
+        @if (!$from_reporte_incidencium) <!-- Mostrar solo si no viene del expediente -->
             <h1 class="mt-4">Reporte de incidencia</h1>
             <ol class="breadcrumb mb-4">
                 <li class="breadcrumb-item"><a href="{{ route('panel') }}">Inicio</a></li>
@@ -114,7 +114,7 @@
                             <strong>{{ $reporte_incidencia->motivo }}</strong>
                         </p>
                         <P>
-                            EN EL MODULO DE: <strong>{{$reporte_incidencia->modulo}}</strong> A <strong>{{$reporte_incidencia->hora_clase}}</strong> 
+                            EN EL MODULO DE: <strong>{{$reporte_incidencia->modulo}}</strong> A <strong>{{$reporte_incidencia->hora_clase}}</strong>
                         </P>
                         <P>
                             EN LA ASIGNATURA: <strong>{{$reporte_incidencia->asignatura}}</strong>
@@ -123,7 +123,7 @@
                             REPORTÓ: <strong>{{ $reporte_incidencia->nombre_profesor }}</strong></p>
                         </P>
                         <P>
-                            OBSERVACIONES: <strong>{{$reporte_incidencia->observaciones}}</strong> 
+                            OBSERVACIONES: <strong>{{$reporte_incidencia->observaciones}}</strong>
                         </P>
                     </div>
 
@@ -150,9 +150,16 @@
         </div>
         <div class="container-fluid px-4 d-flex justify-content-center gap-3">
             <!-- Botón para regresar a la lista de citatorios -->
-            <a href="{{ route('reporte_incidencia.index') }}" class="btn btn-primary mt-3">
-                Volver a la lista de pase de salida
-            </a>
+            @if ($from_reporte_incidencium)
+                <a href="{{ route('expediente_disciplinario.show', $suspencion_clase->expedienteDisciplinario->id) }}"
+                    class="btn btn-primary mt-3">
+                    Volver al expediente
+                </a>
+            @else
+                <a href="{{ route('reporte_incidencia.index') }}" class="btn btn-primary mt-3">
+                    Volver a la lista de reportes
+                </a>
+            @endif
             <!-- Botón para imprimir -->
             <button onclick="imprimir()" class="btn btn-success mt-3">
                 Imprimir

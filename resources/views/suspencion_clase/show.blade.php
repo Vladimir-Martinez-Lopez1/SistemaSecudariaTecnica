@@ -66,7 +66,7 @@
 
 @section('content')
     <div class="container-fluid px-4">
-        @if ($from_suspencion_clase) <!-- Mostrar solo si no viene del expediente -->
+        @if (!$from_suspencion_clase) <!-- Mostrar solo si no viene del expediente -->
             <h1 class="mt-4">Suspención de clases</h1>
             <ol class="breadcrumb mb-4">
                 <li class="breadcrumb-item"><a href="{{ route('panel') }}">Inicio</a></li>
@@ -115,7 +115,7 @@
                             acuerdo
                             97, donde se establece la organización y funcionamiento de la escuela, al que se sujetará el
                             alumnado, por el motivo:
-                            <strong>{{ $suspencion_clase->motivo }}</strong>, 
+                            <strong>{{ $suspencion_clase->motivo }}</strong>,
                             que lo establece el Capítulo
                             <strong>{{$suspencion_clase->capitulo}}</strong> Artículo:
                             <strong>{{$suspencion_clase->articulo}}</strong> Fracción
@@ -144,7 +144,7 @@
                             <p>Vo.Bo.</p>
                             <P>DIRECCIÓN DE LA ESCUELA</P>
                             <P>MTRO. ULTIMINIO GALLO GONZÁLEZ</P>
-                            
+
                         </div>
                         <div class="col text-center">
                             <p>EL ASESOR DEL GRUPO</p>
@@ -156,9 +156,16 @@
         </div>
         <div class="container-fluid px-4 d-flex justify-content-center gap-3">
             <!-- Botón para regresar a la lista de citatorios -->
-            <a href="{{ route('suspencion_clase.index') }}" class="btn btn-primary mt-3">
-                Volver a la lista de pase de salida
-            </a>
+            @if ($from_suspencion_clase)
+                <a href="{{ route('expediente_disciplinario.show', $suspencion_clase->expedienteDisciplinario->id) }}"
+                    class="btn btn-primary mt-3">
+                    Volver al expediente
+                </a>
+            @else
+                <a href="{{ route('suspencion_clase.index') }}" class="btn btn-primary mt-3">
+                    Volver a la lista de pase de salida
+                </a>
+            @endif
             <!-- Botón para imprimir -->
             <button onclick="imprimir()" class="btn btn-success mt-3">
                 Imprimir

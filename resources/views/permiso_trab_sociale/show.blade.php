@@ -61,7 +61,7 @@
 
 @section('content')
     <div class="container-fluid px-4">
-        @if ($from_permiso_trab_sociale) <!-- Mostrar solo si no viene del expediente -->
+        @if (!$from_permiso_trab_sociale) <!-- Mostrar solo si no viene del expediente -->
             <h1 class="mt-4">Suspención de clases</h1>
             <ol class="breadcrumb mb-4">
                 <li class="breadcrumb-item"><a href="{{ route('panel') }}">Inicio</a></li>
@@ -105,11 +105,11 @@
                             del <strong>{{ $permiso_trab_sociale->grado }}</strong> Grado, Grupo
                             <strong>{{ $permiso_trab_sociale->grupo}}</strong>, por motivo:
                             <strong>{{ $permiso_trab_sociale->motivo }}</strong>, tendrá permiso
-                            <strong>{{$permiso_trab_sociale->numero_dias}}</strong> día (s) comenzando el <strong>{{$permiso_trab_sociale->fecha_inicio}}</strong> 
-                            y terminando <strong>{{$permiso_trab_sociale->fecha_termino}}</strong> 
+                            <strong>{{$permiso_trab_sociale->numero_dias}}</strong> día (s) comenzando el <strong>{{$permiso_trab_sociale->fecha_inicio}}</strong>
+                            y terminando <strong>{{$permiso_trab_sociale->fecha_termino}}</strong>
                             del presente año.</P>
                         <p>
-                            Agradeciendo de su atención y apoyo, sirvace de firmar de enterado    
+                            Agradeciendo de su atención y apoyo, sirvace de firmar de enterado
                         </p>
                     </div>
 
@@ -120,7 +120,7 @@
                         </div>
                         <div class="col text-center">
                             <p>MATEMÁTICAS</p>
-                            <p>_____________________________________</p>    
+                            <p>_____________________________________</p>
                         </div>
                         <div class="col text-center">
                             <p>INGLES</p>
@@ -134,7 +134,7 @@
                         </div>
                         <div class="col text-center">
                             <p>SOCIALES</p>
-                            <p>_____________________________________</p>    
+                            <p>_____________________________________</p>
                         </div>
                         <div class="col text-center">
                             <p>SOCIALES</p>
@@ -148,7 +148,7 @@
                         </div>
                         <div class="col text-center">
                             <p>E. FÍSICA</p>
-                            <p>_____________________________________</p>    
+                            <p>_____________________________________</p>
                         </div>
                         <div class="col text-center">
                             <p>TECNOLOGÍA</p>
@@ -178,9 +178,16 @@
         </div>
         <div class="container-fluid px-4 d-flex justify-content-center gap-3">
             <!-- Botón para regresar a la lista de citatorios -->
-            <a href="{{ route('permiso_trab_sociale.index') }}" class="btn btn-primary mt-3">
-                Volver a la lista de pase de salida
-            </a>
+            @if ($from_permiso_trab_sociale)
+                <a href="{{ route('expediente_disciplinario.show', $permiso_trab_sociale->expedienteDisciplinario->id) }}"
+                    class="btn btn-primary mt-3">
+                    Volver al expediente
+                </a>
+            @else
+                <a href="{{ route('permiso_trab_sociale.index') }}" class="btn btn-primary mt-3">
+                    Volver a la lista de permisos
+                </a>
+            @endif
             <!-- Botón para imprimir -->
             <button onclick="imprimir()" class="btn btn-success mt-3">
                 Imprimir
