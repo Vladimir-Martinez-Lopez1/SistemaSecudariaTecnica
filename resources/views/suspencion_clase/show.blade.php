@@ -163,7 +163,7 @@
                 </a>
             @else
                 <a href="{{ route('suspencion_clase.index') }}" class="btn btn-primary mt-3">
-                    Volver a la lista de pase de salida
+                    Volver a la lista de Documentos
                 </a>
             @endif
             <!-- Botón para imprimir -->

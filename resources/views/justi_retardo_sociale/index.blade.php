@@ -73,7 +73,7 @@
                                 <td>{{$justificado->fecha_permiso}}</td>
                                 <td>
                                     <div class="btn-group" role="group" aria-label="Basic mixed styles example">
-                                        <a href="{{ route('justi_retardo_sociale.show', ['justi_retardo_sociale' => $justificado->id, 'from_justi_retardo_sociale' => true]) }}">
+                                        <a href="{{ route('justi_retardo_sociale.show', ['justi_retardo_sociale' => $justificado->id, 'from_justi_retardo_sociale' => false]) }}">
                                             <button type="button" class="btn btn-success">Ver</button>
                                         </a>
                                         <a href="{{ route('justi_retardo_sociale.edit', ['justi_retardo_sociale' => $justificado->id]) }}">

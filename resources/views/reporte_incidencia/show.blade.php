@@ -151,13 +151,13 @@
         <div class="container-fluid px-4 d-flex justify-content-center gap-3">
             <!-- Botón para regresar a la lista de citatorios -->
             @if ($from_reporte_incidencium)
-                <a href="{{ route('expediente_disciplinario.show', $suspencion_clase->expedienteDisciplinario->id) }}"
+                <a href="{{ route('expediente_disciplinario.show', $reporte_incidencia->expedienteDisciplinario->id) }}"
                     class="btn btn-primary mt-3">
                     Volver al expediente
                 </a>
             @else
                 <a href="{{ route('reporte_incidencia.index') }}" class="btn btn-primary mt-3">
-                    Volver a la lista de reportes
+                    Volver a la lista de Reportes
                 </a>
             @endif
             <!-- Botón para imprimir -->

@@ -15,12 +15,12 @@
         <h1 class="mt-4 text-center">Crear pase de salida de trabajo social</h1>
         <ol class="breadcrumb mb-4">
             <li class="breadcrumb-item"><a href="{{route('panel')}}">Inicio</a></li>
-            <li class="breadcrumb-item"><a href="{{route('pase_salida_trab_sociale.index')}}">Pase de salida</a></li> 
+            <li class="breadcrumb-item"><a href="{{route('pase_salida_trab_sociale.index')}}">Pase de salida</a></li>
             <li class="breadcrumb-item active">Crear Pase de salida </li>
         </ol>
 
-        
-        {{-- depuracion del envio de datos a la BD 
+
+        {{-- depuracion del envio de datos a la BD
         @if ($errors->any())
             <div class="alert alert-danger">
                 <ul>
@@ -49,7 +49,8 @@
                         {{-- <input type="number" name="matricula" id="matricula" class="form-control" value="{{ old('matricula') }}"> --}}
                         <select title="Seleccione un alumno..." data-live-search="true" name="matricula" id="matricula" class="form-control selectpicker show-tick">
                             @foreach ($matricula as $item)
-                                <option value="{{ $item->matricula }}">{{ $item->matricula }} - {{ $item->nombre }} {{ $item->apellido }}</option>
+                                <option value="{{ $item->matricula }}"{{old('matricula')==$item->matricula ? 'selected': ''}}>{{ $item->matricula }} - {{ $item->nombre }}
+                                    {{ $item->apellido }}</option>
                             @endforeach
                         </select>
                         @error('matricula')

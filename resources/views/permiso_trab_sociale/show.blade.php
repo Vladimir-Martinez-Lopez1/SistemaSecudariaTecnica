@@ -62,7 +62,7 @@
 @section('content')
     <div class="container-fluid px-4">
         @if (!$from_permiso_trab_sociale) <!-- Mostrar solo si no viene del expediente -->
-            <h1 class="mt-4">Suspención de clases</h1>
+            <h1 class="mt-4">Permiso de Ausencia por Trabajo Social</h1>
             <ol class="breadcrumb mb-4">
                 <li class="breadcrumb-item"><a href="{{ route('panel') }}">Inicio</a></li>
                 <li class="breadcrumb-item"><a href="{{ route('permiso_trab_sociale.index') }}">Permiso Trabajo Social</a></li>

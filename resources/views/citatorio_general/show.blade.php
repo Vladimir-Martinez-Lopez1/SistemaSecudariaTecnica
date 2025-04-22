@@ -116,7 +116,7 @@
                             objetivo
                             de
                             tratar asuntos relacionados con el aprovechamiento académico y conductual de su hijo
-                            (a):_________________________________________________________________________________del
+                            (a):_____________________________________del
                             <strong>{{ $citatorio->grado }}</strong>, grupo <strong>{{ $citatorio->grupo}}</strong>.
                         </p>
 
@@ -169,7 +169,7 @@
                             objetivo
                             de
                             tratar asuntos relacionados con el aprovechamiento académico y conductual de su hijo
-                            (a):_________________________________________________________________________________del
+                            (a):_____________________________________del
                             <strong>{{ $citatorio->grado }}</strong>, grupo <strong>{{ $citatorio->grupo}}</strong>.
                         </p>
 
@@ -207,25 +207,114 @@
 
         <script>
             function imprimir() {
-                // Clona el contenido del div "imprimir"
-                const contenido = document.querySelector('.imprimir').cloneNode(true);
+    // Clona el contenido del div "imprimir"
+    const contenido = document.querySelector('.imprimir').cloneNode(true);
 
-                // Oculta elementos innecesarios al imprimir
-                const botones = contenido.querySelectorAll('button, a');
-                botones.forEach(boton => boton.style.display = 'none');
+    // Oculta elementos innecesarios al imprimir
+    const botones = contenido.querySelectorAll('button, a');
+    botones.forEach(boton => boton.style.display = 'none');
 
-                // Abre una nueva ventana para imprimir
-                const ventana = window.open('', '', 'height=500,width=800');
-                ventana.document.write('<html><head><title>Citatorio General</title>');
-                ventana.document.write('<link rel="stylesheet" href="{{ asset('css/app.css') }}">'); // Asegúrate de incluir los estilos
-                ventana.document.write('</head><body>');
-                ventana.document.write(contenido.innerHTML);
-                ventana.document.write('</body></html>');
-                ventana.document.close();
+    // Hace visible el contenido duplicado
+    const contenidoDuplicado = contenido.querySelector('.contenido-duplicado');
+    if (contenidoDuplicado) {
+        contenidoDuplicado.style.display = 'block';
+    }
 
-                // Imprime el contenido
-                ventana.print();
-            }
+    // Abre una nueva ventana para imprimir
+    const ventana = window.open('', '', 'height=500,width=800');
+
+    ventana.document.write(`
+        <html>
+            <head>
+                <title>Citatorio General</title>
+                <style>
+                    /* Configuración de página */
+                    @page {
+                        size: letter;
+                        margin: 0.5cm;
+                    }
+
+                    /* Estilos base */
+                    body {
+                        margin: 0;
+                        padding: 0;
+                        font-family: Arial, sans-serif;
+                        font-size: 12pt;
+                    }
+
+                    /* Contenedor principal */
+                    .container-impresion {
+                        width: 100%;
+                        box-sizing: border-box;
+                        padding: 0;
+                    }
+
+                    /* Estilos para ambos recuadros */
+                    .recuadro {
+                        border: 1px solid #000 !important;
+                        width: 100%;
+                        box-sizing: border-box;
+                        margin: 0 auto 10px;
+                        page-break-inside: avoid;
+                        padding: 10px;
+                    }
+
+                    /* Espaciados */
+                    .p-4 {
+                        padding: 0.8rem !important;
+                    }
+
+                    /* Alineación */
+                    .text-center {
+                        text-align: center !important;
+                    }
+
+                    .fw-bold {
+                        font-weight: bold !important;
+                    }
+
+                    .line-height-small {
+                        line-height: 0.9 !important;
+                    }
+
+                    hr {
+                        margin: 8px 0;
+                        border: 0;
+                        border-top: 1px solid #000;
+                    }
+
+                    /* Ajustes específicos para impresión */
+                    @media print {
+                        body {
+                            padding: 0.5cm;
+                        }
+
+                        .recuadro {
+                            margin-bottom: 0.5cm;
+                        }
+
+                        .contenido-duplicado {
+                            display: block !important;
+                            margin-top: 0.3cm;
+                        }
+                    }
+                </style>
+            </head>
+            <body>
+                <div class="container-impresion">
+                    ${contenido.innerHTML}
+                </div>
+                <script>
+                    setTimeout(function() {
+                        window.print();
+                        window.close();
+                    }, 200);
+                <\/script>
+            </body>
+        </html>
+    `);
+    ventana.document.close();
+}
         </script>
 
     @endpush

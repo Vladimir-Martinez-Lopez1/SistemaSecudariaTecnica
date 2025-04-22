@@ -3,6 +3,9 @@
 use App\Http\Controllers\citatorioController;
 use App\Http\Controllers\citatorioGeneralClaseController;
 use App\Http\Controllers\expedienteDisciplinarioController;
+use App\Http\Controllers\homeController;
+use App\Http\Controllers\loginController;
+use App\Http\Controllers\logoutController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\expedienteMedicoController;
 use App\Http\Controllers\controlDeCitaController;
@@ -15,11 +18,7 @@ use App\Http\Controllers\permisoTrabSocialeController;
 use App\Http\Controllers\reporteIncidenciaController;
 use App\Http\Controllers\suspencioClaseController;
 
-Route::get('/', function () {
-    return view('template');
-});
-
-Route::view('/panel', 'panel.index')->name('panel');
+Route::get('/',[homeController::class, 'index'])->name('panel')->middleware('auth');
 
 //Rutas medicas
 Route::resource('expedientes_medicos', expedienteMedicoController::class);
@@ -42,9 +41,10 @@ Route::resource('permiso_trab_sociale', permisoTrabSocialeController::class);
 Route::resource('justi_retardo_sociale', justiRetardoSocialeController::class);
 
 
-Route::get('/login', function () {
-    return view('auth.login');
-});
+Route::get('/login', [loginController::class,'index'])->name('login');
+Route::post('/login',[loginController::class, 'login']);
+Route::get('/logout', [logoutController::class, 'logout'])->name('logout');
+
 
 Route::get('/401', function () {
     return view('pages.401');
