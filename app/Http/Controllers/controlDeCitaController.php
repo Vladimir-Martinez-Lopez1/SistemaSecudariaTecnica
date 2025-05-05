@@ -134,19 +134,19 @@ class controlDeCitaController extends Controller
     {
         try {
             DB::beginTransaction();
-    
+
             // Buscar la cita médica por su ID
             $cita = ControlCita::findOrFail($id);
-    
+
             // Cambiar el estado: si está activo (1), desactivarlo (0), y viceversa
             $cita->estado = $cita->estado == 1 ? 0 : 1;
             $cita->save();
-    
+
             DB::commit();
-    
+
             // Redirigir al índice con un mensaje de éxito
             return redirect()->route('control_de_citas.index')->with('success', 'Estado de la cita actualizado correctamente.');
-    
+
         } catch (\Exception $e) {
             DB::rollBack();
             return redirect()->route('control_de_citas.index')->with('error', 'Ocurrió un error al cambiar el estado de la cita.');
