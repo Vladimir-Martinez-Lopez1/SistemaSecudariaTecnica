@@ -19,6 +19,7 @@ use App\Http\Controllers\justiRetardoSocialeController;
 use App\Http\Controllers\citatorioGeneralClaseController;
 use App\Http\Controllers\paseSalidaTrabSocialeController;
 use App\Http\Controllers\expedienteDisciplinarioController;
+use App\Http\Controllers\profileController;
 
 Route::get('/',[homeController::class, 'index'])->name('panel')->middleware('auth');
 
@@ -38,7 +39,8 @@ Route::resources([
     'permiso_trab_sociale' => permisoTrabSocialeController::class,
     'justi_retardo_sociale' => justiRetardoSocialeController::class,
     'users' => userController::class,
-    'roles' => roleController::class
+    'roles' => roleController::class,
+    'profile' => profileController::class,
 ]);
 
 Route::get('/login', [loginController::class,'index'])->name('login');

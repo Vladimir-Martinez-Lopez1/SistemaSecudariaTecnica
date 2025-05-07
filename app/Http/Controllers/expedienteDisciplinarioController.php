@@ -20,10 +20,10 @@ class expedienteDisciplinarioController extends Controller
 
     function __construct()
     {
-        $this->middleware('permission:ver-expedienteDisciplinario|crear-expedienteDisciplinario|editar-expedienteDisciplinario|mostrar-expedienteDisciplinario',['only'=>['index']]);
+        $this->middleware('permission:ver-expedienteDisciplinario|crear-expedienteDisciplinario|editar-expedienteDisciplinario|mostrar-expedienteDisciplinario|ver-paseSalidaTrabSociale',['only'=>['index']]);
         $this->middleware('permission:crear-expedienteDisciplinario', ['only' => ['create', 'store']]);
         $this->middleware('permission:editar-expedienteDisciplinario', ['only' => ['edit', 'update']]);
-        $this->middleware('permission:mostrar-expedienteDisciplinario', ['only' => ['show']]);
+        $this->middleware('permission:mostrar-expedienteDisciplinario|ver-paseSalidaTrabSociale', ['only' => ['show']]);
     }
     public function index()
     {

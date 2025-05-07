@@ -29,7 +29,7 @@
         </div>
 
 
-
+        @can('ver-reporteIncidencia')
         <!-- Tabla de citatorios -->
         <div class="card mb-4">
             <div class="card-header">
@@ -231,7 +231,11 @@
                 </table>
             </div>
         </div>
+        @endcan
 
+        @can('ver-paseSalidaTrabSociale')
+        @can('ver-justiRetardoSociale')
+        @can('ver-permisoTrabSociale' )
         <!-- Tabla de pase de salida trabajo Social -->
         <div class="card mb-4">
             <div class="card-header">
@@ -374,6 +378,10 @@
                 </table>
             </div>
         </div>
+        @endcan
+        @endcan
+        @endcan
+
 
     </div>
 @endsection
