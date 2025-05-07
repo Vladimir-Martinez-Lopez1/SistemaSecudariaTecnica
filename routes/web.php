@@ -1,45 +1,45 @@
 <?php
 
-use App\Http\Controllers\citatorioController;
-use App\Http\Controllers\citatorioGeneralClaseController;
-use App\Http\Controllers\expedienteDisciplinarioController;
+use App\Http\Controllers\roleController;
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\homeController;
+use App\Http\Controllers\userController;
 use App\Http\Controllers\loginController;
 use App\Http\Controllers\logoutController;
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\expedienteMedicoController;
-use App\Http\Controllers\controlDeCitaController;
-use App\Http\Controllers\justificanteMedicoController;
-use App\Http\Controllers\informeSaludController;
-use App\Http\Controllers\justiRetardoSocialeController;
+use App\Http\Controllers\citatorioController;
 use App\Http\Controllers\paseSalidaController;
-use App\Http\Controllers\paseSalidaTrabSocialeController;
-use App\Http\Controllers\permisoTrabSocialeController;
-use App\Http\Controllers\reporteIncidenciaController;
+use App\Http\Controllers\informeSaludController;
+use App\Http\Controllers\controlDeCitaController;
 use App\Http\Controllers\suspencioClaseController;
+use App\Http\Controllers\expedienteMedicoController;
+use App\Http\Controllers\reporteIncidenciaController;
+use App\Http\Controllers\justificanteMedicoController;
+use App\Http\Controllers\permisoTrabSocialeController;
+use App\Http\Controllers\justiRetardoSocialeController;
+use App\Http\Controllers\citatorioGeneralClaseController;
+use App\Http\Controllers\paseSalidaTrabSocialeController;
+use App\Http\Controllers\expedienteDisciplinarioController;
 
 Route::get('/',[homeController::class, 'index'])->name('panel')->middleware('auth');
 
-//Rutas medicas
-Route::resource('expedientes_medicos', expedienteMedicoController::class);
-Route::resource('control_de_citas', controlDeCitaController::class);
-Route::resource('justificante_inasistencia_medico', justificanteMedicoController::class);
-Route::resource('informe_salud', informeSaludController::class);
 
-//Rutas disciplinarias
-Route::resource('expediente_disciplinario', expedienteDisciplinarioController::class);
-Route::resource('citatorio', citatorioController::class);
-Route::resource('citatorio_general', citatorioGeneralClaseController::class);
-Route::resource('pase_salida', paseSalidaController::class);
-Route::resource('reporte_incidencia', reporteIncidenciaController::class);
-Route::resource('suspencion_clase', suspencioClaseController::class);
-
-
-//Rutas trabajo social
-Route::resource('pase_salida_trab_sociale', paseSalidaTrabSocialeController::class);
-Route::resource('permiso_trab_sociale', permisoTrabSocialeController::class);
-Route::resource('justi_retardo_sociale', justiRetardoSocialeController::class);
-
+Route::resources([
+    'expedientes_medicos' => expedienteMedicoController::class,
+    'control_de_citas' => controlDeCitaController::class,
+    'justificante_inasistencia_medico' => justificanteMedicoController::class,
+    'informe_salud' => informeSaludController::class,
+    'expediente_disciplinario' => expedienteDisciplinarioController::class,
+    'citatorio' => citatorioController::class,
+    'citatorio_general' => citatorioGeneralClaseController::class,
+    'pase_salida' => paseSalidaController::class,
+    'reporte_incidencia' => reporteIncidenciaController::class,
+    'suspencion_clase' => suspencioClaseController::class,
+    'pase_salida_trab_sociale' => paseSalidaTrabSocialeController::class,
+    'permiso_trab_sociale' => permisoTrabSocialeController::class,
+    'justi_retardo_sociale' => justiRetardoSocialeController::class,
+    'users' => userController::class,
+    'roles' => roleController::class
+]);
 
 Route::get('/login', [loginController::class,'index'])->name('login');
 Route::post('/login',[loginController::class, 'login']);

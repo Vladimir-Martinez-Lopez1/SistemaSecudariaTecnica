@@ -8,12 +8,24 @@ use App\Models\Citatorio_generale;
 use Illuminate\Http\Request;
 use Exception;
 use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
+use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Routing\Controllers\Middleware;
 
 class citatorioGeneralClaseController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
+    function __construct()
+    {
+        $this->middleware('permission:ver-citatorioGeneral|crear-citatorioGeneral|editar-citatorioGeneral|mostrar-citatorioGeneral',['only'=>['index']]);
+        $this->middleware('permission:crear-citatorioGeneral', ['only' => ['create', 'store']]);
+        $this->middleware('permission:editar-citatorioGeneral', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:mostrar-citatorioGeneral', ['only' => ['show']]);
+    }
+
+
     public function index()
     {
         //

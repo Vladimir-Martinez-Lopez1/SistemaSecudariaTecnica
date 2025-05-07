@@ -10,13 +10,23 @@ use App\Models\ExpedienteMedico;
 use App\Models\JustificanteInasistenciaMedica;
 use App\Http\Requests\UpdateJustificanteInasistenciaMedicoRequest;
 use App\Http\Requests\StoreJustificanteInasistenciaMedicoRequest;
-
+use App\Http\Controllers\Controller;
+use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Routing\Controllers\Middleware;
 
 class justificanteMedicoController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
+    function __construct()
+    {
+        $this->middleware('permission:ver-justificanteMedico|crear-justificanteMedico|editar-justificanteMedico|mostrar-justificanteMedico',['only'=>['index']]);
+        $this->middleware('permission:crear-justificanteMedico', ['only' => ['create', 'store']]);
+        $this->middleware('permission:editar-justificanteMedico', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:mostrar-justificanteMedico', ['only' => ['show']]);
+    }
+
     public function index()
     {
         $justificantes = JustificanteInasistenciaMedica::with('expedienteMedico.alumno')->get();

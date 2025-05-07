@@ -10,12 +10,24 @@ use App\Models\ExpedienteDisciplinario;
 use App\Http\Requests\UpdateInfoExpedienteMedicoRequest;
 use Exception;
 use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
+use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Routing\Controllers\Middleware;
 
 class expedienteMedicoController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
+
+     function __construct()
+     {
+         $this->middleware('permission:ver-expedienteMedico|crear-expedienteMedico|editar-expedienteMedico|mostrar-expedienteMedico',['only'=>['index']]);
+         $this->middleware('permission:crear-expedienteMedico', ['only' => ['create', 'store']]);
+         $this->middleware('permission:editar-expedienteMedico', ['only' => ['edit', 'update']]);
+         $this->middleware('permission:mostrar-expedienteMedico', ['only' => ['show']]);
+     }
+
     public function index()
     {
         //Expedientes y alumnos
@@ -51,7 +63,7 @@ class expedienteMedicoController extends Controller
             ExpedienteDisciplinario::create([
                 'alumno_id' => $alumno->id
             ]);
-           
+
             DB::commit();
         }catch(Exception $e){
             DB::rollBack();

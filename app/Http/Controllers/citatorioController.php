@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreCitatorioRequest;
+use App\Http\Controllers\Controller;
+use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Routing\Controllers\Middleware;
 use App\Http\Requests\UpdateCitaMedicaRequest;
 use App\Http\Requests\UpdateCitatorioRequest;
 use App\Models\Citatorio;
@@ -17,6 +20,17 @@ class citatorioController extends Controller
     /**
      * Display a listing of the resource.
      */
+    function __construct()
+    {
+        $this->middleware('permission:ver-citatorio|crear-citatorio|editar-citatorio|mostrar-citatorio',['only'=>['index']]);
+        $this->middleware('permission:crear-citatorio', ['only' => ['create', 'store']]);
+        $this->middleware('permission:editar-citatorio', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:mostrar-citatorio', ['only' => ['show']]);
+    }
+
+
+
+
     public function index()
     {
         //

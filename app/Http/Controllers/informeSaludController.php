@@ -11,12 +11,23 @@ use App\Models\Alumno;
 use App\Models\InformeSalud;
 use Illuminate\Support\Facades\DB;
 use Exception;
+use App\Http\Controllers\Controller;
+use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Routing\Controllers\Middleware;
 
 class informeSaludController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
+    function __construct()
+    {
+        $this->middleware('permission:ver-informeSalud|crear-informeSalud|editar-informeSalud|mostrar-informeSalud',['only'=>['index']]);
+        $this->middleware('permission:crear-informeSalud', ['only' => ['create', 'store']]);
+        $this->middleware('permission:editar-informeSalud', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:mostrar-informeSalud', ['only' => ['show']]);
+    }
+
     public function index()
     {
         // Obtener los informes de salud con la información del expediente médico y el alumno
@@ -113,7 +124,7 @@ class informeSaludController extends Controller
         return view('informe_salud.edit', ['informe_salud' => $informe_salud]);
     }
 
-    
+
     public function update(UpdateInformeSaludRequest $request, InformeSalud $informe_salud)
 {
     try {
@@ -140,13 +151,13 @@ class informeSaludController extends Controller
         return redirect()->back()->withErrors(['error' => 'Ocurrió un error al actualizar el informe de salud.']);
     }
 }
-    
+
 
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(string $id)
     {
-        
+
     }
 }

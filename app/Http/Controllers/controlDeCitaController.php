@@ -10,12 +10,23 @@ use App\Models\ExpedienteMedico;
 use App\Models\Alumno;
 use Illuminate\Support\Facades\DB;
 use Exception;
+use App\Http\Controllers\Controller;
+use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Routing\Controllers\Middleware;
+
 
 class controlDeCitaController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
+    function __construct()
+    {
+        $this->middleware('permission:ver-controlDeCita|crear-controlDeCita|editar-controlDeCita|mostrar-controlDeCita',['only'=>['index']]);
+        $this->middleware('permission:crear-controlDeCita', ['only' => ['create', 'store']]);
+        $this->middleware('permission:editar-controlDeCita', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:eliminar-controlDeCita', ['only' => ['destroy']]);
+    }
     public function index()
     {
         // Citas médicas activas (estado = 1)

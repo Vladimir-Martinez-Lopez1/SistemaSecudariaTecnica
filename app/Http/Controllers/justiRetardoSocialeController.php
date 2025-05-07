@@ -9,12 +9,23 @@ use App\Models\ExpedienteDisciplinario;
 use App\Models\Justi_retardo_sociale;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
+use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Routing\Controllers\Middleware;
 
 class justiRetardoSocialeController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
+    function __construct()
+    {
+        $this->middleware('permission:ver-justificanteRetardoSocial|crear-justificanteRetardoSocial|editar-justificanteRetardoSocial|mostrar-justificanteRetardoSocial',['only'=>['index']]);
+        $this->middleware('permission:crear-justificanteRetardoSocial', ['only' => ['create', 'store']]);
+        $this->middleware('permission:editar-justificanteRetardoSocial', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:mostrar-justificanteRetardoSocial', ['only' => ['show']]);
+    }
+
     public function index()
     {
         //

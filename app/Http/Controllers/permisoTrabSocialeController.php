@@ -10,12 +10,24 @@ use App\Models\Permiso_trab_sociale;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
+use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Routing\Controllers\Middleware;
+
 
 class permisoTrabSocialeController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
+    function __construct()
+    {
+        $this->middleware('permission:ver-permisoTrabSociale|crear-permisoTrabSociale|editar-permisoTrabSociale|mostrar-permisoTrabSociale',['only'=>['index']]);
+        $this->middleware('permission:crear-permisoTrabSociale', ['only' => ['create', 'store']]);
+        $this->middleware('permission:editar-permisoTrabSociale', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:mostrar-permisoTrabSociale', ['only' => ['show']]);
+    }
+
     public function index()
     {
         //

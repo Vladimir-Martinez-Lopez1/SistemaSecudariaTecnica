@@ -9,12 +9,24 @@ use App\Models\ExpedienteDisciplinario;
 use App\Models\Pase_salida_trab_sociale;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
+use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Routing\Controllers\Middleware;
+
 
 class paseSalidaTrabSocialeController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
+    function __construct()
+    {
+        $this->middleware('permission:ver-paseSalidaSocial|crear-paseSalidaSocial|editar-paseSalidaSocial|mostrar-paseSalidaSocial',['only'=>['index']]);
+        $this->middleware('permission:crear-paseSalidaSocial', ['only' => ['create', 'store']]);
+        $this->middleware('permission:editar-paseSalidaSocial', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:mostrar-paseSalidaSocial', ['only' => ['show']]);
+    }
+
     public function index()
     {
         //

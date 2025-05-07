@@ -9,12 +9,24 @@ use App\Models\ExpedienteDisciplinario;
 use App\Models\Reporte_incidencia;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
+use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Routing\Controllers\Middleware;
+
 
 class reporteIncidenciaController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
+    function __construct()
+    {
+        $this->middleware('permission:ver-reporteIncidencia|crear-reporteIncidencia|editar-reporteIncidencia|mostrar-reporteIncidencia',['only'=>['index']]);
+        $this->middleware('permission:crear-reporteIncidencia', ['only' => ['create', 'store']]);
+        $this->middleware('permission:editar-reporteIncidencia', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:mostrar-reporteIncidencia', ['only' => ['show']]);
+    }
+
     public function index()
     {
         //

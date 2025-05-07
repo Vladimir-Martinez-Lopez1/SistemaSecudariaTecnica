@@ -51,10 +51,10 @@ class PermissionSeeder extends Seeder
             'mostrar-justificanteMedico',
 
             // Permisos para el módulo de justificante de retardo Social
-            'ver-justificanteRetardoSocial',
-            'crear-justificanteRetardoSocial',
-            'editar-justificanteRetardoSocial',
-            'mostrar-justificanteRetardoSocial',
+            'ver-justiRetardoSociale',
+            'crear-justiRetardoSociale',
+            'editar-justiRetardoSociale',
+            'mostrar-justiRetardoSociale',
 
             // Permisos para el módulo de pase de salida
             'ver-paseSalida',
@@ -63,10 +63,10 @@ class PermissionSeeder extends Seeder
             'mostrar-paseSalida',
 
             // Permisos para el módulo de pase de salida social
-            'ver-paseSalidaSocial',
-            'crear-paseSalidaSocial',
-            'editar-paseSalidaSocial',
-            'mostrar-paseSalidaSocial',
+            'ver-paseSalidaTrabSociale',
+            'crear-paseSalidaTrabSociale',
+            'editar-paseSalidaTrabSociale',
+            'mostrar-paseSalidaTrabSociale',
 
             // Permisos para el módulo de reporte incidencias
             'ver-reporteIncidencia',
@@ -79,6 +79,31 @@ class PermissionSeeder extends Seeder
             'crear-suspencionClase',
             'editar-suspencionClase',
             'mostrar-suspencionClase',
+
+            // Permisos para el módulo de Permiso Trab Social
+            'ver-permisoTrabSociale',
+            'crear-permisoTrabSociale',
+            'editar-permisoTrabSociale',
+            'mostrar-permisoTrabSociale',
+
+
+            // Permisos para el módulo de Roles
+            'ver-role',
+            'crear-role',
+            'editar-role',
+            'eliminar-role',
+
+            // Permisos para el módulo de Usuarios
+            'ver-user',
+            'crear-user',
+            'editar-user',
+            'eliminar-user',
+
+            //Permisos para el módulo de Control de Citas
+            'ver-controlDeCita',
+            'crear-controlDeCita',
+            'editar-controlDeCita',
+            'mostrar-controlDeCita',
         ];
 
         foreach ($permisos as $permiso) {

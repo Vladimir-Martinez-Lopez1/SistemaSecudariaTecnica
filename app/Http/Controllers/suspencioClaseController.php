@@ -10,12 +10,23 @@ use App\Models\Suspencion_clase;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
+use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Routing\Controllers\Middleware;
 
 class suspencioClaseController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
+    function __construct()
+    {
+        $this->middleware('permission:ver-suspencionClase|crear-suspencionClase|editar-suspencionClase|mostrar-suspencionClase',['only'=>['index']]);
+        $this->middleware('permission:crear-suspencionClase', ['only' => ['create', 'store']]);
+        $this->middleware('permission:editar-suspencionClase', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:mostrar-suspencionClase', ['only' => ['show']]);
+    }
+
     public function index()
     {
         //
