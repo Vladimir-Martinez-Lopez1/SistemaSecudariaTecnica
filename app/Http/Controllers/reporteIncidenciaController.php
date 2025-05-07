@@ -5,13 +5,11 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreReporteIncidenciaRequest;
 use App\Http\Requests\UpdateReporteIncidenciaRequest;
 use App\Models\Alumno;
+use Illuminate\Routing\Controller; // Ensure the correct Controller class is imported
 use App\Models\ExpedienteDisciplinario;
 use App\Models\Reporte_incidencia;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use App\Http\Controllers\Controller;
-use Illuminate\Routing\Controllers\HasMiddleware;
-use Illuminate\Routing\Controllers\Middleware;
 
 
 class reporteIncidenciaController extends Controller

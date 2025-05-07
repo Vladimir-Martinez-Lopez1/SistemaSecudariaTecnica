@@ -5,14 +5,12 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StorePermisoTrabSocialeRequest;
 use App\Http\Requests\UpdatePermisoTrabSocialeRequest;
 use App\Models\Alumno;
+use Illuminate\Routing\Controller; // Ensure the correct Controller class is imported
 use App\Models\ExpedienteDisciplinario;
 use App\Models\Permiso_trab_sociale;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
-use App\Http\Controllers\Controller;
-use Illuminate\Routing\Controllers\HasMiddleware;
-use Illuminate\Routing\Controllers\Middleware;
 
 
 class permisoTrabSocialeController extends Controller

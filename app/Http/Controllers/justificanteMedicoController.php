@@ -7,12 +7,10 @@ use Illuminate\Support\Facades\DB;
 use Exception;
 use App\Models\Alumno;
 use App\Models\ExpedienteMedico;
+use Illuminate\Routing\Controller; // Ensure the correct Controller class is imported
 use App\Models\JustificanteInasistenciaMedica;
 use App\Http\Requests\UpdateJustificanteInasistenciaMedicoRequest;
 use App\Http\Requests\StoreJustificanteInasistenciaMedicoRequest;
-use App\Http\Controllers\Controller;
-use Illuminate\Routing\Controllers\HasMiddleware;
-use Illuminate\Routing\Controllers\Middleware;
 
 class justificanteMedicoController extends Controller
 {

@@ -6,14 +6,12 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests\storeInformeSaludRequest;
 use App\Http\Requests\UpdateInformeSaludRequest;
+use Illuminate\Routing\Controller; // Ensure the correct Controller class is imported
 use App\Models\ExpedienteMedico;
 use App\Models\Alumno;
 use App\Models\InformeSalud;
 use Illuminate\Support\Facades\DB;
 use Exception;
-use App\Http\Controllers\Controller;
-use Illuminate\Routing\Controllers\HasMiddleware;
-use Illuminate\Routing\Controllers\Middleware;
 
 class informeSaludController extends Controller
 {

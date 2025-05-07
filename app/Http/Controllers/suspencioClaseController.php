@@ -4,15 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreSuspencionClaseRequest;
 use App\Http\Requests\UpdateSuspencioClaseRequest;
+use Illuminate\Routing\Controller; // Ensure the correct Controller class is imported
 use App\Models\Alumno;
 use App\Models\ExpedienteDisciplinario;
 use App\Models\Suspencion_clase;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
-use App\Http\Controllers\Controller;
-use Illuminate\Routing\Controllers\HasMiddleware;
-use Illuminate\Routing\Controllers\Middleware;
+
 
 class suspencioClaseController extends Controller
 {

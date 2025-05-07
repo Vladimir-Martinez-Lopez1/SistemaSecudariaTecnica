@@ -5,14 +5,12 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests\storeControlDeCitasRequest;
 use App\Http\Requests\UpdateCitaMedicaRequest;
+use Illuminate\Routing\Controller; // Ensure the correct Controller class is imported
 use App\Models\ControlCita;
 use App\Models\ExpedienteMedico;
 use App\Models\Alumno;
 use Illuminate\Support\Facades\DB;
 use Exception;
-use App\Http\Controllers\Controller;
-use Illuminate\Routing\Controllers\HasMiddleware;
-use Illuminate\Routing\Controllers\Middleware;
 
 
 class controlDeCitaController extends Controller

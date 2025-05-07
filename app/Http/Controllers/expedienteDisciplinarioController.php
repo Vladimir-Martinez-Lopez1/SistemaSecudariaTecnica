@@ -4,15 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreExpedienteDisciplinarioRequest;
 use App\Http\Requests\UpdateExpedienteDisciplinarioRequest;
+use Illuminate\Routing\Controller; // Ensure the correct Controller class is imported
 use App\Models\Alumno;
 use App\Models\ExpedienteDisciplinario;
 use App\Models\ExpedienteMedico;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use App\Http\Controllers\Controller;
-use Illuminate\Routing\Controllers\HasMiddleware;
-use Illuminate\Routing\Controllers\Middleware;
 
 class expedienteDisciplinarioController extends Controller
 {

@@ -3,11 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreCitatorioRequest;
-use App\Http\Controllers\Controller;
-use Illuminate\Routing\Controllers\HasMiddleware;
-use Illuminate\Routing\Controllers\Middleware;
 use App\Http\Requests\UpdateCitaMedicaRequest;
 use App\Http\Requests\UpdateCitatorioRequest;
+use Illuminate\Routing\Controller; // Ensure the correct Controller class is imported
 use App\Models\Citatorio;
 use App\Models\ExpedienteDisciplinario;
 use App\Models\Alumno;

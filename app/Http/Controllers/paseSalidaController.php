@@ -6,13 +6,11 @@ use App\Http\Requests\StorePaseSalidaRequest;
 use App\Http\Requests\UpdatePaseSalidaRequest;
 use App\Models\Alumno;
 use App\Models\ExpedienteDisciplinario;
+use Illuminate\Routing\Controller; // Ensure the correct Controller class is imported
 use App\Models\Pase_salida;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use \Illuminate\Support\Facades\Facade;
-use App\Http\Controllers\Controller;
-use Illuminate\Routing\Controllers\HasMiddleware;
-use Illuminate\Routing\Controllers\Middleware;
 
 
 class paseSalidaController extends Controller

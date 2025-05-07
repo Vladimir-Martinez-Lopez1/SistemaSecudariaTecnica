@@ -4,15 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
+use Illuminate\Routing\Controller; // Ensure the correct Controller class is imported
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Role;
-use App\Http\Controllers\Controller;
-use Illuminate\Routing\Controllers\HasMiddleware;
-use Illuminate\Routing\Controllers\Middleware;
+
 
 
 class userController extends Controller
@@ -22,6 +21,7 @@ class userController extends Controller
      */
     function __construct()
     {
+        //dd('Middleware aplicado', request()->route()->getName());
         $this->middleware('permission:ver-user|crear-user|editar-user|mostrar-user',['only'=>['index']]);
         $this->middleware('permission:crear-user', ['only' => ['create', 'store']]);
         $this->middleware('permission:editar-user', ['only' => ['edit', 'update']]);

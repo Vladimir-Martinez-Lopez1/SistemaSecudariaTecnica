@@ -4,13 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreCitatorioGeneraleRequest;
 use App\Http\Requests\UpdateCitatorioGeneralRequest;
+use Illuminate\Routing\Controller; // Ensure the correct Controller class is imported
 use App\Models\Citatorio_generale;
 use Illuminate\Http\Request;
 use Exception;
 use Illuminate\Support\Facades\DB;
-use App\Http\Controllers\Controller;
-use Illuminate\Routing\Controllers\HasMiddleware;
-use Illuminate\Routing\Controllers\Middleware;
+
 
 class citatorioGeneralClaseController extends Controller
 {

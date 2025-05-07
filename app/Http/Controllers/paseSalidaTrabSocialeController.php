@@ -5,14 +5,11 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StorePaseSalidaTrabSocialeRequest;
 use App\Http\Requests\UpdatePaseSalidaTrabSocialeRequest;
 use App\Models\Alumno;
+use Illuminate\Routing\Controller; // Ensure the correct Controller class is imported
 use App\Models\ExpedienteDisciplinario;
 use App\Models\Pase_salida_trab_sociale;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use App\Http\Controllers\Controller;
-use Illuminate\Routing\Controllers\HasMiddleware;
-use Illuminate\Routing\Controllers\Middleware;
-
 
 class paseSalidaTrabSocialeController extends Controller
 {
@@ -21,10 +18,10 @@ class paseSalidaTrabSocialeController extends Controller
      */
     function __construct()
     {
-        $this->middleware('permission:ver-paseSalidaSocial|crear-paseSalidaSocial|editar-paseSalidaSocial|mostrar-paseSalidaSocial',['only'=>['index']]);
-        $this->middleware('permission:crear-paseSalidaSocial', ['only' => ['create', 'store']]);
-        $this->middleware('permission:editar-paseSalidaSocial', ['only' => ['edit', 'update']]);
-        $this->middleware('permission:mostrar-paseSalidaSocial', ['only' => ['show']]);
+        $this->middleware('permission:ver-paseSalidaTrabSociale|crear-paseSalidaTrabSociale|editar-paseSalidaTrabSociale|mostrar-paseSalidaTrabSociale',['only'=>['index']]);
+        $this->middleware('permission:crear-paseSalidaTrabSociale', ['only' => ['create', 'store']]);
+        $this->middleware('permission:editar-paseSalidaTrabSociale', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:mostrar-paseSalidaTrabSociale', ['only' => ['show']]);
     }
 
     public function index()
