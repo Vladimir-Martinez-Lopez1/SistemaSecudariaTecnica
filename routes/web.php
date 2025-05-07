@@ -21,7 +21,8 @@ use App\Http\Controllers\paseSalidaTrabSocialeController;
 use App\Http\Controllers\expedienteDisciplinarioController;
 use App\Http\Controllers\profileController;
 
-Route::get('/',[homeController::class, 'index'])->name('panel')->middleware('auth');
+Route::get('/', [homeController::class, 'index'])->name('panel');
+//Route::view('/panel', 'panel.index') ->name('panel');
 
 
 Route::resources([
