@@ -24,6 +24,8 @@ class storeJustificanteInasistenciaMedicoRequest extends FormRequest
         return [
             'matricula' => 'required|exists:alumnos,matricula|integer',
             'fecha' => 'required|date',
+            'grado' => 'required|in:1,2,3',
+            'grupo' => 'required|in:A,B,C,D,E,F',
             'modulos' => 'required|string|max:255',
             'nombre_medico' => 'required|string|max:255',
         ];

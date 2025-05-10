@@ -1,9 +1,9 @@
 @extends('template')
 
 @section('title','Crear expediente medico')
-    
+
 @push('css')
-    
+
 @endpush
 
 @section('content')
@@ -12,7 +12,7 @@
         <ol class="breadcrumb mb-4">
             <li class="breadcrumb-item"><a href="{{route('panel')}}">Inicio</a></li>
             <li class="breadcrumb-item"><a href="{{route('informe_salud.index')}}">Informes de salud</a></li>
-            <li class="breadcrumb-item active">Crear informe de salud</li> 
+            <li class="breadcrumb-item active">Crear informe de salud</li>
         </ol>
 
         <!-- Formulario -->
@@ -24,7 +24,7 @@
                         <label for="matricula" class="form-label">Matricula</label>
                         <input type="number" name="matricula" id="matricula" class="form-control" value="{{old('matricula')}}">
                         @error('matricula')
-                           <small class="text-danger">{{'*'. $message}}</small> 
+                           <small class="text-danger">{{'*'. $message}}</small>
                         @enderror
                     </div>
 
@@ -32,7 +32,7 @@
                         <label for="grado" class="form-label">Grado</label>
                         <select name="grado" id="grado" class="form-control">
                             <option value="">Seleccione...</option>
-                            @foreach([1,2,3,4,5,6] as $grado)
+                            @foreach([1,2,3] as $grado)
                                 <option value="{{ $grado }}" {{ old('grado') == $grado ? 'selected' : '' }}>{{ $grado }}</option>
                             @endforeach
                         </select>
@@ -102,7 +102,7 @@
                         @enderror
                     </div>
 
-                    
+
                     <div class="col-md-6">
                         <label for="nombre_medico" class="form-label">Nombre del Médico</label>
                         <select name="nombre_medico" id="grupo" class="form-control">
@@ -128,5 +128,5 @@
 @endsection
 
 @push('js')
-    
+
 @endpush

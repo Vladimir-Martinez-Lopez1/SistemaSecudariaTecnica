@@ -1,7 +1,7 @@
 @extends('template')
 
 @section('title','Expedientes Medicos')
-    
+
 @push('css')
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> <!--alerta -->
     <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" type="text/css">
@@ -33,13 +33,15 @@
         <h1 class="mt-4">Expedientes Medicos</h1>
         <ol class="breadcrumb mb-4">
             <li class="breadcrumb-item"><a href="{{route('panel')}}">Inicio</a></li>
-            <li class="breadcrumb-item active">Expedientes Medicos</li>          
+            <li class="breadcrumb-item active">Expedientes Medicos</li>
         </ol>
 
-        
-        <a href="{{route('expedientes_medicos.create')}}"> 
-            <button type="button" class=" btn btn-primary"> Crear Expediente Medico </button>
-        </a>
+        <div class="mb-4">
+            <a href="{{route('expedientes_medicos.create')}}">
+                <button type="button" class=" btn btn-primary"> Crear Expediente </button>
+            </a>
+        </div>
+
         <div class="mb-4">
             <!--Tabla expedientes -->
             <div class="card mb-4">
@@ -57,7 +59,7 @@
                                 <th>Acciones</th>
                             </tr>
                         </thead>
-                        
+
                         <tbody>
                             @foreach ($expedientes as $expediente)
                                 <tr>
@@ -71,15 +73,19 @@
                                         {{ $expediente->alumno->apellido }}
                                     </td>
                                     <td>
-                                        
+
                                         <div class="btn-group btn-group-sm" role="group" aria-label="Small button group">
-                                            
+
                                             <a href="{{ route('expedientes_medicos.edit', ['expedientes_medico' => $expediente->id]) }}">
                                                 <button type="button" class="btn btn-outline-dark">Editar información</button>
                                             </a>
-        
+
                                             <!--Falta desarrollar la vista de los expedientes -->
-                                            <button type="button" class="btn btn-outline-dark">Ver expediente</button>
+                                            <a href="{{ route('expedientes_medicos.show', $expediente->id) }}">
+                                                <button type="button" class="btn btn-outline-info">Ver expediente</button>
+                                            </a>
+
+
                                         </div>
                                     </td>
                                 </tr>

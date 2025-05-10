@@ -14,6 +14,8 @@ return new class extends Migration
         Schema::create('justificante_inasistencia_medicas', function (Blueprint $table) {
             $table->id();
             $table->date('fecha');
+            $table->string('grado', 10);
+            $table->string('grupo', 10);
             $table->string('modulos', 50);
             $table->string('nombre_medico', 50);
             $table->foreignId('expediente_medico_id')->constrained('expediente_medicos')->onDelete('cascade');

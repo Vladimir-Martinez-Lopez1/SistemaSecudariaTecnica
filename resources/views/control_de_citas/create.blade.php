@@ -1,9 +1,9 @@
 @extends('template')
 
 @section('title','Crear expediente medico')
-    
+
 @push('css')
-    
+
 @endpush
 
 @section('content')
@@ -12,11 +12,11 @@
         <ol class="breadcrumb mb-4">
             <li class="breadcrumb-item"><a href="{{route('panel')}}">Inicio</a></li>
             <li class="breadcrumb-item"><a href="{{route('control_de_citas.index')}}">Citas Medicas</a></li>
-            <li class="breadcrumb-item active">Crear citas medica</li> 
+            <li class="breadcrumb-item active">Crear citas medica</li>
         </ol>
 
         <div class="mb-4">
-            <a href="{{route('control_de_citas.create')}}"> 
+            <a href="{{route('control_de_citas.create')}}">
                 <button type="button" class=" btn btn-primary"> Agendar cita medica </button>
             </a>
         </div>
@@ -26,7 +26,7 @@
             <form action="{{ route('control_de_citas.store') }}" method="post">
                 @csrf
                 <div class="row g-3">
-                    
+
                     <div class="col-md-6">
                         <label for="matricula" class="form-label">Matrícula del Alumno</label>
                         <input type="number" name="matricula" id="matricula" class="form-control" value="{{ old('matricula') }}">
@@ -47,7 +47,7 @@
                         <label for="grado" class="form-label">Grado</label>
                         <select name="grado" id="grado" class="form-control">
                             <option value="">Seleccione...</option>
-                            @foreach([1,2,3,4,5,6] as $grado)
+                            @foreach([1,2,3] as $grado)
                                 <option value="{{ $grado }}" {{ old('grado') == $grado ? 'selected' : '' }}>{{ $grado }}</option>
                             @endforeach
                         </select>
@@ -109,5 +109,5 @@
 @endsection
 
 @push('js')
-    
+
 @endpush
