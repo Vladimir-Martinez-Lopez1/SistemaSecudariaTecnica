@@ -44,7 +44,7 @@
             </a>
         </div>
 
-
+        {{-- Tabla Persmiso Trabajo social --}}
         <div class="card mb-4">
             <div class="card-header">
                 <i class="fas fa-table me-1"></i>
@@ -59,8 +59,8 @@
                             <th>Grado|Grupo</th>
                             <th>Motivo</th>
                             <th>Número de dias </th>
-                            <th>Fecha de permiso</th>
-                            <th>Fecha de regreso</th>
+                            <th>Fecha de Inicio</th>
+                            <th>Fecha de termino</th>
                             <th>Nombre del padre</th>
                             <th>Acciones</th>
                         </tr>
@@ -81,9 +81,14 @@
                                 <td>{{$permiso->nombre_padre}}</td>
                                 <td>
                                     <div class="btn-group" role="group" aria-label="Basic mixed styles example">
-                                        <button type="button" class="btn btn-success">Ver</button>
-                                        <button type="button" class="btn btn-warning">Editar</button>
-                                        <button type="button" class="btn btn-danger">Borrar</button>
+                                        <a
+                                            href="{{ route('permiso_trab_sociale.show', ['permiso_trab_sociale' => $permiso->id, 'from_permiso_trab_sociale' => false]) }}">
+                                            <button type="button" class="btn btn-success">Ver</button>
+                                        </a>
+                                        <a
+                                            href="{{ route('permiso_trab_sociale.edit', ['permiso_trab_sociale' => $permiso->id]) }}">
+                                            <button type="button" class="btn btn-warning">Editar</button>
+                                        </a>
                                     </div>
                                 </td>
                             </tr>

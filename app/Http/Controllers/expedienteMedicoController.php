@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\storeExpedienteMedicoRequest;
+use Illuminate\Routing\Controller; // Ensure the correct Controller class is imported
 use App\Models\Alumno;
 use App\Models\ExpedienteMedico;
 use App\Models\ExpedienteDisciplinario;
@@ -16,6 +17,15 @@ class expedienteMedicoController extends Controller
     /**
      * Display a listing of the resource.
      */
+
+     function __construct()
+     {
+         $this->middleware('permission:ver-expedienteMedico|crear-expedienteMedico|editar-expedienteMedico|mostrar-expedienteMedico',['only'=>['index']]);
+         $this->middleware('permission:crear-expedienteMedico', ['only' => ['create', 'store']]);
+         $this->middleware('permission:editar-expedienteMedico', ['only' => ['edit', 'update']]);
+         $this->middleware('permission:mostrar-expedienteMedico', ['only' => ['show']]);
+     }
+
     public function index()
     {
         //Expedientes y alumnos
@@ -51,7 +61,7 @@ class expedienteMedicoController extends Controller
             ExpedienteDisciplinario::create([
                 'alumno_id' => $alumno->id
             ]);
-           
+
             DB::commit();
         }catch(Exception $e){
             DB::rollBack();
@@ -63,9 +73,17 @@ class expedienteMedicoController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    /*public function show(string $id)
     {
         //
+    }*/
+    public function show(string $id)
+    {
+        // Obtener el expediente médico con sus relaciones
+        $expediente = ExpedienteMedico::with(['alumno', 'informesSalud', 'justificantesInasistencia'])->findOrFail($id);
+
+        // Pasar los datos a la vista
+        return view('expediente_medico.show', compact('expediente'));
     }
 
     /**

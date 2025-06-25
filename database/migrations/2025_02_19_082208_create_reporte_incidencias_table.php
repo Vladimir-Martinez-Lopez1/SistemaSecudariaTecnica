@@ -13,12 +13,14 @@ return new class extends Migration
     {
         Schema::create('reporte_incidencias', function (Blueprint $table) {
             $table->id();
-            $table->integer('numero_lista');
-            $table->string('nombre_profesor', 50);
+            $table->string('grado', 50);
+            $table->string('grupo', 50);
+            $table->text('motivo');
+            $table->string('modulo', 50);
             $table->string('asignatura', 50);
-            $table->string('motivo', 20);
-            $table->time('hora_clase', precision: 0);
-            $table->longText('observaciones');
+            $table->string('nombre_profesor', 50);
+            $table->time('hora_clase');
+            $table->text('observaciones');
             $table->date('fecha_reporte');
             $table->foreignId('expediente_disciplinario_id')->constrained('expediente_disciplinarios')->onDelete('cascade');
             $table->timestamps();

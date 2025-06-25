@@ -36,9 +36,12 @@
             <li class="breadcrumb-item active">Justificantes de inasistencia medica</li>          
         </ol>
         
-        <a href="{{route('justificante_inasistencia_medico.create')}}"> 
-            <button type="button" class=" btn btn-primary"> Añadir Justificante Medico </button>
-        </a >
+        <div class="mb-4">
+            <a href="{{route('justificante_inasistencia_medico.create')}}"> 
+                <button type="button" class=" btn btn-primary"> Añadir Justificante Medico </button>
+            </a >
+        </div>
+        
         
 
         <div class="mb-4">
@@ -55,6 +58,7 @@
                                 <th>Matrícula</th>
                                 <th>Nombre</th>
                                 <th>Apellidos</th>
+                                <th>Grado/Grupo</th>
                                 <th>Fecha</th>
                                 <th>Módulos</th>
                                 <th>Médico</th>
@@ -67,6 +71,7 @@
                                     <td>{{ $justificante->expedienteMedico->alumno->matricula }}</td>
                                     <td>{{ $justificante->expedienteMedico->alumno->nombre }}</td>
                                     <td>{{ $justificante->expedienteMedico->alumno->apellido }}</td>
+                                    <td>{{ $justificante->grado }} /{{ $justificante->grupo }} </td>
                                     <td>{{ $justificante->fecha }}</td>
                                     <td>{{ $justificante->modulos }}</td>
                                     <td>{{ $justificante->nombre_medico }}</td>
@@ -74,6 +79,10 @@
                                         <div class="btn-group btn-group-sm" role="group">
                                             <a href="{{ route('justificante_inasistencia_medico.edit', $justificante->id) }}">
                                                 <button type="button" class="btn btn-outline-dark">Editar</button>
+                                            </a>
+
+                                            <a href="{{ route('justificante_inasistencia_medico.show', $justificante->id) }}">
+                                                <button type="button" class="btn btn-outline-info">Ver</button>
                                             </a>
 
 

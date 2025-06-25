@@ -7,16 +7,24 @@ use Illuminate\Support\Facades\DB;
 use Exception;
 use App\Models\Alumno;
 use App\Models\ExpedienteMedico;
+use Illuminate\Routing\Controller; // Ensure the correct Controller class is imported
 use App\Models\JustificanteInasistenciaMedica;
 use App\Http\Requests\UpdateJustificanteInasistenciaMedicoRequest;
 use App\Http\Requests\StoreJustificanteInasistenciaMedicoRequest;
-
 
 class justificanteMedicoController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
+    function __construct()
+    {
+        $this->middleware('permission:ver-justificanteMedico|crear-justificanteMedico|editar-justificanteMedico|mostrar-justificanteMedico',['only'=>['index']]);
+        $this->middleware('permission:crear-justificanteMedico', ['only' => ['create', 'store']]);
+        $this->middleware('permission:editar-justificanteMedico', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:mostrar-justificanteMedico', ['only' => ['show']]);
+    }
+
     public function index()
     {
         $justificantes = JustificanteInasistenciaMedica::with('expedienteMedico.alumno')->get();
@@ -46,6 +54,8 @@ class justificanteMedicoController extends Controller
             JustificanteInasistenciaMedica::create([
                 'expediente_medico_id' => $expediente->id,
                 'fecha' => $request->fecha,
+                'grado' => $request->grado,
+                'grupo' => $request->grupo,
                 'modulos' => $request->modulos,
                 'nombre_medico' => $request->nombre_medico,
             ]);
@@ -62,9 +72,35 @@ class justificanteMedicoController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    /*public function show($id)
     {
-        //
+        // Buscar el justificante específico junto con el expediente médico y alumno
+        $justificante = JustificanteInasistenciaMedica::with('expedienteMedico.alumno')->findOrFail($id);
+
+        // Retornar la vista con el justificante
+        return view('justificante_inasistencia_medico.show', compact('justificante'));
+    }*/
+    /*public function show(string $id, Request $request)
+    {
+        // Obtener el justificante de inasistencia médica
+        $justificante = JustificanteInasistenciaMedica::with('expedienteMedico.alumno')->findOrFail($id);
+
+        // Obtener el origen de la solicitud
+        $origen = $request->query('origen');
+
+        // Pasar los datos a la vista
+        return view('justificante_inasistencia_medico.show', compact('justificante', 'origen'));
+    }*/
+    public function show(string $id, Request $request)
+    {
+        // Obtener el justificante con sus relaciones
+        $justificante = JustificanteInasistenciaMedica::with('expedienteMedico.alumno')->findOrFail($id);
+
+        // Determinar si la solicitud proviene de expediente_medico
+        $fromExpedienteMedico = $request->query('from_expediente_medico', false);
+
+        // Pasar los datos a la vista
+        return view('justificante_inasistencia_medico.show', compact('justificante', 'fromExpedienteMedico'));
     }
 
     /**
@@ -84,11 +120,14 @@ class justificanteMedicoController extends Controller
      */
     public function update(UpdateJustificanteInasistenciaMedicoRequest $request, JustificanteInasistenciaMedica $justificante)
     {
+        //dd($request);
         try {
             DB::beginTransaction();
 
             $justificante->update([
                 'fecha' => $request->fecha,
+                'grado' => $request->grado,
+                'grupo' => $request->grupo,
                 'modulos' => $request->modulos,
                 'nombre_medico' => $request->nombre_medico,
             ]);

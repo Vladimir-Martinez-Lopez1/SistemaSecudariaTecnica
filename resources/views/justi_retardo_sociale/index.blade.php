@@ -44,7 +44,7 @@
             </a>
         </div>
 
-        <!--Tabla de citatorios-->
+        <!--Tabla de Justificante de retardo trabajo social-->
         <div class="card mb-4">
             <div class="card-header">
                 <i class="fas fa-table me-1"></i>
@@ -73,9 +73,12 @@
                                 <td>{{$justificado->fecha_permiso}}</td>
                                 <td>
                                     <div class="btn-group" role="group" aria-label="Basic mixed styles example">
-                                        <button type="button" class="btn btn-success">Ver</button>
-                                        <button type="button" class="btn btn-warning">Editar</button>
-                                        <button type="button" class="btn btn-danger">Borrar</button>
+                                        <a href="{{ route('justi_retardo_sociale.show', ['justi_retardo_sociale' => $justificado->id, 'from_justi_retardo_sociale' => false]) }}">
+                                            <button type="button" class="btn btn-success">Ver</button>
+                                        </a>
+                                        <a href="{{ route('justi_retardo_sociale.edit', ['justi_retardo_sociale' => $justificado->id]) }}">
+                                            <button type="button" class="btn btn-warning">Editar</button>
+                                        </a>
                                     </div>
                                 </td>
                             </tr>

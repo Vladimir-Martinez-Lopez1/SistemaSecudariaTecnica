@@ -44,7 +44,7 @@
             </a>
         </div>
 
-        <!--Tabla de citatorios-->
+        <!--Tabla de Suspencion de clases-->
         <div class="card mb-4">
             <div class="card-header">
                 <i class="fas fa-table me-1"></i>
@@ -57,6 +57,7 @@
                             <th>Matricula</th>
                             <th>Nombre del alumno(a)</th>
                             <th>Grado|Grupo</th>
+                            <th>Nombre del padre</th>
                             <th>Motivo</th>
                             <th>No. días de suspencion</th>
                             <th>Inicio de la suspención</th>
@@ -75,6 +76,7 @@
                                     {{ $suspencion->expedienteDisciplinario->alumno->apellido }}
                                 </td>
                                 <td>{{$suspencion->grado }} / {{ $suspencion->grupo }}</td>
+                                <td>{{$suspencion->nombre_padre}}</td>
                                 <td>{{$suspencion->motivo}}</td>
                                 <td>{{$suspencion->numero_dias}}</td>
                                 <td>{{$suspencion->fecha_inicio}}</td>
@@ -83,9 +85,12 @@
                                 <td>{{$suspencion->fecha_suspencion}}</td>
                                 <td>
                                     <div class="btn-group" role="group" aria-label="Basic mixed styles example">
-                                        <button type="button" class="btn btn-success">Ver</button>
-                                        <button type="button" class="btn btn-warning">Editar</button>
-                                        <button type="button" class="btn btn-danger">Borrar</button>
+                                        <a href="{{ route('suspencion_clase.show', ['suspencion_clase' => $suspencion->id, 'from_suspencion_clase' => false]) }}">
+                                            <button type="button" class="btn btn-success">Ver</button>
+                                        </a>
+                                        <a href="{{ route('suspencion_clase.edit', ['suspencion_clase' => $suspencion->id]) }}">
+                                            <button type="button" class="btn btn-warning">Editar</button>
+                                        </a>
                                     </div>
                                 </td>
                             </tr>

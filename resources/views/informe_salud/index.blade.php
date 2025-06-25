@@ -60,7 +60,11 @@
                                     <a href="{{ route('informe_salud.edit', ['informe_salud' => $informe->id]) }}">
                                         <button type="button" class="btn btn-outline-dark">Editar</button>
                                     </a>
-                                    
+
+                                    <a href="{{ route('informe_salud.show', $informe->id) }}">
+                                        <button type="button" class="btn btn-outline-info">Ver</button>
+                                    </a>
+
                                 </div>
                             </td>
                         </tr>

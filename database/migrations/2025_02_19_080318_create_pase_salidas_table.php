@@ -14,10 +14,13 @@ return new class extends Migration
         Schema::create('pase_salidas', function (Blueprint $table) {
             $table->id();
             $table->integer('numero_lista');
+            $table->string('grado', 50);
+            $table->string('grupo', 50);
             $table->string('motivo', 250);
-            $table->time('hora_salida', precision: 0);
-            $table->time('hora_regreso', precision: 0);
+            $table->time('hora_salida');
+            $table->time('hora_regreso');
             $table->date('fecha_salida');
+            $table->string('solicito', 50);
             $table->foreignId('expediente_disciplinario_id')->constrained('expediente_disciplinarios')->onDelete('cascade');
             $table->timestamps();
         });

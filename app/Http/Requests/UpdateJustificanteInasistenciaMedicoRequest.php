@@ -23,6 +23,8 @@ class UpdateJustificanteInasistenciaMedicoRequest extends FormRequest
     {
         return [
             'fecha' => 'required|date',
+            'grado' => 'required|string|max:10',
+            'grupo' => 'required|string|max:10',
             'modulos' => 'required|string|max:255',
             'nombre_medico' => 'required|string|max:255',
         ];

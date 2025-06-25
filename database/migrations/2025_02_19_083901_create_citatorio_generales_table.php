@@ -13,12 +13,13 @@ return new class extends Migration
     {
         Schema::create('citatorio_generales', function (Blueprint $table) {
             $table->id();
-            $table->integer('numero_lista');
+            $table->date('fecha_creacion');
             $table->string('asignatura', 50);
-            $table->time('hora_cita', precision: 0);
+            $table->string('grado', 50);
+            $table->string('grupo', 50);
+            $table->time('hora_cita');
             $table->date('fecha_cita');
             $table->string('nombre_profesor', 50);
-            $table->foreignId('expediente_disciplinario_id')->constrained('expediente_disciplinarios')->onDelete('cascade');
             $table->timestamps();
         });
     }

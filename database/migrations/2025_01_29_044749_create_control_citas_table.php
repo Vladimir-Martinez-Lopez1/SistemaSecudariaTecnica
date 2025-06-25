@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('sexo', 50);
             $table->string('diagnostico', 100);
             $table->string('observaciones', 100);
+            $table->integer('estado')->default(1);
             $table->timestamps();
         });
     }

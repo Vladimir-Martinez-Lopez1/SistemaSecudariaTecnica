@@ -24,7 +24,7 @@ class storeInformeSaludRequest extends FormRequest
         return [
             'matricula' => 'required|exists:alumnos,matricula|integer',
             'fecha' => 'required|date',
-            'grado' => 'required|in:1,2,3,4,5,6',
+            'grado' => 'required|in:1,2,3',
             'grupo' => 'required|in:A,B,C,D,E,F',
             'diagnostico' => 'required|string|max:150',
             'motivo' => 'required|string|max:150',

@@ -1,9 +1,9 @@
 @extends('template')
 
 @section('title','Crear justificante medico')
-    
+
 @push('css')
-    
+
 @endpush
 
 @section('content')
@@ -11,7 +11,7 @@
     <h1 class="mt-4">Crear justificante de inasistencia medica</h1>
         <ol class="breadcrumb mb-4">
             <li class="breadcrumb-item"><a href="{{route('panel')}}">Inicio</a></li>
-            <li class="breadcrumb-item"><a href="{{route('justificante_inasistencia_medico.index')}}">Justificantes de inasistencia medica</a></li>          
+            <li class="breadcrumb-item"><a href="{{route('justificante_inasistencia_medico.index')}}">Justificantes de inasistencia medica</a></li>
             <li class="breadcrumb-item active">Crear justificante Medico</li>
         </ol>
 
@@ -31,6 +31,32 @@
                 </div>
 
                 <input type="hidden" name="expediente_medico_id" id="expediente_medico_id" value="{{ old('expediente_medico_id') }}">
+
+                <div class="col-md-6">
+                    <label for="grado" class="form-label">Grado</label>
+                    <select name="grado" id="grado" class="form-control">
+                        <option value="">Seleccione...</option>
+                        @foreach([1,2,3] as $grado)
+                            <option value="{{ $grado }}" {{ old('grado') == $grado ? 'selected' : '' }}>{{ $grado }}</option>
+                        @endforeach
+                    </select>
+                    @error('grado')
+                    <small class="text-danger">{{ '*'.$message }}</small>
+                    @enderror
+                </div>
+
+                <div class="col-md-6">
+                    <label for="grupo" class="form-label">Grupo</label>
+                    <select name="grupo" id="grupo" class="form-control">
+                        <option value="">Seleccione...</option>
+                        @foreach(['A', 'B', 'C', 'D', 'E', 'F'] as $grupo)
+                            <option value="{{ $grupo }}" {{ old('grupo') == $grupo ? 'selected' : '' }}>{{ $grupo }}</option>
+                        @endforeach
+                    </select>
+                    @error('grupo')
+                    <small class="text-danger">{{ '*'.$message }}</small>
+                    @enderror
+                </div>
 
                 <div class="col-md-6">
                     <label for="fecha" class="form-label">Fecha</label>
@@ -64,14 +90,14 @@
                 <div class="col-12 text-center">
                     <button type="submit" class="btn btn-primary">Guardar</button>
                 </div>
-                
-            </div> 
-        </form>
-    </div> 
 
-</div>    
+            </div>
+        </form>
+    </div>
+
+</div>
 @endsection
 
 @push('js')
-    
+
 @endpush

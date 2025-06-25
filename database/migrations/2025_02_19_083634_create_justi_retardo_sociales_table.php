@@ -13,7 +13,8 @@ return new class extends Migration
     {
         Schema::create('justi_retardo_sociales', function (Blueprint $table) {
             $table->id();
-            $table->integer('numero_lista');
+            $table->string('grado', 50);
+            $table->string('grupo', 50);
             $table->date('fecha_permiso');
             $table->foreignId('expediente_disciplinario_id')->constrained('expediente_disciplinarios')->onDelete('cascade');
             $table->timestamps();
