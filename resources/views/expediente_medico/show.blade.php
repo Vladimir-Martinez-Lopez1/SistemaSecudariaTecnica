@@ -40,7 +40,7 @@
                     <tr>
                         <th>Fecha</th>
                         <th>Alumno</th>
-                        <th>Grado/Grupo</th> 
+                        <th>Grado/Grupo</th>
                         <th>Diagnóstico</th>
                         <th>Motivo</th>
                         <th>Fecha Inicio</th>
@@ -63,7 +63,7 @@
 
                             <td> <!-- boton para vista show de informe de salud -->
                                 <a href="{{ route('informe_salud.show', ['informe_salud' => $informe->id, 'from_expediente_medico' => true]) }}">
-                                    <button type="button" class="btn btn-outline-info">Ver</button>
+                                    <button type="button" class="btn btn-success">Ver</button>
                                 </a>
                             </td>
                         </tr>
@@ -103,11 +103,11 @@
                             <td>{{ $justificante->fecha }}</td>
                             <td>{{ $justificante->modulos }}</td>
                             <td>{{ $justificante->nombre_medico }}</td>
-                            <td>  <!-- boton para vista show de justificantes de inasistencia médica--> 
+                            <td>  <!-- boton para vista show de justificantes de inasistencia médica-->
                                 <a href="{{ route('justificante_inasistencia_medico.show', ['justificante_inasistencia_medico' => $justificante->id, 'from_expediente_medico' => true]) }}">
-                                    <button type="button" class="btn btn-outline-info">Ver</button>
+                                    <button type="button" class="btn btn-success">Ver</button>
                                 </a>
-                            </td>    
+                            </td>
                         </tr>
                     @endforeach
                 </tbody>

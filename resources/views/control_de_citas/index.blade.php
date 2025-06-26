@@ -12,11 +12,11 @@
     <h1 class="mt-4">Control de citas</h1>
     <ol class="breadcrumb mb-4">
         <li class="breadcrumb-item"><a href="{{ route('panel') }}">Inicio</a></li>
-        <li class="breadcrumb-item active">Citas médicas</li>          
+        <li class="breadcrumb-item active">Citas médicas</li>
     </ol>
 
     <div class="mb-4">
-        <a href="{{ route('control_de_citas.create') }}"> 
+        <a href="{{ route('control_de_citas.create') }}">
             <button type="button" class="btn btn-primary">Agendar cita médica</button>
         </a>
     </div>
@@ -32,8 +32,8 @@
                 <thead>
                     <tr>
                         <th>Fecha</th>
-                        <th>Alumno</th> 
-                        <th>Grado/Grupo</th> 
+                        <th>Alumno</th>
+                        <th>Grado/Grupo</th>
                         <th>Sexo</th>
                         <th>Diagnóstico</th>
                         <th>Observaciones</th>
@@ -54,12 +54,12 @@
                             <td>
                                 <div class="btn-group btn-group-sm" role="group" aria-label="Small button group">
                                     <a href="{{ route('control_de_citas.edit', ['control_de_cita' => $cita->id]) }}">
-                                        <button type="button" class="btn btn-outline-dark">Editar Cita</button>
+                                        <button type="button" class="btn btn-primary">Editar Cita</button>
                                     </a>
                                     <form action="{{ route('control_de_citas.destroy', $cita->id) }}" method="POST" style="display: inline;">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="btn btn-outline-danger">Desactivar</button>
+                                        <button type="submit" class="btn btn-warning">Desactivar</button>
                                     </form>
                                 </div>
                             </td>
@@ -74,15 +74,15 @@
     <div class="card mb-4">
         <div class="card-header">
             <i class="fas fa-table me-1"></i>
-            Citas médicas inactivas 
+            Citas médicas inactivas
         </div>
         <div class="card-body">
             <table id="datatablesSimpleInactivas" class="table table-bordered table-striped">
                 <thead>
                     <tr>
                         <th>Fecha</th>
-                        <th>Alumno</th> 
-                        <th>Grado/Grupo</th> 
+                        <th>Alumno</th>
+                        <th>Grado/Grupo</th>
                         <th>Sexo</th>
                         <th>Diagnóstico</th>
                         <th>Observaciones</th>
@@ -103,12 +103,12 @@
                             <td>
                                 <div class="btn-group btn-group-sm" role="group" aria-label="Small button group">
                                     <a href="{{ route('control_de_citas.edit', ['control_de_cita' => $cita->id]) }}">
-                                        <button type="button" class="btn btn-outline-dark">Editar Cita</button>
+                                        <button type="button" class="btn btn-primary">Editar Cita</button>
                                     </a>
                                     <form action="{{ route('control_de_citas.destroy', $cita->id) }}" method="POST" style="display: inline;">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="btn btn-outline-success">Activar</button>
+                                        <button type="submit" class="btn btn-warning">Activar</button>
                                     </form>
                                 </div>
                             </td>
@@ -118,7 +118,7 @@
             </table>
         </div>
     </div>
-</div>   
+</div>
 @endsection
 
 @push('js')

@@ -18,58 +18,112 @@
             display: none;
         }
 
+        .header-images {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .header-img {
+            height: 80px;
+            object-fit: contain;
+        }
+
         @media print {
+            body * {
+                visibility: hidden;
+                margin: 0 !important;
+                padding: 0 !important;
+            }
+
+            .print,
+            .print * {
+                visibility: visible;
+            }
+
+            .print {
+                position: absolute;
+                left: 1cm;
+                top: 0;
+                width: calc(100% - 1cm);
+                padding-right: 0.5cm;
+                margin: 0 !important;
+            }
+
+            @page {
+                size: letter;
+                margin: 1.5cm 0.5cm 1.5cm 0;
+                padding: 0;
+            }
+
+            .no-print {
+                display: none !important;
+            }
+
+            .print-container {
+                border: none !important;
+                padding: 0 !important;
+                margin: 0 !important;
+                max-width: 100% !important;
+            }
+
+            .container {
+                page-break-after: avoid;
+                page-break-inside: avoid;
+            }
 
             /* Mostrar el contenido duplicado al imprimir */
             .contenido-duplicado {
-                display: block;
-                page-break-before: always;
-                /* Asegura que el contenido duplicado esté en una nueva página */
+                display: block !important;
+                margin-top: 1cm;
             }
 
-            @media print {
-
-                /* Mantener alineación y espaciado */
-                .text-center {
-                    text-align: center !important;
-                }
-
-                .fw-bold {
-                    font-weight: bold !important;
-                }
-
-                .line-height-small {
-                    line-height: 0.5 !important;
-                }
-
-                .ms-4 {
-                    margin-left: 1.5rem !important;
-                }
-
-                .mt-4 {
-                    margin-top: 1.5rem !important;
-                }
-
-                .my-4 {
-                    margin-top: 1.5rem !important;
-                    margin-bottom: 1.5rem !important;
-                }
-
-                .border {
-                    border: 1px solid #000 !important;
-                }
-
-                .p-4 {
-                    padding: 1.5rem !important;
-                }
-
-                /* Asegurar que los elementos mantengan su formato */
-                h3,
-                p {
-                    font-size: 1rem !important;
-                }
+            /* Asegurar que las imágenes se muestren al imprimir */
+            .header-images {
+                display: flex !important;
             }
 
+            /* Mantener alineación y espaciado */
+            .text-center {
+                text-align: center !important;
+            }
+
+            .fw-bold {
+                font-weight: bold !important;
+            }
+
+            .line-height-small {
+                line-height: 0.5 !important;
+            }
+
+            .ms-4 {
+                margin-left: 1.5rem !important;
+            }
+
+            .mt-4 {
+                margin-top: 1.5rem !important;
+            }
+
+            .my-4 {
+                margin-top: 1.5rem !important;
+                margin-bottom: 1.5rem !important;
+            }
+
+            .border {
+                border: 1px solid #000 !important;
+            }
+
+            .p-4 {
+                padding: 1.5rem !important;
+            }
+
+            /* Asegurar que los elementos mantengan su formato */
+            h3,
+            p {
+                font-size: 1rem !important;
+            }
         }
     </style>
 @endpush
@@ -84,16 +138,22 @@
                 <li class="breadcrumb-item active">Ver citatorio</li>
             </ol>
         @endif
-        <div class="imprimir">
+        <div class="print">
             <!-- Contenido original -->
             <div class="contenido-original">
                 <!-- Vista del justificante -->
-                <div class="container mt-4 border p-4">
+                <div class="container border p-4">
                     <!-- Título centrado -->
-                    <div class="text-center line-height-small">
-                        <h3 class="fw-bold">ESCUELA SECUNDARIA TECNICA N 66</h3>
-                        <p>CLAVE: 20DST0062I</p>
-                        <p>CUILAPAN DE GUERRERO, OAX</p>
+                    <div class="header-images">
+                        <img src="{{ asset('/storage/logoEST.png') }}" class="header-img" alt="Escudo izquierdo">
+                        <div class="text-center line-height-small">
+                            <h3 class="fw-bold ">ESCUELA SECUNDARIA TECNICA N 66</h3>
+                            <br>
+                            <p>CLAVE: 20DST0062I</p>
+                            <br>
+                            <p>CUILAPAN DE GUERRERO, OAX</p>
+                        </div>
+                        <img src="{{ asset('/storage/logoIEEPO.png') }}" class="header-img" alt="Escudo derecho">
                     </div>
 
                     <!-- Línea continua -->
@@ -141,12 +201,18 @@
             <!-- Contenido duplicado (solo visible al imprimir) -->
             <div class="contenido-duplicado">
                 <!-- Vista del justificante -->
-                <div class="container mt-4 border p-4">
+                <div class="container border p-4">
                     <!-- Título centrado -->
-                    <div class="text-center line-height-small">
-                        <h3 class="fw-bold">ESCUELA SECUNDARIA TECNICA N 66</h3>
-                        <p>CLAVE: 20DST0062I</p>
-                        <p>CUILAPAN DE GUERRERO, OAX</p>
+                    <div class="header-images">
+                        <img src="{{ asset('/storage/logoEST.png') }}" class="header-img" alt="Escudo izquierdo">
+                        <div class="text-center line-height-small">
+                            <h3 class="fw-bold ">ESCUELA SECUNDARIA TECNICA N 66</h3>
+                            <br>
+                            <p>CLAVE: 20DST0062I</p>
+                            <br>
+                            <p>CUILAPAN DE GUERRERO, OAX</p>
+                        </div>
+                        <img src="{{ asset('/storage/logoIEEPO.png') }}" class="header-img" alt="Escudo derecho">
                     </div>
 
                     <!-- Línea continua -->
@@ -191,7 +257,7 @@
                 </div>
             </div>
         </div>
-        <div class="container-fluid px-4 d-flex justify-content-center gap-3">
+        <div class="container-fluid px-4 d-flex justify-content-center gap-3 no-print">
             <!-- Botón para regresar a la lista de citatorios -->
             <a href="{{ route('citatorio_general.index') }}" class="btn btn-primary mt-3">
                 Volver a la lista de citatorios
@@ -203,118 +269,10 @@
         </div>
 @endsection
 
-    @push('js')
-
-        <script>
-            function imprimir() {
-    // Clona el contenido del div "imprimir"
-    const contenido = document.querySelector('.imprimir').cloneNode(true);
-
-    // Oculta elementos innecesarios al imprimir
-    const botones = contenido.querySelectorAll('button, a');
-    botones.forEach(boton => boton.style.display = 'none');
-
-    // Hace visible el contenido duplicado
-    const contenidoDuplicado = contenido.querySelector('.contenido-duplicado');
-    if (contenidoDuplicado) {
-        contenidoDuplicado.style.display = 'block';
-    }
-
-    // Abre una nueva ventana para imprimir
-    const ventana = window.open('', '', 'height=500,width=800');
-
-    ventana.document.write(`
-        <html>
-            <head>
-                <title>Citatorio General</title>
-                <style>
-                    /* Configuración de página */
-                    @page {
-                        size: letter;
-                        margin: 0.5cm;
-                    }
-
-                    /* Estilos base */
-                    body {
-                        margin: 0;
-                        padding: 0;
-                        font-family: Arial, sans-serif;
-                        font-size: 12pt;
-                    }
-
-                    /* Contenedor principal */
-                    .container-impresion {
-                        width: 100%;
-                        box-sizing: border-box;
-                        padding: 0;
-                    }
-
-                    /* Estilos para ambos recuadros */
-                    .recuadro {
-                        border: 1px solid #000 !important;
-                        width: 100%;
-                        box-sizing: border-box;
-                        margin: 0 auto 10px;
-                        page-break-inside: avoid;
-                        padding: 10px;
-                    }
-
-                    /* Espaciados */
-                    .p-4 {
-                        padding: 0.8rem !important;
-                    }
-
-                    /* Alineación */
-                    .text-center {
-                        text-align: center !important;
-                    }
-
-                    .fw-bold {
-                        font-weight: bold !important;
-                    }
-
-                    .line-height-small {
-                        line-height: 0.9 !important;
-                    }
-
-                    hr {
-                        margin: 8px 0;
-                        border: 0;
-                        border-top: 1px solid #000;
-                    }
-
-                    /* Ajustes específicos para impresión */
-                    @media print {
-                        body {
-                            padding: 0.5cm;
-                        }
-
-                        .recuadro {
-                            margin-bottom: 0.5cm;
-                        }
-
-                        .contenido-duplicado {
-                            display: block !important;
-                            margin-top: 0.3cm;
-                        }
-                    }
-                </style>
-            </head>
-            <body>
-                <div class="container-impresion">
-                    ${contenido.innerHTML}
-                </div>
-                <script>
-                    setTimeout(function() {
-                        window.print();
-                        window.close();
-                    }, 200);
-                <\/script>
-            </body>
-        </html>
-    `);
-    ventana.document.close();
-}
-        </script>
-
-    @endpush
+@push('js')
+    <script>
+        function imprimir() {
+            window.print();
+        }
+    </script>
+@endpush

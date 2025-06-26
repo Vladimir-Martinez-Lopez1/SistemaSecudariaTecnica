@@ -39,7 +39,8 @@ class informeSaludController extends Controller
      */
     public function create()
     {
-        return view('informe_salud.create');
+        $matricula = Alumno::all();
+        return view('informe_salud.create',compact('matricula'));
     }
 
     /**

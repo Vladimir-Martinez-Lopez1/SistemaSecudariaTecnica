@@ -1,9 +1,9 @@
 @extends('template')
 
 @section('title','Editar Informacion de Expediente Medico')
-    
+
 @push('css')
-    
+
 @endpush
 
 @section('content')
@@ -11,8 +11,8 @@
     <h1 class="mt-4">Editar Información Expediente Medico</h1>
     <ol class="breadcrumb mb-4">
         <li class="breadcrumb-item"><a href="{{route('panel')}}">Inicio</a></li>
-        <li class="breadcrumb-item"><a href="{{route('expedientes_medicos.index')}}">Expedientes Medicos</a></li>  
-        <li class="breadcrumb-item active">Editar Expedientes Medicos</li>          
+        <li class="breadcrumb-item"><a href="{{route('expedientes_medicos.index')}}">Expedientes Medicos</a></li>
+        <li class="breadcrumb-item active">Editar Expedientes Medicos</li>
     </ol>
 
     <!-- Formulario-->
@@ -28,7 +28,7 @@
                         <small class="text-danger">{{ '*'. $message }}</small>
                     @enderror
                 </div>
-        
+
                 <div class="col-md-6">
                     <label for="nombre" class="form-label">Nombre(s)</label>
                     <input type="text" name="nombre" id="nombre" class="form-control" value="{{ old('nombre', $expediente->alumno->nombre) }}">
@@ -36,7 +36,7 @@
                         <small class="text-danger">{{ '*'. $message }}</small>
                     @enderror
                 </div>
-        
+
                 <div class="col-md-6">
                     <label for="apellido" class="form-label">Apellido(s)</label>
                     <input type="text" name="apellido" id="apellido" class="form-control" value="{{ old('apellido', $expediente->alumno->apellido) }}">
@@ -44,10 +44,10 @@
                         <small class="text-danger">{{ '*'. $message }}</small>
                     @enderror
                 </div>
-        
+
                 <div class="col-12 text-center">
                     <button type="submit" class="btn btn-primary">Actualizar</button>
-                    <button type="reset" class="btn btn-secondary">Cancelar</button>
+                    <a href="{{ route('expedientes_medicos.index') }}" class="btn btn-secondary">Cancelar</a>
                 </div>
             </div>
         </form>
@@ -58,5 +58,5 @@
 @endsection
 
 @push('js')
-    
+
 @endpush

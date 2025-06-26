@@ -1,7 +1,7 @@
 @extends('template')
 
 @section('title','Justificante de inasistencia medica')
-    
+
 @push('css')
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> <!--alerta -->
 <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" type="text/css">
@@ -33,16 +33,16 @@
         <h1 class="mt-4">Justificante de inasistencia medica</h1>
         <ol class="breadcrumb mb-4">
             <li class="breadcrumb-item"><a href="{{route('panel')}}">Inicio</a></li>
-            <li class="breadcrumb-item active">Justificantes de inasistencia medica</li>          
+            <li class="breadcrumb-item active">Justificantes de inasistencia medica</li>
         </ol>
-        
+
         <div class="mb-4">
-            <a href="{{route('justificante_inasistencia_medico.create')}}"> 
+            <a href="{{route('justificante_inasistencia_medico.create')}}">
                 <button type="button" class=" btn btn-primary"> Añadir Justificante Medico </button>
             </a >
         </div>
-        
-        
+
+
 
         <div class="mb-4">
             <!-- Tabla de justificantes -->
@@ -78,11 +78,11 @@
                                     <td>
                                         <div class="btn-group btn-group-sm" role="group">
                                             <a href="{{ route('justificante_inasistencia_medico.edit', $justificante->id) }}">
-                                                <button type="button" class="btn btn-outline-dark">Editar</button>
+                                                <button type="button" class="btn btn-success">Editar</button>
                                             </a>
 
                                             <a href="{{ route('justificante_inasistencia_medico.show', $justificante->id) }}">
-                                                <button type="button" class="btn btn-outline-info">Ver</button>
+                                                <button type="button" class="btn btn-warning">Ver</button>
                                             </a>
 
 

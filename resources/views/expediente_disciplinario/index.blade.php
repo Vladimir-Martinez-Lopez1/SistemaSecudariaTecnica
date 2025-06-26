@@ -77,12 +77,12 @@
                                         <div class="btn-group btn-group-sm" role="group" aria-label="Small button group">
 
                                             <a href="{{ route('expediente_disciplinario.edit', ['expediente_disciplinario' => $expediente->id]) }}">
-                                                <button type="button" class="btn btn-outline-dark">Editar información</button>
+                                                <button type="button" class="btn btn-success">Editar información</button>
                                             </a>
 
                                             <!--Falta desarrollar la vista de los expedientes -->
                                             <a href="{{ route('expediente_disciplinario.show', $expediente->id) }}">
-                                                <button type="button" class="btn btn-outline-info">Ver expediente</button>
+                                                <button type="button" class="btn btn-warning">Ver expediente</button>
                                             </a>
 
 

@@ -13,53 +13,78 @@
             line-height: 0.5;
         }
 
-        /* Ocultar el contenido duplicado en la vista normal */
-        .contenido-duplicado {
-            display: none;
+        .header-images {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
         }
 
+        .header-img {
+            height: 80px;
+            /* Ajusta esta altura según necesites */
+            object-fit: contain;
+        }
+    </style>
+    <style>
         @media print {
-
-            /* Mantener alineación y espaciado */
-            .text-center {
-                text-align: center !important;
+            body * {
+                visibility: hidden;
+                margin: 0 !important;
+                padding: 0 !important;
             }
 
-            .fw-bold {
-                font-weight: bold !important;
+            .print,
+            .print * {
+                visibility: visible;
             }
 
-            .line-height-small {
-                line-height: 0.5 !important;
+            .print {
+                position: absolute;
+                left: 1cm;
+                top: 0;
+                width: calc(100% - 1cm);
+                padding-right: 0.5cm;
+                margin: 0 !important;
             }
 
-            .ms-4 {
-                margin-left: 1.5rem !important;
+            @page {
+                size: letter;
+                margin: 1.5cm 0.5cm 1.5cm 0;
+                padding: 0;
             }
 
-            .mt-4 {
-                margin-top: 1.5rem !important;
+            .no-print {
+                display: none !important;
             }
 
-            .my-4 {
-                margin-top: 1.5rem !important;
-                margin-bottom: 1.5rem !important;
+            .print-container {
+                border: none !important;
+                padding: 0 !important;
+                margin: 0 !important;
+                max-width: 100% !important;
             }
 
-            .border {
-                border: 1px solid #000 !important;
+            .container {
+                page-break-after: avoid;
+                page-break-inside: avoid;
             }
 
-            .p-4 {
-                padding: 1.5rem !important;
+            /* Asegurar que las imágenes se muestren al imprimir */
+            .header-images {
+                display: flex !important;
             }
+        }
 
-            /* Asegurar que los elementos mantengan su formato */
-            h3,
-            p {
-                font-size: 1rem !important;
-            }
+        .line-height-small p {
+            line-height: 1.2;
+            margin-bottom: 0.2rem;
+        }
 
+        .contenido-texto {
+            padding-left: 1.5rem;
+            padding-right: 1.5rem;
         }
     </style>
 @endpush
@@ -74,31 +99,38 @@
                 <li class="breadcrumb-item active">Ver documento de suspencion</li>
             </ol>
         @endif
-        <div class="imprimir">
-            <!-- Contenido original -->
-            <div class="contenido-original">
-                <!-- Vista del justificante -->
-                <div class="container mt-4 border p-4">
+        <div class="print">
+            <!-- Detalles del informe de salud -->
+            <div class="container mt-4 border p-4">
+                <div class="container mt-4">
                     <!-- Título centrado -->
-                    <div class="text-center line-height-small">
-                        <h3 class="fw-bold">ESCUELA SECUNDARIA TECNICA N 66</h3>
-                        <p>CLAVE: 20DST0062I</p>
-                        <p>CUILAPAN DE GUERRERO, OAX</p>
+                    <div class="header-images">
+                        <img src="{{ asset('/storage/logoEST.png') }}" class="header-img" alt="Escudo izquierdo">
+                        <div class="text-center line-height-small">
+                            <h3 class="fw-bold ">ESCUELA SECUNDARIA TECNICA N 66</h3>
+                            <p>CLAVE: 20DST0062I</p>
+                            <p>CUILAPAN DE GUERRERO, OAX</p>
+                        </div>
+                        <img src="{{ asset('/storage/logoIEEPO.png') }}" class="header-img" alt="Escudo derecho">
                     </div>
 
                     <!-- Línea continua -->
                     <hr class="my-4">
+                    <div class="text-end line-height-small">
+                        <p>MESA: SERVS. EDUCS. COMPLS.</p>
+                    </div>
+                    <div class="text-end line-height-small">
+                        <p>ASUNTO: SUSPENCIÓN DE CLASES</p>
+                    </div>
+                    <div class="text-end line-height-small">
 
+                            <p class="text-end">Cuilapam de guerrero, Oax,
+                            <strong>{{ \Carbon\Carbon::parse($suspencion_clase->fecha_suspencion)->day }}</strong> de
+                            <strong>{{ \Carbon\Carbon::parse($suspencion_clase->fecha_suspencion)->month }}</strong> de
+                            <strong>{{ \Carbon\Carbon::parse($suspencion_clase->fecha_suspencion)->year }}</strong></p>
+                    </div>
                     <!-- Texto con sangría -->
-                    <div class="text-justify ms-4">
-                        <div class="row mt-4">
-                            <div class="col text-end">
-                                <p>MESA: SERVS. EDUCS. COMPLS.</p>
-                                <p>ASUNTO: SUSPENCIÓN DE CLASES</p>
-                                <p>Cuilapam de Guerrero, Oax., a <strong>{{$suspencion_clase->fecha_suspencion}}</strong>
-                                </p>
-                            </div>
-                        </div>
+                    <div class="mt-4">
                         <p>C. <strong>{{$suspencion_clase->nombre_padre}}</strong>_</p>
                         <p>NOMBRE DEL (A) PADRE, MADRE O TUTOR (A).</p>
                         <P>
@@ -121,10 +153,12 @@
                             <strong>{{$suspencion_clase->articulo}}</strong> Fracción
                             <strong>{{$suspencion_clase->fraccion}}</strong> Inciso
                             <strong>{{$suspencion_clase->inciso}}</strong>, Se hace acreedor a una sanción disciplinaria
-                            correspondiente a <strong>{{$suspencion_clase->numero_dias}}</strong> día(s) hábil(es) de <strong> SUSPENSIÓN DE CLASES </strong> siendo los siguientes:
+                            correspondiente a <strong>{{$suspencion_clase->numero_dias}}</strong> día(s) hábil(es) de
+                            <strong> SUSPENSIÓN DE CLASES </strong> siendo los siguientes:
                         </P>
                         <p>
-                            Fecha de inicio <strong>{{$suspencion_clase->fecha_inicio}}</strong> Fecha de termino <strong>{{$suspencion_clase->fecha_termino}}</strong>
+                            Fecha de inicio <strong>{{$suspencion_clase->fecha_inicio}}</strong> Fecha de termino
+                            <strong>{{$suspencion_clase->fecha_termino}}</strong>
                         </p>
                         <p>
                             Por lo que se le comunica, para su conocimiento e intervención en el mejoramiento conductual
@@ -134,27 +168,46 @@
 
                     <!-- Firma -->
                     </br>
+                    <div class="text-center mt-4">
+                        <p class="line-height-small">A T E N T A M E N T E</p>
+                    </div>
+                    <br>
                     <div class="row mt-4">
                         <div class="col text-center">
-                           <p>A T E N T A M E N T E</p>
-                           <p>COORDINACIÓN DE SERVS. EDUCS. COMPLS.</p>
-                           <P>MTRO. BERTOLDO AQUINO BOLAÑOS</P>
+                            <p class="line-height-small">COORDINACIÓN DE SERVS.</p>
+                            <br>
+                            <p class="line-height-small">EDUCS. COMPLS.</p>
+                            <br>
+                            <p class="line-height-small">MTRO. BERTOLDO</P>
+                            <br>
+                            <p class="line-height-small">AQUINO BOLAÑOS</P>
                         </div>
                         <div class="col text-center">
-                            <p>Vo.Bo.</p>
-                            <P>DIRECCIÓN DE LA ESCUELA</P>
-                            <P>MTRO. ULTIMINIO GALLO GONZÁLEZ</P>
+                            <br>
+                            <p class="line-height-small">Vo.Bo.</p>
+                            <br>
+                            <p class="line-height-small">DIRECCIÓN DE</P>
+                            <br>
+                            <p class="line-height-small">LA ESCUELA</P>
+                            <br>
+                            <p class="line-height-small">MTRO. ULTIMINIO</P>
+                            <br>
+                            <p class="line-height-small">GALLO GONZÁLEZ</P>
 
                         </div>
                         <div class="col text-center">
-                            <p>EL ASESOR DEL GRUPO</p>
-                            <p>PROFR (A) <strong>{{ $suspencion_clase->nombre_profesor }}</strong></p>
+                            <br>
+                            <p class="line-height-small">EL ASESOR DEL GRUPO</p>
+                            <br>
+                            <p class="line-height-small">PROFR (A)</p>
+                            <br>
+                            <p class="line-height-small"><strong>{{ $suspencion_clase->nombre_profesor }}</strong></p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="container-fluid px-4 d-flex justify-content-center gap-3">
+        <div class="container-fluid px-4 d-flex justify-content-center gap-3 no-print">
             <!-- Botón para regresar a la lista de citatorios -->
             @if ($from_suspencion_clase)
                 <a href="{{ route('expediente_disciplinario.show', $suspencion_clase->expedienteDisciplinario->id) }}"
@@ -174,28 +227,9 @@
 @endsection
 
     @push('js')
-
         <script>
             function imprimir() {
-                // Clona el contenido del div "imprimir"
-                const contenido = document.querySelector('.imprimir').cloneNode(true);
-
-                // Oculta elementos innecesarios al imprimir
-                const botones = contenido.querySelectorAll('button, a');
-                botones.forEach(boton => boton.style.display = 'none');
-
-                // Abre una nueva ventana para imprimir
-                const ventana = window.open('', '', 'height=500,width=800');
-                ventana.document.write('<html><head><title>Citatorio General</title>');
-                ventana.document.write('<link rel="stylesheet" href="{{ asset('css/app.css') }}">'); // Asegúrate de incluir los estilos
-                ventana.document.write('</head><body>');
-                ventana.document.write(contenido.innerHTML);
-                ventana.document.write('</body></html>');
-                ventana.document.close();
-
-                // Imprime el contenido
-                ventana.print();
+                window.print();
             }
         </script>
-
     @endpush

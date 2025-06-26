@@ -13,48 +13,78 @@
             line-height: 0.5;
         }
 
-        @media imprimir {
+        .header-images {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
 
-            /* Mantener alineación y espaciado */
-            .text-center {
-                text-align: center !important;
+        .header-img {
+            height: 80px;
+            /* Ajusta esta altura según necesites */
+            object-fit: contain;
+        }
+    </style>
+    <style>
+        @media print {
+            body * {
+                visibility: hidden;
+                margin: 0 !important;
+                padding: 0 !important;
             }
 
-            .fw-bold {
-                font-weight: bold !important;
+            .print,
+            .print * {
+                visibility: visible;
             }
 
-            .line-height-small {
-                line-height: 0.5 !important;
+            .print {
+                position: absolute;
+                left: 1cm;
+                top: 0;
+                width: calc(100% - 1cm);
+                padding-right: 0.5cm;
+                margin: 0 !important;
             }
 
-            .ms-4 {
-                margin-left: 1.5rem !important;
+            @page {
+                size: letter;
+                margin: 1.5cm 0.5cm 1.5cm 0;
+                padding: 0;
             }
 
-            .mt-4 {
-                margin-top: 1.5rem !important;
+            .no-print {
+                display: none !important;
             }
 
-            .my-4 {
-                margin-top: 1.5rem !important;
-                margin-bottom: 1.5rem !important;
+            .print-container {
+                border: none !important;
+                padding: 0 !important;
+                margin: 0 !important;
+                max-width: 100% !important;
             }
 
-            .border {
-                border: 1px solid #000 !important;
+            .container {
+                page-break-after: avoid;
+                page-break-inside: avoid;
             }
 
-            .p-4 {
-                padding: 1.5rem !important;
+            /* Asegurar que las imágenes se muestren al imprimir */
+            .header-images {
+                display: flex !important;
             }
+        }
 
-            /* Asegurar que los elementos mantengan su formato */
-            h3,
-            p {
-                font-size: 1rem !important;
-            }
+        .line-height-small p {
+            line-height: 1.2;
+            margin-bottom: 0.2rem;
+        }
 
+        .contenido-texto {
+            padding-left: 1.5rem;
+            padding-right: 1.5rem;
         }
     </style>
 @endpush
@@ -70,25 +100,27 @@
                 <li class="breadcrumb-item active">Ver justificante</li>
             </ol>
         @endif
-        <div class="imprimir">
+        <div class="print">
             <!-- Contenido original -->
-            <div class="contenido-original">
-                <!-- Vista del justificante -->
-                <div class="container mt-4 border p-4">
+            <div class="container mt-4 border p-4">
+                <div class="container mt-4">
                     <!-- Título centrado -->
-                    <div class="text-center line-height-small">
-                        <h3 class="fw-bold">ESCUELA SECUNDARIA TECNICA N 66</h3>
-                        <p>CLAVE: 20DST0062I</p>
-                        <p>CUILAPAN DE GUERRERO, OAX</p>
-                        <p>COORDINACION DE SERVICIOS EDUCATIVOS COMPLEMENTARIOS</p>
+                    <div class="header-images">
+                        <img src="{{ asset('/storage/logoEST.png') }}" class="header-img" alt="Escudo izquierdo">
+                        <div class="text-center line-height-small">
+                            <h3 class="fw-bold ">ESCUELA SECUNDARIA TECNICA N 66</h3>
+                            <p>CLAVE: 20DST0062I</p>
+                            <p>CUILAPAN DE GUERRERO, OAX</p>
+                        </div>
+                        <img src="{{ asset('/storage/logoIEEPO.png') }}" class="header-img" alt="Escudo derecho">
                     </div>
 
                     <!-- Línea continua -->
                     <hr class="my-4">
 
                     <!-- Texto con sangría -->
-                    <div class="text-justify ms-4">
-
+                    
+                    <div class="mt-4">
                         <p>
                             POR ESTE MEDIO SOLICITO DE SU APOYO PARA QUE EL ALUMNO (A): <strong>{{$nombre}}
                                 {{$apellido }}</strong>
@@ -111,7 +143,7 @@
                 </div>
             </div>
         </div>
-        <div class="container-fluid px-4 d-flex justify-content-center gap-3">
+        <div class="container-fluid px-4 d-flex justify-content-center gap-3 no-print">
             <!-- Botón para regresar a la lista de citatorios -->
             @if ($from_justi_retardo_sociale)
                 <a href="{{ route('expediente_disciplinario.show', $justi_retardo_sociale->expedienteDisciplinario->id) }}"
@@ -131,28 +163,9 @@
 @endsection
 
     @push('js')
-
         <script>
             function imprimir() {
-                // Clona el contenido del div "imprimir"
-                const contenido = document.querySelector('.imprimir').cloneNode(true);
-
-                // Oculta elementos innecesarios al imprimir
-                const botones = contenido.querySelectorAll('button, a');
-                botones.forEach(boton => boton.style.display = 'none');
-
-                // Abre una nueva ventana para imprimir
-                const ventana = window.open('', '', 'height=500,width=800');
-                ventana.document.write('<html><head><title>Citatorio General</title>');
-                ventana.document.write('<link rel="stylesheet" href="{{ asset('css/app.css') }}">'); // Asegúrate de incluir los estilos
-                ventana.document.write('</head><body>');
-                ventana.document.write(contenido.innerHTML);
-                ventana.document.write('</body></html>');
-                ventana.document.close();
-
-                // Imprime el contenido
-                ventana.print();
+                window.print();
             }
         </script>
-
     @endpush

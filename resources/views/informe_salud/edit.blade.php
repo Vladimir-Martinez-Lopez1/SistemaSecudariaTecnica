@@ -3,7 +3,7 @@
 @section('title', 'Editar Informe Médico')
 
 @push('css')
-    
+
 @endpush
 
 @section('content')
@@ -12,7 +12,7 @@
     <ol class="breadcrumb mb-4">
         <li class="breadcrumb-item"><a href="{{ route('panel') }}">Inicio</a></li>
         <li class="breadcrumb-item"><a href="{{ route('informe_salud.index') }}">Informes de salud</a></li>
-        <li class="breadcrumb-item active">Editar informe de salud</li>          
+        <li class="breadcrumb-item active">Editar informe de salud</li>
     </ol>
 
     <!-- Formulario -->
@@ -115,7 +115,7 @@
                     @enderror
                 </div>
 
-            
+
                 <!-- Nombre del Médico -->
                 <div class="col-md-6">
                     <label for="nombre_medico" class="form-label">Nombre del Médico</label>
@@ -131,11 +131,12 @@
                         <small class="text-danger">{{ '*' . $message }}</small>
                     @enderror
                 </div>
-                
+
 
                 <!-- Botón de Guardar -->
                 <div class="col-12 text-center">
-                    <button type="submit" class="btn btn-primary">Guardar</button>
+                    <button type="submit" class="btn btn-primary">Actualizar</button>
+                    <a href="{{ route('informe_salud.index') }}" class="btn btn-secondary">Cancelar</a>
                 </div>
             </div>
         </form>
@@ -144,5 +145,5 @@
 @endsection
 
 @push('js')
-    
+
 @endpush

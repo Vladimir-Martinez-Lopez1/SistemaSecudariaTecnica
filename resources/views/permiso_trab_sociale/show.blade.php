@@ -13,48 +13,78 @@
             line-height: 0.5;
         }
 
-        @media imprimir {
+        .header-images {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
 
-            /* Mantener alineación y espaciado */
-            .text-center {
-                text-align: center !important;
+        .header-img {
+            height: 80px;
+            /* Ajusta esta altura según necesites */
+            object-fit: contain;
+        }
+    </style>
+    <style>
+        @media print {
+            body * {
+                visibility: hidden;
+                margin: 0 !important;
+                padding: 0 !important;
             }
 
-            .fw-bold {
-                font-weight: bold !important;
+            .print,
+            .print * {
+                visibility: visible;
             }
 
-            .line-height-small {
-                line-height: 0.5 !important;
+            .print {
+                position: absolute;
+                left: 1cm;
+                top: 0;
+                width: calc(100% - 1cm);
+                padding-right: 0.5cm;
+                margin: 0 !important;
             }
 
-            .ms-4 {
-                margin-left: 1.5rem !important;
+            @page {
+                size: letter;
+                margin: 1.5cm 0.5cm 1.5cm 0;
+                padding: 0;
             }
 
-            .mt-4 {
-                margin-top: 1.5rem !important;
+            .no-print {
+                display: none !important;
             }
 
-            .my-4 {
-                margin-top: 1.5rem !important;
-                margin-bottom: 1.5rem !important;
+            .print-container {
+                border: none !important;
+                padding: 0 !important;
+                margin: 0 !important;
+                max-width: 100% !important;
             }
 
-            .border {
-                border: 1px solid #000 !important;
+            .container {
+                page-break-after: avoid;
+                page-break-inside: avoid;
             }
 
-            .p-4 {
-                padding: 1.5rem !important;
+            /* Asegurar que las imágenes se muestren al imprimir */
+            .header-images {
+                display: flex !important;
             }
+        }
 
-            /* Asegurar que los elementos mantengan su formato */
-            h3,
-            p {
-                font-size: 1rem !important;
-            }
+        .line-height-small p {
+            line-height: 1.2;
+            margin-bottom: 0.2rem;
+        }
 
+        .contenido-texto {
+            padding-left: 1.5rem;
+            padding-right: 1.5rem;
         }
     </style>
 @endpush
@@ -69,45 +99,50 @@
                 <li class="breadcrumb-item active">Ver permiso</li>
             </ol>
         @endif
-        <div class="imprimir">
-            <!-- Contenido original -->
-            <div class="contenido-original">
-                <!-- Vista del justificante -->
-                <div class="container mt-4 border p-4">
+        <div class="print">
+            <!-- Detalles del informe de salud -->
+            <div class="container mt-4 border p-4">
+                <div class="container mt-4">
                     <!-- Título centrado -->
-                    <div class="text-center line-height-small">
-                        <h3 class="fw-bold">ESCUELA SECUNDARIA TECNICA N 66</h3>
-                        <p>CLAVE: 20DST0062I</p>
-                        <p>CUILAPAN DE GUERRERO, OAX</p>
+                    <div class="header-images">
+                        <img src="{{ asset('/storage/logoEST.png') }}" class="header-img" alt="Escudo izquierdo">
+                        <div class="text-center line-height-small">
+                            <h3 class="fw-bold ">ESCUELA SECUNDARIA TECNICA N 66</h3>
+                            <p>CLAVE: 20DST0062I</p>
+                            <p>CUILAPAN DE GUERRERO, OAX</p>
+                        </div>
+                        <img src="{{ asset('/storage/logoIEEPO.png') }}" class="header-img" alt="Escudo derecho">
                     </div>
 
                     <!-- Línea continua -->
                     <hr class="my-4">
 
+                    <!-- Texto centrado -->
+                    <div class="text-end line-height-small">
+                        <p>ASUNTO: PERSMISO POR TRABAJO SOCIAL</p>
+                        <p>Cuilapam de Guerrero, Oax., a <strong>{{$permiso_trab_sociale->fecha_reporte}}</strong>
+                        </p>
+                    </div>
                     <!-- Texto con sangría -->
-                    <div class="text-justify ms-4">
-                        <div class="row mt-4">
-                            <div class="col text-end">
-                                <p>ASUNTO: PERSMISO POR TRABAJO SOCIAL</p>
-                                <p>Cuilapam de Guerrero, Oax., a <strong>{{$permiso_trab_sociale->fecha_reporte}}</strong>
-                                </p>
-                            </div>
-                        </div>
+                    <div class="mt-4 line-height-small">
                         <p>C. C. PERSONAL DOCENTE</p>
                         <P>DE ESTA INSTITUCIÓN</P>
                         <P>
                             P R E S E N T E.
                         </P>
-
+                    </div>
+                    <div class="mt-4">
                         <p>
                             El Departamento de Trabajo Social se permite comunicar a
                             usted que el alumno (a): <strong>{{$nombre}} {{$apellido }}</strong>
                             del <strong>{{ $permiso_trab_sociale->grado }}</strong> Grado, Grupo
                             <strong>{{ $permiso_trab_sociale->grupo}}</strong>, por motivo:
                             <strong>{{ $permiso_trab_sociale->motivo }}</strong>, tendrá permiso
-                            <strong>{{$permiso_trab_sociale->numero_dias}}</strong> día (s) comenzando el <strong>{{$permiso_trab_sociale->fecha_inicio}}</strong>
+                            <strong>{{$permiso_trab_sociale->numero_dias}}</strong> día (s) comenzando el
+                            <strong>{{$permiso_trab_sociale->fecha_inicio}}</strong>
                             y terminando <strong>{{$permiso_trab_sociale->fecha_termino}}</strong>
-                            del presente año.</P>
+                            del presente año.
+                        </P>
                         <p>
                             Agradeciendo de su atención y apoyo, sirvace de firmar de enterado
                         </p>
@@ -115,8 +150,8 @@
 
                     <div class="row mt-4">
                         <div class="col text-center">
-                           <p>ESPAÑOL</p>
-                           <p>_____________________________________</p>
+                            <p>ESPAÑOL</p>
+                            <p>_____________________________________</p>
                         </div>
                         <div class="col text-center">
                             <p>MATEMÁTICAS</p>
@@ -129,8 +164,8 @@
                     </div>
                     <div class="row mt-4">
                         <div class="col text-center">
-                           <p>CIENCIAS</p>
-                           <p>_____________________________________</p>
+                            <p>CIENCIAS</p>
+                            <p>_____________________________________</p>
                         </div>
                         <div class="col text-center">
                             <p>SOCIALES</p>
@@ -143,8 +178,8 @@
                     </div>
                     <div class="row mt-4">
                         <div class="col text-center">
-                           <p>ARTES</p>
-                           <p>_____________________________________</p>
+                            <p>ARTES</p>
+                            <p>_____________________________________</p>
                         </div>
                         <div class="col text-center">
                             <p>E. FÍSICA</p>
@@ -161,22 +196,31 @@
                     </br>
                     <div class="row mt-4">
                         <div class="col text-center">
-                           <p>PADRE O TUTOR</p>
-                           <P>C. <strong>{{ $permiso_trab_sociale->nombre_padre }}</strong></P>
+                            <p class="line-height-small">PADRE O TUTOR</p>
+                            <br>
+                            <P class="line-height-small">C. <strong>{{ $permiso_trab_sociale->nombre_padre }}</strong></P>
                         </div>
                         <div class="col text-center">
-                            <P>TRABAJO SOCIAL</P>
-                            <P>ENRIQUE J ESQUIVEL HERNÁNDEZ</P>
+                            <P class="line-height-small">TRABAJO SOCIAL</P>
+                            <br>
+                            <P class="line-height-small">ENRIQUE J ESQUIVEL</P>
+                            <br>
+                            <P class="line-height-small">HERNÁNDEZ</P>
                         </div>
                         <div class="col text-center">
-                            <P>SUBDIRECCIÓN DE LA ESCULA DE LA ESCUELA</P>
-                            <P>MTRO. ROLANDO PÉREZ CASTELLANOS</P>
+                            <P class="line-height-small">SUBDIRECCIÓN DE LA</P>
+                            <br>
+                            <P class="line-height-small">ESCUELA</P>
+                            <br>
+                            <P class="line-height-small">MTRO. ROLANDO PÉREZ</P>
+                            <br>
+                            <P class="line-height-small">CASTELLANOS</P>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="container-fluid px-4 d-flex justify-content-center gap-3">
+        <div class="container-fluid px-4 d-flex justify-content-center gap-3 no-print">
             <!-- Botón para regresar a la lista de citatorios -->
             @if ($from_permiso_trab_sociale)
                 <a href="{{ route('expediente_disciplinario.show', $permiso_trab_sociale->expedienteDisciplinario->id) }}"
@@ -196,27 +240,9 @@
 @endsection
 
     @push('js')
-
         <script>
             function imprimir() {
-                // Clona el contenido del div "imprimir"
-                const contenido = document.querySelector('.imprimir').cloneNode(true);
-
-                // Oculta elementos innecesarios al imprimir
-                const botones = contenido.querySelectorAll('button, a');
-                botones.forEach(boton => boton.style.display = 'none');
-
-                // Abre una nueva ventana para imprimir
-                const ventana = window.open('', '', 'height=500,width=800');
-                ventana.document.write('<html><head><title>Citatorio General</title>');
-                ventana.document.write('<link rel="stylesheet" href="{{ asset('css/app.css') }}">'); // Asegúrate de incluir los estilos
-                ventana.document.write('</head><body>');
-                ventana.document.write(contenido.innerHTML);
-                ventana.document.write('</body></html>');
-                ventana.document.close();
-
-                // Imprime el contenido
-                ventana.print();
+                window.print();
             }
         </script>
 

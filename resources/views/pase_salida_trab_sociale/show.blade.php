@@ -13,53 +13,78 @@
             line-height: 0.5;
         }
 
-        /* Ocultar el contenido duplicado en la vista normal */
-        .contenido-duplicado {
-            display: none;
+        .header-images {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
         }
 
+        .header-img {
+            height: 80px;
+            /* Ajusta esta altura según necesites */
+            object-fit: contain;
+        }
+    </style>
+    <style>
         @media print {
-
-            /* Mantener alineación y espaciado */
-            .text-center {
-                text-align: center !important;
+            body * {
+                visibility: hidden;
+                margin: 0 !important;
+                padding: 0 !important;
             }
 
-            .fw-bold {
-                font-weight: bold !important;
+            .print,
+            .print * {
+                visibility: visible;
             }
 
-            .line-height-small {
-                line-height: 0.5 !important;
+            .print {
+                position: absolute;
+                left: 1cm;
+                top: 0;
+                width: calc(100% - 1cm);
+                padding-right: 0.5cm;
+                margin: 0 !important;
             }
 
-            .ms-4 {
-                margin-left: 1.5rem !important;
+            @page {
+                size: letter;
+                margin: 1.5cm 0.5cm 1.5cm 0;
+                padding: 0;
             }
 
-            .mt-4 {
-                margin-top: 1.5rem !important;
+            .no-print {
+                display: none !important;
             }
 
-            .my-4 {
-                margin-top: 1.5rem !important;
-                margin-bottom: 1.5rem !important;
+            .print-container {
+                border: none !important;
+                padding: 0 !important;
+                margin: 0 !important;
+                max-width: 100% !important;
             }
 
-            .border {
-                border: 1px solid #000 !important;
+            .container {
+                page-break-after: avoid;
+                page-break-inside: avoid;
             }
 
-            .p-4 {
-                padding: 1.5rem !important;
+            /* Asegurar que las imágenes se muestren al imprimir */
+            .header-images {
+                display: flex !important;
             }
+        }
 
-            /* Asegurar que los elementos mantengan su formato */
-            h3,
-            p {
-                font-size: 1rem !important;
-            }
+        .line-height-small p {
+            line-height: 1.2;
+            margin-bottom: 0.2rem;
+        }
 
+        .contenido-texto {
+            padding-left: 1.5rem;
+            padding-right: 1.5rem;
         }
     </style>
 @endpush
@@ -67,36 +92,37 @@
 @section('content')
     <div class="container-fluid px-4">
         @if (!$from_pase_salida_trab_sociale) <!-- Mostrar solo si no viene del expediente -->
-            <h1 class="mt-4">Pase de salida</h1>
+            <h1 class="mt-4">Pase de salida por Trabajo Social</h1>
             <ol class="breadcrumb mb-4">
                 <li class="breadcrumb-item"><a href="{{ route('panel') }}">Inicio</a></li>
                 <li class="breadcrumb-item"><a href="{{ route('pase_salida.index') }}">Pase de salida</a></li>
                 <li class="breadcrumb-item active">Ver pase</li>
             </ol>
         @endif
-        <div class="imprimir">
-            <!-- Contenido original -->
-            <div class="contenido-original">
-                <!-- Vista del justificante -->
-                <div class="container mt-4 border p-4">
+        <div class="print">
+            <!-- Detalles del informe de salud -->
+            <div class="container mt-4 border p-4">
+                <div class="container mt-4">
                     <!-- Título centrado -->
-                    <div class="text-center line-height-small">
-                        <h3 class="fw-bold">ESCUELA SECUNDARIA TECNICA N 66</h3>
-                        <p>CLAVE: 20DST0062I</p>
-                        <p>CUILAPAN DE GUERRERO, OAX</p>
+                    <div class="header-images">
+                        <img src="{{ asset('/storage/logoEST.png') }}" class="header-img" alt="Escudo izquierdo">
+                        <div class="text-center line-height-small">
+                            <h3 class="fw-bold ">ESCUELA SECUNDARIA TECNICA N 66</h3>
+                            <p>CLAVE: 20DST0062I</p>
+                            <p>CUILAPAN DE GUERRERO, OAX</p>
+                        </div>
+                        <img src="{{ asset('/storage/logoIEEPO.png') }}" class="header-img" alt="Escudo derecho">
                     </div>
 
                     <!-- Línea continua -->
                     <hr class="my-4">
 
+                    <div class="text-end line-height-small">
+                        <p>ASUNTO: PASE DE SALIDA</p>
+                    </div>
+                    <br>
                     <!-- Texto con sangría -->
                     <div class="text-center  ms-4">
-                        <div class="row mt-4">
-                            <div class="col text-end">
-                                <p>ASUNTO: PASE DE SALIDA</p>
-                            </div>
-
-                        </div>
 
                         <p>
                             NOMBRE DEL ALUMNO (A): <strong>{{$nombre}} {{$apellido }}</strong>
@@ -120,24 +146,35 @@
                     </br>
                     <div class="row mt-4">
                         <div class="col text-center">
-                            <p>SOLICITO</p>
-                            <p><strong>{{ $pase_salida_trab_sociale->solicito }}</strong></p>
+                            <p class="line-height-small">SOLICITO</p>
+                            <br>
+                            <p class="line-height-small"><strong>{{ $pase_salida_trab_sociale->solicito }}</strong></p>
                         </div>
                         <div class="col text-center">
-                            <p>AUTORIZÓ</p>
-                            <P>TRABAJO SOCIAL</P>
-                            <P>ENRIQUE J ESQUIVEL HERNÁNDEZ</P>
+                            <p class="line-height-small">AUTORIZÓ</p>
+                            <br>
+                            <p class="line-height-small">TRABAJO SOCIAL</P>
+                            <br>
+                            <p class="line-height-small">ENRIQUE J ESQUIVEL</P>
+                            <br>
+                            <p class="line-height-small">HERNÁNDEZ</P>
                         </div>
                         <div class="col text-center">
-                            <p>Vo.Bo.</p>
-                            <P>LA SUBDIRECCIÓN DE LA ESCULA DE LA ESCUELA</P>
-                            <P>MTRO. ROLANDO PÉREZ CASTELLANOS</P>
+                            <p class="line-height-small">Vo.Bo.</p>
+                            <br>
+                            <p class="line-height-small">LA SUBDIRECCIÓN DE</P>
+                            <br>
+                            <p class="line-height-small">LA ESCULA</P>
+                            <br>
+                            <p class="line-height-small">MTRO. ROLANDO PÉREZ</P>
+                            <br>
+                            <p class="line-height-small">CASTELLANOS</P>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="container-fluid px-4 d-flex justify-content-center gap-3">
+        <div class="container-fluid px-4 d-flex justify-content-center gap-3 no-print">
             <!-- Botón para regresar a la lista de citatorios -->
             @if ($from_pase_salida_trab_sociale)
                 <a href="{{ route('expediente_disciplinario.show', $pase_salida_trab_sociale->expedienteDisciplinario->id) }}"
@@ -157,28 +194,9 @@
 @endsection
 
     @push('js')
-
         <script>
             function imprimir() {
-                // Clona el contenido del div "imprimir"
-                const contenido = document.querySelector('.imprimir').cloneNode(true);
-
-                // Oculta elementos innecesarios al imprimir
-                const botones = contenido.querySelectorAll('button, a');
-                botones.forEach(boton => boton.style.display = 'none');
-
-                // Abre una nueva ventana para imprimir
-                const ventana = window.open('', '', 'height=500,width=800');
-                ventana.document.write('<html><head><title>Citatorio General</title>');
-                ventana.document.write('<link rel="stylesheet" href="{{ asset('css/app.css') }}">'); // Asegúrate de incluir los estilos
-                ventana.document.write('</head><body>');
-                ventana.document.write(contenido.innerHTML);
-                ventana.document.write('</body></html>');
-                ventana.document.close();
-
-                // Imprime el contenido
-                ventana.print();
+                window.print();
             }
         </script>
-
     @endpush

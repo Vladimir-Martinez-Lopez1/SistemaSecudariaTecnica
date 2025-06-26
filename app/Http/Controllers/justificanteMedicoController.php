@@ -36,7 +36,8 @@ class justificanteMedicoController extends Controller
      */
     public function create()
     {
-        return view('justificante_inasistencia_medico.create');
+        $matricula = Alumno::all();
+        return view('justificante_inasistencia_medico.create',compact('matricula'));
     }
 
     /**

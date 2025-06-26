@@ -3,6 +3,9 @@
 @section('title','Crear justificante medico')
 
 @push('css')
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.14.0-beta3/dist/css/bootstrap-select.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
 @endpush
 
@@ -23,12 +26,20 @@
             <div class="row g-3">
 
                 <div class="col-md-6">
-                    <label for="matricula" class="form-label">Matrícula</label>
-                    <input type="number" name="matricula" id="matricula" class="form-control" value="{{ old('matricula') }}">
-                    @error('matricula')
-                        <small class="text-danger">{{ '*' . $message }}</small>
-                    @enderror
-                </div>
+                        <label for="matricula" class="form-label">Nombre del Alumno</label>
+                        {{-- <input type="number" name="matricula" id="matricula" class="form-control"
+                            value="{{ old('matricula') }}"> --}}
+                        <select title="Seleccione un alumno..." data-live-search="true" name="matricula" id="matricula"
+                            class="form-control selectpicker show-tick">
+                            @foreach ($matricula as $item)
+                                <option value="{{ $item->matricula }}"{{old('matricula')==$item->matricula ? 'selected': ''}}>{{ $item->matricula }} - {{ $item->nombre }}
+                                    {{ $item->apellido }}</option>
+                            @endforeach
+                        </select>
+                        @error('matricula')
+                            <small class="text-danger">{{ '*' . $message }}</small>
+                        @enderror
+                    </div>
 
                 <input type="hidden" name="expediente_medico_id" id="expediente_medico_id" value="{{ old('expediente_medico_id') }}">
 
@@ -99,5 +110,6 @@
 @endsection
 
 @push('js')
+     <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.14.0-beta3/dist/js/bootstrap-select.min.js"></script>
 
 @endpush

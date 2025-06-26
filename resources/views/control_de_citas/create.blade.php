@@ -3,23 +3,22 @@
 @section('title','Crear expediente medico')
 
 @push('css')
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.14.0-beta3/dist/css/bootstrap-select.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
 @endpush
 
 @section('content')
     <div class="container-fluid px-4">
-        <h1 class="mt-4">Control de citas</h1>
+        <h1 class="mt-4">Crear cita medica</h1>
         <ol class="breadcrumb mb-4">
             <li class="breadcrumb-item"><a href="{{route('panel')}}">Inicio</a></li>
             <li class="breadcrumb-item"><a href="{{route('control_de_citas.index')}}">Citas Medicas</a></li>
             <li class="breadcrumb-item active">Crear citas medica</li>
         </ol>
 
-        <div class="mb-4">
-            <a href="{{route('control_de_citas.create')}}">
-                <button type="button" class=" btn btn-primary"> Agendar cita medica </button>
-            </a>
-        </div>
+        
 
         <!-- Formulario -->
         <div class="container w-100 border border-3 border-primary rounded p-4 mt-3">
@@ -27,11 +26,20 @@
                 @csrf
                 <div class="row g-3">
 
+
                     <div class="col-md-6">
-                        <label for="matricula" class="form-label">Matrícula del Alumno</label>
-                        <input type="number" name="matricula" id="matricula" class="form-control" value="{{ old('matricula') }}">
+                        <label for="matricula" class="form-label">Nombre del Alumno</label>
+                        {{-- <input type="number" name="matricula" id="matricula" class="form-control"
+                            value="{{ old('matricula') }}"> --}}
+                        <select title="Seleccione un alumno..." data-live-search="true" name="matricula" id="matricula"
+                            class="form-control selectpicker show-tick">
+                            @foreach ($matricula as $item)
+                                <option value="{{ $item->matricula }}"{{old('matricula')==$item->matricula ? 'selected': ''}}>{{ $item->matricula }} - {{ $item->nombre }}
+                                    {{ $item->apellido }}</option>
+                            @endforeach
+                        </select>
                         @error('matricula')
-                        <small class="text-danger">{{ '*'.$message }}</small>
+                            <small class="text-danger">{{ '*' . $message }}</small>
                         @enderror
                     </div>
 
@@ -109,5 +117,6 @@
 @endsection
 
 @push('js')
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.14.0-beta3/dist/js/bootstrap-select.min.js"></script>
 
 @endpush

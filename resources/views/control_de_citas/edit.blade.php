@@ -10,8 +10,8 @@
     <h1 class="mt-4">Editar Cita Médica</h1>
     <ol class="breadcrumb mb-4">
         <li class="breadcrumb-item"><a href="{{ route('panel') }}">Inicio</a></li>
-        <li class="breadcrumb-item"><a href="{{ route('control_de_citas.index') }}">Citas Médicas</a></li>  
-        <li class="breadcrumb-item active">Editar Cita</li>          
+        <li class="breadcrumb-item"><a href="{{ route('control_de_citas.index') }}">Citas Médicas</a></li>
+        <li class="breadcrumb-item active">Editar Cita</li>
     </ol>
 
     <!-- Formulario -->
@@ -28,7 +28,7 @@
                     <small class="text-danger">{{ '*'.$message }}</small>
                     @enderror
                 </div>
-                
+
 
                 <div class="col-md-6">
                     <label for="fecha" class="form-label">Fecha</label>
@@ -83,7 +83,7 @@
 
                 <div class="col-12 text-center">
                     <button type="submit" class="btn btn-primary">Actualizar</button>
-                    <button type="reset" class="btn btn-secondary">Cancelar</button>
+                    <a href="{{ route('control_de_citas.index') }}" class="btn btn-secondary">Cancelar</a>
                 </div>
 
             </div>
