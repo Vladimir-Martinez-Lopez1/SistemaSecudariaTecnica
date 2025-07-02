@@ -85,7 +85,7 @@
                     @enderror
                 </div>
 
-                <div class="col-md-6">
+                {{-- <div class="col-md-6">
                     <label for="nombre_medico" class="form-label">Nombre del Médico</label>
                     <select name="nombre_medico" id="grupo" class="form-control">
                         <option value="">Seleccione...</option>
@@ -95,6 +95,14 @@
                     </select>
                     @error('grupo')
                     <small class="text-danger">{{ '*'.$message }}</small>
+                    @enderror
+                </div> --}}
+                <!-- añadir el nombre del médico mediante un text -->
+                <div class="col-md-6">
+                    <label for="nombre_medico" class="form-label">Nombre del Médico</label>
+                    <input type="text" name="nombre_medico" id="nombre_medico" class="form-control" value="{{ old('nombre_medico') }}">
+                    @error('nombre_medico')
+                        <small class="text-danger">{{ '*' . $message }}</small>
                     @enderror
                 </div>
 

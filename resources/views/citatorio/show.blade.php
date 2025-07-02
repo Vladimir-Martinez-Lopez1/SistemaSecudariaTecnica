@@ -42,12 +42,7 @@
         padding-right: 1.5rem;
     }
 </style> --}}
-<style>
-    .line-height-small {
-        line-height: 0.5;
-    }
-</style>
-<style>
+{{-- <style>
     .line-height-small {
         line-height: 0.5;
     }
@@ -62,8 +57,6 @@
         height: 80px; /* Ajusta esta altura según necesites */
         object-fit: contain;
     }
-</style>
-<style>
     @media print {
         body * {
             visibility: hidden;
@@ -122,7 +115,8 @@
         padding-left: 1.5rem;
         padding-right: 1.5rem;
     }
-</style>
+</style> --}}
+ 
 @endpush
 
 @section('content')
@@ -182,7 +176,7 @@
 
             <div class="row mt-4">
                 <div class="col text-center">
-                    <p>PROFRA. <strong>{{ $citatorio->nombre_profesor }}</strong></p>
+                    <p>PROFR(A). <strong>{{ $citatorio->nombre_profesor }}</strong></p>
                     <p>OORD. DE SERVS. EDUCS. COMPLS.</p>
                 </div>
                 <div class="col text-center">

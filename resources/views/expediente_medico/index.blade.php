@@ -24,7 +24,7 @@
         });
         Toast.fire({
         icon: "success",
-        title: "Operacion exitosa"
+        title: "Registro guardado exitosamente"
         });
     </script>
 @endif

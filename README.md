@@ -1,66 +1,85 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+Manual Técnico - SISTEMA DE GESTIÓN DE INCIDENCIAS: SECUNDARIA TÉCNICA N. 66
+Este es un sistema de gestión estudiantil para escuelas secundarias construido con Laravel que maneja expedientes disciplinarios y médicos de estudiantes .
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Requisitos del Sistema
+Software Necesario
+PHP 8.1+ (requerido por las dependencias del proyecto) composer.lock:24
+Composer para gestión de dependencias PHP composer.lock:1-7
+MySQL como base de datos principal database.php:91-98
+Servidor web (Apache/Nginx)
+Framework y Dependencias
+Laravel Framework (framework principal) README.md:10-22
+Spatie Laravel Permission para control de acceso basado en roles permission.php:91-150
+Instalación y Configuración
+1. Clonar el Repositorio
+git clone https://github.com/Vladimir-Martinez-Lopez1/SistemaSecudariaTecnica.git
+cd SistemaSecudariaTecnica
+2. Instalar Dependencias
+composer install
+3. Configuración de Base de Datos
+Crear archivo .env basado en .env.example y configurar:
 
-## About Laravel
+DB_CONNECTION=mysql  
+DB_HOST=127.0.0.1  
+DB_PORT=3306  
+DB_DATABASE=proyecto_secundaria_tec  
+DB_USERNAME=root  
+DB_PASSWORD= 
+Importar la base de datos creada con el nombre "sistemasecundariatecnica.sql"
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+4. Configuración de Aplicación
+php artisan key:generate  
+php artisan config:cache
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+5. Migraciones y Seeders
+php artisan migrate  
+php artisan db:seed
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
 
-## Learning Laravel
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+6. Configuración de Permisos
+El sistema utiliza un sistema de permisos granular con patrones específicos roleController.php:90-111:
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+ver-* - Ver registros
+crear-* - Crear registros
+editar-* - Editar registros
+mostrar-* - Mostrar registros individuales
+eliminar-* - Eliminar registros
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+7. Configuración de Storage
+php artisan storage:link (importante, para poder utilizar los iconos)
 
-## Laravel Sponsors
+ESTRUCTURA DEL SISTEMA - Controladores Principales
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+Gestión Médica: justificanteMedicoController, controlDeCitaController, informeSaludController justificanteMedicoController.php:15-26
+Gestión Disciplinaria: paseSalidaController, justiRetardoSocialeController paseSalidaController.php:61-92
+Administración: roleController, userController roleController.php:61-68
 
-### Premium Partners
+FLUJO DE DATOS
+Todos los controladores siguen el patrón de buscar estudiantes por matrícula y vincular con expedientes médicos/disciplinarios justificanteMedicoController.php:47-60 :
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+$alumno = Alumno::where('matricula', $request->matricula)->firstOrFail();  
+$expediente = ExpedienteMedico::where('alumno_id', $alumno->id)->firstOrFail();
 
-## Contributing
+EJECUCIÓN DEL SISTEMA - Servidor de Desarrollo
+php artisan serve
+El sistema estará disponible en http://localhost:8000
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Configuración de Producción
+Configurar servidor web (Apache/Nginx)
+Configurar SSL/HTTPS
+Optimizar configuración:
+php artisan config:cache  
+php artisan route:cache  
+php artisan view:cache
+Usuarios y Roles
+Sistema de Autenticación
+El sistema implementa control de acceso basado en roles con middleware de permisos justificanteMedicoController.php:20-26 . Cada controlador requiere permisos específicos para cada operación CRUD.
 
-## Code of Conduct
+Gestión de Roles
+Los roles se gestionan a través del roleController que permite crear, editar y asignar permisos roleController.php:96-111.
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Colaboradores del sistema:
+[Vladimir Martínez López.](https://github.com/Vladimir-Martinez-Lopez1)
+[Edgar David López Crúz.](https://github.com/edgarDLC)
+[Cristian Wesly Mendoza Nuñez.](https://github.com/WENXEX)

@@ -3,90 +3,8 @@
 @section('title', 'Ver Persmiso Trab Social')
 
 @push('css')
-    <style>
-        .line-height-small {
-            line-height: 0.5;
-        }
-    </style>
-    <style>
-        .line-height-small {
-            line-height: 0.5;
-        }
 
-        .header-images {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 1rem;
-            margin-bottom: 1rem;
-        }
 
-        .header-img {
-            height: 80px;
-            /* Ajusta esta altura según necesites */
-            object-fit: contain;
-        }
-    </style>
-    <style>
-        @media print {
-            body * {
-                visibility: hidden;
-                margin: 0 !important;
-                padding: 0 !important;
-            }
-
-            .print,
-            .print * {
-                visibility: visible;
-            }
-
-            .print {
-                position: absolute;
-                left: 1cm;
-                top: 0;
-                width: calc(100% - 1cm);
-                padding-right: 0.5cm;
-                margin: 0 !important;
-            }
-
-            @page {
-                size: letter;
-                margin: 1.5cm 0.5cm 1.5cm 0;
-                padding: 0;
-            }
-
-            .no-print {
-                display: none !important;
-            }
-
-            .print-container {
-                border: none !important;
-                padding: 0 !important;
-                margin: 0 !important;
-                max-width: 100% !important;
-            }
-
-            .container {
-                page-break-after: avoid;
-                page-break-inside: avoid;
-            }
-
-            /* Asegurar que las imágenes se muestren al imprimir */
-            .header-images {
-                display: flex !important;
-            }
-        }
-
-        .line-height-small p {
-            line-height: 1.2;
-            margin-bottom: 0.2rem;
-        }
-
-        .contenido-texto {
-            padding-left: 1.5rem;
-            padding-right: 1.5rem;
-        }
-    </style>
 @endpush
 
 @section('content')
@@ -197,24 +115,15 @@
                     <div class="row mt-4">
                         <div class="col text-center">
                             <p class="line-height-small">PADRE O TUTOR</p>
-                            <br>
                             <P class="line-height-small">C. <strong>{{ $permiso_trab_sociale->nombre_padre }}</strong></P>
                         </div>
                         <div class="col text-center">
                             <P class="line-height-small">TRABAJO SOCIAL</P>
-                            <br>
-                            <P class="line-height-small">ENRIQUE J ESQUIVEL</P>
-                            <br>
-                            <P class="line-height-small">HERNÁNDEZ</P>
+                            <P class="line-height-small">ENRIQUE J ESQUIVEL HERNÁNDEZ</P>
                         </div>
                         <div class="col text-center">
-                            <P class="line-height-small">SUBDIRECCIÓN DE LA</P>
-                            <br>
-                            <P class="line-height-small">ESCUELA</P>
-                            <br>
-                            <P class="line-height-small">MTRO. ROLANDO PÉREZ</P>
-                            <br>
-                            <P class="line-height-small">CASTELLANOS</P>
+                            <P class="line-height-small">SUBDIRECCIÓN DE LA ESCUELA</P>
+                            <P class="line-height-small">MTRO. ROLANDO PÉREZ CASTELLANOS</P>
                         </div>
                     </div>
                 </div>

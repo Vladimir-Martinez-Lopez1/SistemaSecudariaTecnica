@@ -7,11 +7,6 @@
         .line-height-small {
             line-height: 0.5;
         }
-    </style>
-    <style>
-        .line-height-small {
-            line-height: 0.5;
-        }
 
         /* Ocultar el contenido duplicado en la vista normal */
         .contenido-duplicado {
@@ -172,7 +167,7 @@
 
                         <p>
                             Por este medio de la presente el (la) titular de la asignatura de
-                            <strong>{{ $citatorio->asignatura }}</strong>,de la manera más atenta, Citan a usted con el
+                            <strong>{{ $citatorio->asignatura }}</strong>, de la manera más atenta. Citan a usted con el
                             objetivo
                             de
                             tratar asuntos relacionados con el aprovechamiento académico y conductual de su hijo
@@ -269,10 +264,10 @@
         </div>
 @endsection
 
-@push('js')
-    <script>
-        function imprimir() {
-            window.print();
-        }
-    </script>
-@endpush
+    @push('js')
+        <script>
+            function imprimir() {
+                window.print();
+            }
+        </script>
+    @endpush

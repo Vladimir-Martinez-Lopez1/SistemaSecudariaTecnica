@@ -8,85 +8,7 @@
             line-height: 0.5;
         }
     </style>
-    <style>
-        .line-height-small {
-            line-height: 0.5;
-        }
 
-        .header-images {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 1rem;
-            margin-bottom: 1rem;
-        }
-
-        .header-img {
-            height: 80px;
-            /* Ajusta esta altura según necesites */
-            object-fit: contain;
-        }
-    </style>
-    <style>
-        @media print {
-            body * {
-                visibility: hidden;
-                margin: 0 !important;
-                padding: 0 !important;
-            }
-
-            .print,
-            .print * {
-                visibility: visible;
-            }
-
-            .print {
-                position: absolute;
-                left: 1cm;
-                top: 0;
-                width: calc(100% - 1cm);
-                padding-right: 0.5cm;
-                margin: 0 !important;
-            }
-
-            @page {
-                size: letter;
-                margin: 1.5cm 0.5cm 1.5cm 0;
-                padding: 0;
-            }
-
-            .no-print {
-                display: none !important;
-            }
-
-            .print-container {
-                border: none !important;
-                padding: 0 !important;
-                margin: 0 !important;
-                max-width: 100% !important;
-            }
-
-            .container {
-                page-break-after: avoid;
-                page-break-inside: avoid;
-            }
-
-            /* Asegurar que las imágenes se muestren al imprimir */
-            .header-images {
-                display: flex !important;
-            }
-        }
-
-        .line-height-small p {
-            line-height: 1.2;
-            margin-bottom: 0.2rem;
-        }
-
-        .contenido-texto {
-            padding-left: 1.5rem;
-            padding-right: 1.5rem;
-        }
-    </style>
 @endpush
 
 @section('content')
@@ -159,24 +81,21 @@
                         </p>
                     </div>
 
-
+                    <div class="text-center mt-4">
+                        <p class="line-height-small">Atentamente</p>
+                    </div>
                     <div class="row mt-4">
                         <div class="col text-center">
-                            <p class="line-height-small">Atentamente</p>
-                            <br>
                             <p class="line-height-small">Servicio médico</p>
                             <!--p>...........</p -->
-                            <br>
 
                             <p>DRA. <strong>{{ $informe_salud->nombre_medico }}</strong></p>
                         </div>
 
                         <div class="col text-center">
                             <p class="line-height-small">Vo.Bo.</p>
-                            <br>
                             <p class="line-height-small">DIRECTOR DE LA ESCUELA</p>
                             <!--p>...........</p -->
-                            <br>
 
                             <p>MTRO. ULTIMIO GALLO GONZALEZ</p>
                         </div>

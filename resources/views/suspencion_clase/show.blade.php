@@ -3,90 +3,8 @@
 @section('title', 'Ver suspencion de clase')
 
 @push('css')
-    <style>
-        .line-height-small {
-            line-height: 0.5;
-        }
-    </style>
-    <style>
-        .line-height-small {
-            line-height: 0.5;
-        }
 
-        .header-images {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 1rem;
-            margin-bottom: 1rem;
-        }
 
-        .header-img {
-            height: 80px;
-            /* Ajusta esta altura según necesites */
-            object-fit: contain;
-        }
-    </style>
-    <style>
-        @media print {
-            body * {
-                visibility: hidden;
-                margin: 0 !important;
-                padding: 0 !important;
-            }
-
-            .print,
-            .print * {
-                visibility: visible;
-            }
-
-            .print {
-                position: absolute;
-                left: 1cm;
-                top: 0;
-                width: calc(100% - 1cm);
-                padding-right: 0.5cm;
-                margin: 0 !important;
-            }
-
-            @page {
-                size: letter;
-                margin: 1.5cm 0.5cm 1.5cm 0;
-                padding: 0;
-            }
-
-            .no-print {
-                display: none !important;
-            }
-
-            .print-container {
-                border: none !important;
-                padding: 0 !important;
-                margin: 0 !important;
-                max-width: 100% !important;
-            }
-
-            .container {
-                page-break-after: avoid;
-                page-break-inside: avoid;
-            }
-
-            /* Asegurar que las imágenes se muestren al imprimir */
-            .header-images {
-                display: flex !important;
-            }
-        }
-
-        .line-height-small p {
-            line-height: 1.2;
-            margin-bottom: 0.2rem;
-        }
-
-        .contenido-texto {
-            padding-left: 1.5rem;
-            padding-right: 1.5rem;
-        }
-    </style>
 @endpush
 
 @section('content')
@@ -174,33 +92,24 @@
                     <br>
                     <div class="row mt-4">
                         <div class="col text-center">
-                            <p class="line-height-small">COORDINACIÓN DE SERVS.</p>
-                            <br>
-                            <p class="line-height-small">EDUCS. COMPLS.</p>
-                            <br>
-                            <p class="line-height-small">MTRO. BERTOLDO</P>
-                            <br>
-                            <p class="line-height-small">AQUINO BOLAÑOS</P>
+
+                            <p class="line-height-small">COORDINACIÓN DE SERVS. EDUCS. COMPLS.</p>
+
+                            <p class="line-height-small">MTRO. BERTOLDO AQUINO BOLAÑOS</P>
                         </div>
                         <div class="col text-center">
-                            <br>
+
                             <p class="line-height-small">Vo.Bo.</p>
-                            <br>
-                            <p class="line-height-small">DIRECCIÓN DE</P>
-                            <br>
-                            <p class="line-height-small">LA ESCUELA</P>
-                            <br>
-                            <p class="line-height-small">MTRO. ULTIMINIO</P>
-                            <br>
-                            <p class="line-height-small">GALLO GONZÁLEZ</P>
+
+                            <p class="line-height-small">DIRECCIÓN DE LA ESCUELA</P>
+
+                            <p class="line-height-small">MTRO. ULTIMINIO GALLO GONZÁLEZ</P>
 
                         </div>
                         <div class="col text-center">
-                            <br>
-                            <p class="line-height-small">EL ASESOR DEL GRUPO</p>
-                            <br>
-                            <p class="line-height-small">PROFR (A)</p>
-                            <br>
+
+                            <p class="line-height-small">EL ASESOR DEL GRUPO PROFR (A)</p>
+
                             <p class="line-height-small"><strong>{{ $suspencion_clase->nombre_profesor }}</strong></p>
                         </div>
                     </div>
