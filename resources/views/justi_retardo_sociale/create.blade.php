@@ -46,8 +46,6 @@
                     <div class="col-md-9">
                         <label for="matricula" class="form-label">POR ESTE MEDIO SOLICITO DE SU APOYO PARA QUE EL
                             ALUMNO:</label>
-                        {{-- <input type="number" name="matricula" id="matricula" class="form-control"
-                            value="{{ old('matricula') }}"> --}}
                         <select title="Seleccione un alumno..." data-live-search="true" name="matricula" id="matricula"
                             class="form-control selectpicker show-tick">
                             @foreach ($matricula as $item)

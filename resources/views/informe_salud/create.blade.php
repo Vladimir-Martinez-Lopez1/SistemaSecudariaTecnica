@@ -23,17 +23,8 @@
             <form action="{{ route('informe_salud.store') }}" method="post">
                 @csrf
                 <div class="row g-3">
-                    {{-- <div class="col-md-6">
-                        <label for="matricula" class="form-label">Matricula</label>
-                        <input type="number" name="matricula" id="matricula" class="form-control" value="{{old('matricula')}}">
-                        @error('matricula')s
-                           <small class="text-danger">{{'*'. $message}}</small>
-                        @enderror
-                    </div> --}}
                     <div class="col-md-6">
                         <label for="matricula" class="form-label">Nombre del Alumno</label>
-                        {{-- <input type="number" name="matricula" id="matricula" class="form-control"
-                            value="{{ old('matricula') }}"> --}}
                         <select title="Seleccione un alumno..." data-live-search="true" name="matricula" id="matricula"
                             class="form-control selectpicker show-tick">
                             @foreach ($matricula as $item)

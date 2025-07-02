@@ -16,7 +16,7 @@
         <h1 class="mt-4 text-center">Crear Citatorio General</h1>
         <ol class="breadcrumb mb-4">
             <li class="breadcrumb-item"><a href="{{route('panel')}}">Inicio</a></li>
-            <li class="breadcrumb-item"><a href="{{route('citatorio_general.index')}}">Citatorio</a></li> 
+            <li class="breadcrumb-item"><a href="{{route('citatorio_general.index')}}">Citatorio</a></li>
             <li class="breadcrumb-item active">Crear Citatorio </li>
         </ol>
         <!--Formulario para el citatorio de un alumno-->
@@ -83,9 +83,6 @@
                         @enderror
                     </div>
 
-                    <p class="form-control">
-                        Le solicitamos su puntual asistencia a las: 
-                    </p>
                     <!--Hora para citar al padre de familia-->
                     <div class="col-md-6">
                         <label for="hora_cita" class="form-label">Agradecemos su puntual asistencia a las: </label>
@@ -95,9 +92,6 @@
                         @enderror
                     </div>
 
-                    <p class="form-control">
-                        del día 
-                    </p>
                     <!--Fecha para citar al padre de familia-->
                     <div class="col-md-6">
                         <label for="fecha_cita" class="form-label">del dia: </label>

@@ -20,17 +20,6 @@
         </ol>
 
 
-        {{-- depuracion del envio de datos a la BD
-        @if ($errors->any())
-            <div class="alert alert-danger">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif --}}
-
         <!--Formulario para el citatorio de un alumno-->
         <div class="container w-100 border border-3 border-secundary rounded p-4 mt-3">
             <form action="{{route('pase_salida_trab_sociale.store')}}" method="post">
@@ -143,27 +132,6 @@
 @endsection
 
 @push('js')
-
-    {{-- <script>
-        $(document).ready(function () {
-            $('form').on('submit', function (event) {
-                // Evitar que el formulario se envíe inmediatamente
-                event.preventDefault();
-
-                // Capturar los datos del formulario
-                const formData = $(this).serializeArray();
-
-                // Mostrar los datos en la consola
-                console.log("Datos del formulario:");
-                formData.forEach(function (item) {
-                    console.log(item.name + ": " + item.value);
-                });
-
-                // Opcional: Enviar el formulario manualmente después de verificar los datos
-                // $(this).unbind('submit').submit();
-            });
-        });
-    </script> --}}
         <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.14.0-beta3/dist/js/bootstrap-select.min.js"></script>
 
 @endpush

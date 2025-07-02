@@ -84,20 +84,6 @@
                         <small class="text-danger">{{ '*' . $message }}</small>
                     @enderror
                 </div>
-
-                {{-- <div class="col-md-6">
-                    <label for="nombre_medico" class="form-label">Nombre del Médico</label>
-                    <select name="nombre_medico" id="grupo" class="form-control">
-                        <option value="">Seleccione...</option>
-                        @foreach(['DoctorA', 'DoctorB',] as $grupo)
-                            <option value="{{ $grupo }}" {{ old('grupo') == $grupo ? 'selected' : '' }}>{{ $grupo }}</option>
-                        @endforeach
-                    </select>
-                    @error('grupo')
-                    <small class="text-danger">{{ '*'.$message }}</small>
-                    @enderror
-                </div> --}}
-                <!-- añadir el nombre del médico mediante un text -->
                 <div class="col-md-6">
                     <label for="nombre_medico" class="form-label">Nombre del Médico</label>
                     <input type="text" name="nombre_medico" id="nombre_medico" class="form-control" value="{{ old('nombre_medico') }}">
